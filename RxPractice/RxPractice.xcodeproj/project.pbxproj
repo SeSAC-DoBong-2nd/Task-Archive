@@ -17,6 +17,7 @@
 		9E092E9F2D64990D003B36C4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9E092E9E2D64990D003B36C4 /* Then */; };
 		9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EA32D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift */; };
 		9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EA72D649BD6003B36C4 /* UIAlertManager.swift */; };
+		9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EAA2D649F23003B36C4 /* SimpleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9E092E8B2D649888003B36C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9E092EA32D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewExampleViewController.swift; sourceTree = "<group>"; };
 		9E092EA72D649BD6003B36C4 /* UIAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertManager.swift; sourceTree = "<group>"; };
+		9E092EAA2D649F23003B36C4 /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +95,7 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				9E092EA32D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift */,
+				9E092EA92D649EE3003B36C4 /* SimpleTableView */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -113,6 +115,15 @@
 				9E092EA72D649BD6003B36C4 /* UIAlertManager.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		9E092EA92D649EE3003B36C4 /* SimpleTableView */ = {
+			isa = PBXGroup;
+			children = (
+				9E092EA32D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift */,
+				9E092EAA2D649F23003B36C4 /* SimpleTableViewCell.swift */,
+			);
+			path = SimpleTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +211,7 @@
 				9E092E8E2D649888003B36C4 /* AppDelegate.swift in Sources */,
 				9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */,
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
+				9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */,
 				9E092E8F2D649888003B36C4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
