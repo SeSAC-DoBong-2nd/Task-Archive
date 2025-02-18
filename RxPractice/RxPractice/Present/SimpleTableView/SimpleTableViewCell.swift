@@ -7,6 +7,9 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 final class SimpleTableViewCell: UITableViewCell {
 
     static var cellIdentifier: String {
