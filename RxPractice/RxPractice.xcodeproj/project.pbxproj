@@ -19,6 +19,7 @@
 		9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EA72D649BD6003B36C4 /* UIAlertManager.swift */; };
 		9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EAA2D649F23003B36C4 /* SimpleTableViewCell.swift */; };
 		9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EAF2D64A594003B36C4 /* NumbersViewController.swift */; };
+		9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EBA2D64AAD5003B36C4 /* SimpleValidationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		9E092EA72D649BD6003B36C4 /* UIAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertManager.swift; sourceTree = "<group>"; };
 		9E092EAA2D649F23003B36C4 /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
 		9E092EAF2D64A594003B36C4 /* NumbersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
+		9E092EBA2D64AAD5003B36C4 /* SimpleValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleValidationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				9E092EA92D649EE3003B36C4 /* SimpleTableView */,
 				9E092EAE2D64A581003B36C4 /* NumbersView */,
+				9E092EB92D64AA99003B36C4 /* SimpleValidationView */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -135,6 +138,14 @@
 				9E092EAF2D64A594003B36C4 /* NumbersViewController.swift */,
 			);
 			path = NumbersView;
+			sourceTree = "<group>";
+		};
+		9E092EB92D64AA99003B36C4 /* SimpleValidationView */ = {
+			isa = PBXGroup;
+			children = (
+				9E092EBA2D64AAD5003B36C4 /* SimpleValidationViewController.swift */,
+			);
+			path = SimpleValidationView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E092E8E2D649888003B36C4 /* AppDelegate.swift in Sources */,
+				9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */,
 				9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */,
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
 				9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */,
