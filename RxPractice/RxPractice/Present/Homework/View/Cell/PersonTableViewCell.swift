@@ -6,9 +6,14 @@
 //
 
 import UIKit
+
+import RxCocoa
+import RxSwift
 import SnapKit
 
 final class PersonTableViewCell: UITableViewCell {
+    
+    var disposeBag = DisposeBag()
     
     static let identifier = "PersonTableViewCell"
     
@@ -23,7 +28,7 @@ final class PersonTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemMint
+        imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 8
         return imageView
     }()
@@ -37,6 +42,14 @@ final class PersonTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 16
         return button
     }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+        usernameLabel.text = nil
+        profileImageView.image = nil
+    }
       
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,7 +62,6 @@ final class PersonTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
      
-    
     private func configure() {
         contentView.addSubview(usernameLabel)
         contentView.addSubview(profileImageView)
@@ -74,5 +86,6 @@ final class PersonTableViewCell: UITableViewCell {
             $0.width.equalTo(72)
         }
     }
+    
 }
 

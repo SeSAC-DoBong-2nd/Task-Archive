@@ -8,11 +8,17 @@
 import UIKit
 import SnapKit
 
-class UserCollectionViewCell: UICollectionViewCell {
+final class UserCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "UserCollectionViewCell"
     
-    let label = UILabel()
+    private let label = UILabel()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        label.text = nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,6 +32,10 @@ class UserCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 8
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
+    }
+    
+    func configureCell(text: String) {
+        label.text = text
     }
     
     required init?(coder: NSCoder) {

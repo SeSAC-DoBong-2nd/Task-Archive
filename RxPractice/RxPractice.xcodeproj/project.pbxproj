@@ -26,6 +26,8 @@
 		9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AE2D65CE4100029A14 /* UserCollectionViewCell.swift */; };
 		9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */; };
 		9EA269B12D65CE4100029A14 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AD2D65CE4100029A14 /* PersonTableViewCell.swift */; };
+		9EA269B42D65CF0800029A14 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269B32D65CF0800029A14 /* Dummy.swift */; };
+		9EA269B72D65E8F900029A14 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9EA269B62D65E8F900029A14 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,7 @@
 		9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewController.swift; sourceTree = "<group>"; };
 		9EA269AD2D65CE4100029A14 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 		9EA269AE2D65CE4100029A14 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		9EA269B32D65CF0800029A14 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,7 @@
 				9E092E992D6498F4003B36C4 /* RxSwift in Frameworks */,
 				9E092E972D6498F4003B36C4 /* RxCocoa in Frameworks */,
 				9E092E9F2D64990D003B36C4 /* Then in Frameworks */,
+				9EA269B72D65E8F900029A14 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +186,7 @@
 		9EA269A72D65CDF000029A14 /* Homework */ = {
 			isa = PBXGroup;
 			children = (
+				9EA269B32D65CF0800029A14 /* Dummy.swift */,
 				9EA269A82D65CE1800029A14 /* ViewModel */,
 				9EA269A92D65CE1D00029A14 /* View */,
 			);
@@ -235,6 +240,7 @@
 				9E092E982D6498F4003B36C4 /* RxSwift */,
 				9E092E9B2D649902003B36C4 /* SnapKit */,
 				9E092E9E2D64990D003B36C4 /* Then */,
+				9EA269B62D65E8F900029A14 /* Kingfisher */,
 			);
 			productName = RxPractice;
 			productReference = 9E092E6C2D649880003B36C4 /* RxPractice.app */;
@@ -268,6 +274,7 @@
 				9E092E952D6498F4003B36C4 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				9E092E9A2D649902003B36C4 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9E092E9D2D64990D003B36C4 /* XCRemoteSwiftPackageReference "Then" */,
+				9EA269B52D65E8F900029A14 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9E092E6D2D649880003B36C4 /* Products */;
@@ -304,6 +311,7 @@
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
 				9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */,
 				9E092EBE2D64B652003B36C4 /* BirthdayViewController.swift in Sources */,
+				9EA269B42D65CF0800029A14 /* Dummy.swift in Sources */,
 				9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */,
 				9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */,
 				9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */,
@@ -555,6 +563,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		9EA269B52D65E8F900029A14 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -577,6 +593,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9E092E9D2D64990D003B36C4 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		9EA269B62D65E8F900029A14 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EA269B52D65E8F900029A14 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
