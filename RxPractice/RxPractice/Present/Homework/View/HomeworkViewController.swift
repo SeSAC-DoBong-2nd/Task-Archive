@@ -101,8 +101,10 @@ final class HomeworkViewController: UIViewController {
             .bind(with: self) { owner, indexPath in
                 print(owner.tableDatasource.value[indexPath.row])
                 let data = owner.tableDatasource.value[indexPath.row].name
-                owner.viewModel.collectionViewDatasource.append(data)
-                owner.collectionDatasource.accept(owner.viewModel.collectionViewDatasource)
+                if !owner.viewModel.collectionViewDatasource.contains(data) {
+                    owner.viewModel.collectionViewDatasource.append(data)
+                    owner.collectionDatasource.accept(owner.viewModel.collectionViewDatasource)
+                }
             }.disposed(by: disposeBag)
         
         //collectionView Datasource 변경 시
