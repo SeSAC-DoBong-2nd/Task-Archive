@@ -28,6 +28,7 @@
 		9EA269B12D65CE4100029A14 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AD2D65CE4100029A14 /* PersonTableViewCell.swift */; };
 		9EA269B42D65CF0800029A14 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269B32D65CF0800029A14 /* Dummy.swift */; };
 		9EA269B72D65E8F900029A14 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9EA269B62D65E8F900029A14 /* Kingfisher */; };
+		9EA269B92D65F5B000029A14 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269B82D65F5B000029A14 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		9EA269AD2D65CE4100029A14 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 		9EA269AE2D65CE4100029A14 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		9EA269B32D65CF0800029A14 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		9EA269B82D65F5B000029A14 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 			children = (
 				9EA269B22D65CE4F00029A14 /* Cell */,
 				9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */,
+				9EA269B82D65F5B000029A14 /* DetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */,
 				9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */,
 				9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */,
+				9EA269B92D65F5B000029A14 /* DetailViewController.swift in Sources */,
 				9EA269B12D65CE4100029A14 /* PersonTableViewCell.swift in Sources */,
 				9E092E8F2D649888003B36C4 /* SceneDelegate.swift in Sources */,
 			);
