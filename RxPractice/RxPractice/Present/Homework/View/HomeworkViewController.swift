@@ -17,7 +17,6 @@ final class HomeworkViewController: UIViewController {
     //MARK: - Properties
     private let viewModel: HomeworkViewModel
     private let disposeBag = DisposeBag()
-//    private lazy var tableDatasource = BehaviorRelay(value: viewModel.tableViewDatasource)
     
     
     //MARK: - UI Properties
@@ -133,7 +132,7 @@ final class HomeworkViewController: UIViewController {
             .bind(with: self) { owner, _ in
                 let text = owner.searchBar.text ?? ""
                 (text == "") ?
-                output.tableDatasource.accept(owner.viewModel.tableViewDatasource) :
+                output.tableDatasource.accept(Person.dummy) :
                 output.tableDatasource.accept(output.tableDatasource.value.filter {
                     $0.name.uppercased().contains(text.uppercased())
                 })
@@ -146,7 +145,7 @@ final class HomeworkViewController: UIViewController {
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(with: self) { owner, text in
-                output.tableDatasource.accept(owner.viewModel.tableViewDatasource)
+                output.tableDatasource.accept(Person.dummy)
             }.disposed(by: disposeBag)
         /*
         //+@ 실시간 검색
@@ -156,7 +155,7 @@ final class HomeworkViewController: UIViewController {
             .bind(with: self) { owner, searchText in
                 print(searchText)
                 (searchText == "") ?
-                owner.tableDatasource.accept(owner.viewModel.tableViewDatasource) :
+                owner.tableDatasource.accept(Person.dummy) :
                 owner.tableDatasource.accept(owner.tableDatasource.value.filter {
                     $0.name.uppercased().contains(searchText.uppercased())
                 })
@@ -167,8 +166,9 @@ final class HomeworkViewController: UIViewController {
         searchBar.rx.searchButtonClicked
             .bind(with: self) { owner, _ in
                 let randomPerson = Person.randomImageEmailData()
-                owner.viewModel.tableViewDatasource.insert(Person(name: owner.searchBar.text ?? "", email: randomPerson.email, profileImage: randomPerson.profileImage), at: 0)
-                owner.tableDatasource.accept(owner.viewModel.tableViewDatasource)
+                var dataSource = Person.dummy
+         dataSource.insert(Person(name: owner.searchBar.text ?? "", email: randomPerson.email, profileImage: randomPerson.profileImage), at: 0)
+                owner.tableDatasource.accept(dataSource)
                 owner.searchBar.text = "" //추가 되면 serarchBar text 초기화
             }.disposed(by: disposeBag)
          */
