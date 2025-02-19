@@ -96,6 +96,7 @@ final class HomeworkViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        
         //tableview cell 클릭 시
         tableView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
@@ -107,6 +108,7 @@ final class HomeworkViewController: UIViewController {
                 }
             }.disposed(by: disposeBag)
         
+        
         //collectionView Datasource 변경 시
         collectionDatasource
             .bind(to: collectionView.rx.items(
@@ -116,6 +118,8 @@ final class HomeworkViewController: UIViewController {
             cell.configureCell(text: self.collectionDatasource.value[index])
         }.disposed(by: disposeBag)
         
+        
+        //+@ 실시간 검색
         searchBar.rx.text.orEmpty
             .debounce(.seconds(1), scheduler: MainScheduler.instance) //1초 이후 동작 수행
             .distinctUntilChanged()
@@ -126,6 +130,16 @@ final class HomeworkViewController: UIViewController {
                 owner.tableDatasource.accept(owner.tableDatasource.value.filter {
                     $0.name.uppercased().contains(searchText.uppercased())
                 })
+            }.disposed(by: disposeBag)
+        
+        
+        //+@ 서치바 리턴 시 테이블 뷰 데이터 소스 추가
+        searchBar.rx.searchButtonClicked
+            .bind(with: self) { owner, _ in
+                let randomPerson = Person.randomImageEmailData()
+                owner.viewModel.tableViewDatasource.insert(Person(name: owner.searchBar.text ?? "", email: randomPerson.email, profileImage: randomPerson.profileImage), at: 0)
+                owner.tableDatasource.accept(owner.viewModel.tableViewDatasource)
+                owner.searchBar.text = "" //추가 되면 serarchBar text 초기화
             }.disposed(by: disposeBag)
         
         

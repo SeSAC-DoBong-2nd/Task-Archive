@@ -68,4 +68,8 @@ struct Person: Identifiable {
         Person(name: "Ann", email: "ann.howard@example.com", profileImage: "https://randomuser.me/api/portraits/thumb/women/25.jpg")
     ]
     
+    static func randomImageEmailData() -> Person {
+        return dummy.randomElement() ?? Person(name: "케케몬", email: "keke@gmail.com", profileImage: "비밀!")
+    }
+    
 }
