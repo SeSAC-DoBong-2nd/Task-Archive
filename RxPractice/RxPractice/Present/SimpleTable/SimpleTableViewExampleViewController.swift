@@ -108,5 +108,8 @@ final class SimpleTableViewExampleViewController : UIViewController, UITableView
 /*
  질문
  - tableView.rx.modelSelected(String.self),tableView.rx.itemAccessoryButtonTapped 와 같이 한번만 설정해주는 친구들일 때 subscribe인 것을 이해하였으나, 만약 어떠한 조건으로 인하여 상태가 변한 뒤 눌렀을 때 이벤트가 달라져야한다면 기존 것을 구독해제하고 새로 추가하는게 좋을지? 아니면 bind로 다루는게 좋을지
+    
+ 답변:
+ 위의 상황 무조건 다 가능, error를 반환하도록 해서 핸들링 혹은 enum을 next이전 스트림에서 타입을 받아와 핸들링하고 이후 동작을 귀결시켜도 좋을 것 같음.
  */
 

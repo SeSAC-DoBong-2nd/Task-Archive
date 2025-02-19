@@ -19,6 +19,7 @@ final class BirthdayViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private var infoLabelText = BehaviorSubject(value: false)
     
+    
     // MARK: - UI Properties
     private let birthDayPicker = UIDatePicker()
     private let infoLabel = UILabel()
@@ -29,6 +30,7 @@ final class BirthdayViewController: UIViewController {
     private let dayLabel = UILabel()
     
     private let nextButton = PointButton(title: "")
+    
     
     // MARK: - Life Cycle
     override func viewDidLoad() {

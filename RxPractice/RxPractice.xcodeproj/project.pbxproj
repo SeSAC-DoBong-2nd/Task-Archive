@@ -104,10 +104,10 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				9E092EA92D649EE3003B36C4 /* SimpleTableView */,
-				9E092EAE2D64A581003B36C4 /* NumbersView */,
-				9E092EB92D64AA99003B36C4 /* SimpleValidationView */,
-				9E092EBC2D64B615003B36C4 /* BirthdayView */,
+				9E092EA92D649EE3003B36C4 /* SimpleTable */,
+				9E092EAE2D64A581003B36C4 /* Numbers */,
+				9E092EB92D64AA99003B36C4 /* SimpleValidation */,
+				9E092EBC2D64B615003B36C4 /* Birthday */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -129,37 +129,37 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		9E092EA92D649EE3003B36C4 /* SimpleTableView */ = {
+		9E092EA92D649EE3003B36C4 /* SimpleTable */ = {
 			isa = PBXGroup;
 			children = (
 				9E092EA32D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift */,
 				9E092EAA2D649F23003B36C4 /* SimpleTableViewCell.swift */,
 			);
-			path = SimpleTableView;
+			path = SimpleTable;
 			sourceTree = "<group>";
 		};
-		9E092EAE2D64A581003B36C4 /* NumbersView */ = {
+		9E092EAE2D64A581003B36C4 /* Numbers */ = {
 			isa = PBXGroup;
 			children = (
 				9E092EAF2D64A594003B36C4 /* NumbersViewController.swift */,
 			);
-			path = NumbersView;
+			path = Numbers;
 			sourceTree = "<group>";
 		};
-		9E092EB92D64AA99003B36C4 /* SimpleValidationView */ = {
+		9E092EB92D64AA99003B36C4 /* SimpleValidation */ = {
 			isa = PBXGroup;
 			children = (
 				9E092EBA2D64AAD5003B36C4 /* SimpleValidationViewController.swift */,
 			);
-			path = SimpleValidationView;
+			path = SimpleValidation;
 			sourceTree = "<group>";
 		};
-		9E092EBC2D64B615003B36C4 /* BirthdayView */ = {
+		9E092EBC2D64B615003B36C4 /* Birthday */ = {
 			isa = PBXGroup;
 			children = (
 				9E092EBD2D64B652003B36C4 /* BirthdayViewController.swift */,
 			);
-			path = BirthdayView;
+			path = Birthday;
 			sourceTree = "<group>";
 		};
 		9E092EBF2D64B757003B36C4 /* UIComponents */ = {
