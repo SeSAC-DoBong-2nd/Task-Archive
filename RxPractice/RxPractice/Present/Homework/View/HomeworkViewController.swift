@@ -90,8 +90,8 @@ final class HomeworkViewController: UIViewController {
                 cell.usernameLabel.text = self.tableDatasource.value[row].name
                 cell.detailButton.rx.tap
                     .bind(with: self) { owner, _ in
-                        print("element: \(element)")
-                        print("row element: \(owner.tableDatasource.value[row])")
+                        let title = owner.tableDatasource.value[row].name
+                        owner.navigationController?.pushViewController(DetailViewController(buttonTitle: title), animated: true)
                     }.disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)

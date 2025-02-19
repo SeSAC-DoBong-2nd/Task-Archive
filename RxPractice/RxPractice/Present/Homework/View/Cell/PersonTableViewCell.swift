@@ -35,7 +35,7 @@ final class PersonTableViewCell: UITableViewCell {
     
     let detailButton: UIButton = {
         let button = UIButton()
-        button.setTitle("받기", for: .normal)
+        button.setTitle("더보기", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.isUserInteractionEnabled = true
         button.backgroundColor = .lightGray
@@ -46,9 +46,9 @@ final class PersonTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        disposeBag = DisposeBag()
         usernameLabel.text = nil
         profileImageView.image = nil
+        disposeBag = DisposeBag()
     }
       
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
