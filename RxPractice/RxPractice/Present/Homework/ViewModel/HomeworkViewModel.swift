@@ -13,7 +13,6 @@ import RxSwift
 final class HomeworkViewModel {
     
     let tableViewDatasource = Person.dummy
-    var collectionViewDatasource = [String]()
     
     struct Input {
 //        let tableViewTap: ControlEvent<IndexPath>

@@ -18,7 +18,6 @@ final class HomeworkViewController: UIViewController {
     private let viewModel: HomeworkViewModel
     private let disposeBag = DisposeBag()
 //    private lazy var tableDatasource = BehaviorRelay(value: viewModel.tableViewDatasource)
-//    private lazy var collectionDatasource = BehaviorRelay(value: viewModel.collectionViewDatasource)
     
     
     //MARK: - UI Properties
@@ -78,7 +77,7 @@ final class HomeworkViewController: UIViewController {
             .bind(to: tableView.rx.items(
                 cellIdentifier: PersonTableViewCell.identifier,
                 cellType: PersonTableViewCell.self)
-            ) {row, element, cell in
+            ) { row, element, cell in
                 let processor = DownsamplingImageProcessor(size: cell.profileImageView.bounds.size)
                 cell.profileImageView.kf.setImage(
                     with: URL(string: output.tableDatasource.value[row].profileImage),
@@ -105,9 +104,12 @@ final class HomeworkViewController: UIViewController {
             .bind(with: self) { owner, indexPath in
                 print(output.tableDatasource.value[indexPath.row])
                 let data = output.tableDatasource.value[indexPath.row].name
-                if !owner.viewModel.collectionViewDatasource.contains(data) { //collectionView 데이터 중복 방지
-                    owner.viewModel.collectionViewDatasource.append(data)
-                    output.collectionDatasource.accept(owner.viewModel.collectionViewDatasource)
+                
+                //collectionView 데이터 중복 방지
+                if !output.collectionDatasource.value.contains(data) {
+                    var dataSource = output.collectionDatasource.value
+                    dataSource.append(data)
+                    output.collectionDatasource.accept(dataSource)
                 }
             }.disposed(by: disposeBag)
         
@@ -136,17 +138,16 @@ final class HomeworkViewController: UIViewController {
                     $0.name.uppercased().contains(text.uppercased())
                 })
             }.disposed(by: disposeBag)
+
         
-        //searchBar 공백 시
+        //MARK: - 필수과제 추가구현
+        //+@ searchBar 공백 시
         searchBar.rx.text.orEmpty
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(with: self) { owner, text in
                 output.tableDatasource.accept(owner.viewModel.tableViewDatasource)
             }.disposed(by: disposeBag)
-        
-        
-        //MARK: - 필수과제 추가구현
         /*
         //+@ 실시간 검색
         searchBar.rx.text.orEmpty
