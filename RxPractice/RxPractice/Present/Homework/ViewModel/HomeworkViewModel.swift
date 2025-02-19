@@ -7,22 +7,28 @@
 
 import Foundation
 
+import RxCocoa
+import RxSwift
+
 final class HomeworkViewModel {
     
-    var tableViewDatasource = Person.dummy
+    let tableViewDatasource = Person.dummy
     var collectionViewDatasource = [String]()
     
     struct Input {
-        
+//        let tableViewTap: ControlEvent<IndexPath>
     }
     
     struct Output {
-        
+        let tableDatasource: BehaviorRelay<[Person]>
+        let collectionDatasource: BehaviorRelay<[String]>
+//        let tableViewTap: BehaviorRelay<Void>
     }
     
     func transform(input: Input) -> Output {
         
-        return Output()
+        
+        return Output(tableDatasource: BehaviorRelay(value: Person.dummy), collectionDatasource: BehaviorRelay(value: [String]()))
     }
     
 }

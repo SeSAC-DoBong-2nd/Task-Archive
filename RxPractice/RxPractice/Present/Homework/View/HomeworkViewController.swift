@@ -17,8 +17,8 @@ final class HomeworkViewController: UIViewController {
     //MARK: - Properties
     private let viewModel: HomeworkViewModel
     private let disposeBag = DisposeBag()
-    private lazy var tableDatasource = BehaviorRelay(value: viewModel.tableViewDatasource)
-    private lazy var collectionDatasource = BehaviorRelay(value: viewModel.collectionViewDatasource)
+//    private lazy var tableDatasource = BehaviorRelay(value: viewModel.tableViewDatasource)
+//    private lazy var collectionDatasource = BehaviorRelay(value: viewModel.collectionViewDatasource)
     
     
     //MARK: - UI Properties
@@ -70,15 +70,18 @@ final class HomeworkViewController: UIViewController {
     }
     
     private func bind() {
+        let input = HomeworkViewModel.Input()
+        let output = viewModel.transform(input: input)
+        
         //tableView Datasource 변경 시
-        tableDatasource
+        output.tableDatasource
             .bind(to: tableView.rx.items(
                 cellIdentifier: PersonTableViewCell.identifier,
                 cellType: PersonTableViewCell.self)
             ) {row, element, cell in
                 let processor = DownsamplingImageProcessor(size: cell.profileImageView.bounds.size)
                 cell.profileImageView.kf.setImage(
-                    with: URL(string: self.tableDatasource.value[row].profileImage),
+                    with: URL(string: output.tableDatasource.value[row].profileImage),
                     placeholder: UIImage(named: "placeholderImage"),
                     options: [
                         .processor(processor),
@@ -87,10 +90,10 @@ final class HomeworkViewController: UIViewController {
                         .cacheOriginalImage
                     ]
                 )
-                cell.usernameLabel.text = self.tableDatasource.value[row].name
+                cell.usernameLabel.text = output.tableDatasource.value[row].name
                 cell.detailButton.rx.tap
                     .bind(with: self) { owner, _ in
-                        let title = owner.tableDatasource.value[row].name
+                        let title = output.tableDatasource.value[row].name
                         owner.navigationController?.pushViewController(DetailViewController(buttonTitle: title), animated: true)
                     }.disposed(by: cell.disposeBag)
             }
@@ -100,59 +103,51 @@ final class HomeworkViewController: UIViewController {
         //tableview cell 클릭 시
         tableView.rx.itemSelected
             .bind(with: self) { owner, indexPath in
-                print(owner.tableDatasource.value[indexPath.row])
-                let data = owner.tableDatasource.value[indexPath.row].name
+                print(output.tableDatasource.value[indexPath.row])
+                let data = output.tableDatasource.value[indexPath.row].name
                 if !owner.viewModel.collectionViewDatasource.contains(data) { //collectionView 데이터 중복 방지
                     owner.viewModel.collectionViewDatasource.append(data)
-                    owner.collectionDatasource.accept(owner.viewModel.collectionViewDatasource)
+                    output.collectionDatasource.accept(owner.viewModel.collectionViewDatasource)
                 }
             }.disposed(by: disposeBag)
         
         
         //collectionView Datasource 변경 시
-        collectionDatasource
+        output.collectionDatasource
             .bind(to: collectionView.rx.items(
                     cellIdentifier: UserCollectionViewCell.identifier,
                     cellType: UserCollectionViewCell.self))
         { index, model, cell in
-            cell.configureCell(text: self.collectionDatasource.value[index])
+            cell.configureCell(text: output.collectionDatasource.value[index])
         }.disposed(by: disposeBag)
         
         
         //searchBar 리턴 클릭 시
-        searchBar.rx.searchButtonClicked
+        searchBar.rx
+            //이는 searchBar 공백 시 동작하지 않음
+            //.withLatestFrom(searchBar.rx.text.orEmpty) 를 사용해도 애초에 리턴 클릭 시 발생하는 이벤트 이기에 동작 못함
+            .searchButtonClicked
             .debounce(.seconds(1), scheduler: MainScheduler.instance) //1초 이후 동작 수행
             .bind(with: self) { owner, _ in
                 let text = owner.searchBar.text ?? ""
                 (text == "") ?
-                owner.tableDatasource.accept(owner.viewModel.tableViewDatasource) :
-                owner.tableDatasource.accept(owner.tableDatasource.value.filter {
+                output.tableDatasource.accept(owner.viewModel.tableViewDatasource) :
+                output.tableDatasource.accept(output.tableDatasource.value.filter {
                     $0.name.uppercased().contains(text.uppercased())
                 })
             }.disposed(by: disposeBag)
         
+        //searchBar 공백 시
+        searchBar.rx.text.orEmpty
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .bind(with: self) { owner, text in
+                output.tableDatasource.accept(owner.viewModel.tableViewDatasource)
+            }.disposed(by: disposeBag)
         
         
-        let input = HomeworkViewModel.Input()
-        
-        let output = viewModel.transform(input: )
-        
-        
-    }
-    
-    private func layout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 80, height: 40)
-        layout.scrollDirection = .horizontal
-        return layout
-    }
-
-}
- 
-private extension HomeworkViewController {
-    
-    //필수과제 추가구현
-    func additionalBind() {
+        //MARK: - 필수과제 추가구현
+        /*
         //+@ 실시간 검색
         searchBar.rx.text.orEmpty
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
@@ -175,6 +170,16 @@ private extension HomeworkViewController {
                 owner.tableDatasource.accept(owner.viewModel.tableViewDatasource)
                 owner.searchBar.text = "" //추가 되면 serarchBar text 초기화
             }.disposed(by: disposeBag)
+         */
+        
     }
     
+    private func layout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 80, height: 40)
+        layout.scrollDirection = .horizontal
+        return layout
+    }
+
 }
+
