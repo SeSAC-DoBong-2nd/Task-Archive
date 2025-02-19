@@ -102,7 +102,7 @@ final class HomeworkViewController: UIViewController {
             .bind(with: self) { owner, indexPath in
                 print(owner.tableDatasource.value[indexPath.row])
                 let data = owner.tableDatasource.value[indexPath.row].name
-                if !owner.viewModel.collectionViewDatasource.contains(data) {
+                if !owner.viewModel.collectionViewDatasource.contains(data) { //collectionView 데이터 중복 방지
                     owner.viewModel.collectionViewDatasource.append(data)
                     owner.collectionDatasource.accept(owner.viewModel.collectionViewDatasource)
                 }
@@ -119,9 +119,43 @@ final class HomeworkViewController: UIViewController {
         }.disposed(by: disposeBag)
         
         
+        //searchBar 리턴 클릭 시
+        searchBar.rx.searchButtonClicked
+            .debounce(.seconds(1), scheduler: MainScheduler.instance) //1초 이후 동작 수행
+            .bind(with: self) { owner, _ in
+                let text = owner.searchBar.text ?? ""
+                (text == "") ?
+                owner.tableDatasource.accept(owner.viewModel.tableViewDatasource) :
+                owner.tableDatasource.accept(owner.tableDatasource.value.filter {
+                    $0.name.uppercased().contains(text.uppercased())
+                })
+            }.disposed(by: disposeBag)
+        
+        
+        
+        let input = HomeworkViewModel.Input()
+        
+        let output = viewModel.transform(input: )
+        
+        
+    }
+    
+    private func layout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 80, height: 40)
+        layout.scrollDirection = .horizontal
+        return layout
+    }
+
+}
+ 
+private extension HomeworkViewController {
+    
+    //필수과제 추가구현
+    func additionalBind() {
         //+@ 실시간 검색
         searchBar.rx.text.orEmpty
-            .debounce(.seconds(1), scheduler: MainScheduler.instance) //1초 이후 동작 수행
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(with: self) { owner, searchText in
                 print(searchText)
@@ -141,21 +175,6 @@ final class HomeworkViewController: UIViewController {
                 owner.tableDatasource.accept(owner.viewModel.tableViewDatasource)
                 owner.searchBar.text = "" //추가 되면 serarchBar text 초기화
             }.disposed(by: disposeBag)
-        
-        
-        let input = HomeworkViewModel.Input()
-        
-        let output = viewModel.transform(input: )
-        
-        
     }
     
-    private func layout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 80, height: 40)
-        layout.scrollDirection = .horizontal
-        return layout
-    }
-
 }
- 
