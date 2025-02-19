@@ -114,6 +114,17 @@ final class HomeworkViewController: UIViewController {
             cell.configureCell(text: self.collectionDatasource.value[index])
         }.disposed(by: disposeBag)
         
+        searchBar.rx.text.orEmpty
+            .debounce(.seconds(1), scheduler: MainScheduler.instance) //1초 이후 동작 수행
+            .distinctUntilChanged()
+            .bind(with: self) { owner, searchText in
+                print(searchText)
+                (searchText == "") ?
+                owner.tableDatasource.accept(owner.viewModel.tableViewDatasource) :
+                owner.tableDatasource.accept(owner.tableDatasource.value.filter {
+                    $0.name.uppercased().contains(searchText.uppercased())
+                })
+            }.disposed(by: disposeBag)
         
         
         let input = HomeworkViewModel.Input()
