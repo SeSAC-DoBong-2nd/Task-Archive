@@ -24,6 +24,7 @@ final class HomeworkViewController: UIViewController {
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
     private let searchBar = UISearchBar()
     
+    
     //MARK: - Init
     init(viewModel: HomeworkViewModel) {
         self.viewModel = viewModel
@@ -68,7 +69,8 @@ final class HomeworkViewController: UIViewController {
     }
     
     private func bind() {
-        let input = HomeworkViewModel.Input()
+        let input = HomeworkViewModel.Input(tableViewCellTap: tableView.rx.itemSelected, searchBarReturnTap: searchBar.rx.searchButtonClicked, searchBarText: searchBar.rx.text.orEmpty)
+        
         let output = viewModel.transform(input: input)
         
         //tableView Datasource 변경 시
@@ -99,7 +101,7 @@ final class HomeworkViewController: UIViewController {
         
         
         //tableview cell 클릭 시
-        tableView.rx.itemSelected
+        output.tableViewCellTap
             .bind(with: self) { owner, indexPath in
                 print(output.tableDatasource.value[indexPath.row])
                 let data = output.tableDatasource.value[indexPath.row].name
@@ -124,10 +126,9 @@ final class HomeworkViewController: UIViewController {
         
         
         //searchBar 리턴 클릭 시
-        searchBar.rx
-            //이는 searchBar 공백 시 동작하지 않음
+        //searchButtonClicked: 이는 searchBar 공백 시 동작하지 않음
             //.withLatestFrom(searchBar.rx.text.orEmpty) 를 사용해도 애초에 리턴 클릭 시 발생하는 이벤트 이기에 동작 못함
-            .searchButtonClicked
+        output.searchBarReturnTap
             .debounce(.seconds(1), scheduler: MainScheduler.instance) //1초 이후 동작 수행
             .bind(with: self) { owner, _ in
                 let text = owner.searchBar.text ?? ""
@@ -141,12 +142,13 @@ final class HomeworkViewController: UIViewController {
         
         //MARK: - 필수과제 추가구현
         //+@ searchBar 공백 시
-        searchBar.rx.text.orEmpty
+        output.searchBarText
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(with: self) { owner, text in
                 output.tableDatasource.accept(Person.dummy)
             }.disposed(by: disposeBag)
+        
         /*
         //+@ 실시간 검색
         searchBar.rx.text.orEmpty

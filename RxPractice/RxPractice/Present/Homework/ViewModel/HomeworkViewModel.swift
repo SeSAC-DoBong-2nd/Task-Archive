@@ -13,19 +13,21 @@ import RxSwift
 final class HomeworkViewModel {
     
     struct Input {
-//        let tableViewTap: ControlEvent<IndexPath>
+        let tableViewCellTap: ControlEvent<IndexPath>
+        let searchBarReturnTap: ControlEvent<Void>
+        let searchBarText:  ControlProperty<String>
     }
     
     struct Output {
         let tableDatasource: BehaviorRelay<[Person]>
         let collectionDatasource: BehaviorRelay<[String]>
-//        let tableViewTap: BehaviorRelay<Void>
+        let tableViewCellTap: ControlEvent<IndexPath>
+        let searchBarReturnTap: ControlEvent<Void>
+        let searchBarText:  ControlProperty<String>
     }
     
     func transform(input: Input) -> Output {
-        
-        
-        return Output(tableDatasource: BehaviorRelay(value: Person.dummy), collectionDatasource: BehaviorRelay(value: [String]()))
+        return Output(tableDatasource: BehaviorRelay(value: Person.dummy), collectionDatasource: BehaviorRelay(value: [String]()), tableViewCellTap: input.tableViewCellTap, searchBarReturnTap: input.searchBarReturnTap, searchBarText: input.searchBarText)
     }
     
 }
