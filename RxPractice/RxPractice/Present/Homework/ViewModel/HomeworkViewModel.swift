@@ -27,7 +27,11 @@ final class HomeworkViewModel {
     }
     
     func transform(input: Input) -> Output {
-        return Output(tableDatasource: BehaviorRelay(value: Person.dummy), collectionDatasource: BehaviorRelay(value: [String]()), tableViewCellTap: input.tableViewCellTap, searchBarReturnTap: input.searchBarReturnTap, searchBarText: input.searchBarText)
+        return Output(tableDatasource: BehaviorRelay(value: Person.dummy),
+                      collectionDatasource: BehaviorRelay(value: [String]()),
+                      tableViewCellTap: input.tableViewCellTap,
+                      searchBarReturnTap: input.searchBarReturnTap,
+                      searchBarText: input.searchBarText)
     }
     
 }

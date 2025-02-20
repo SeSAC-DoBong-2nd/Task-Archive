@@ -69,7 +69,9 @@ final class HomeworkViewController: UIViewController {
     }
     
     private func bind() {
-        let input = HomeworkViewModel.Input(tableViewCellTap: tableView.rx.itemSelected, searchBarReturnTap: searchBar.rx.searchButtonClicked, searchBarText: searchBar.rx.text.orEmpty)
+        let input = HomeworkViewModel.Input(tableViewCellTap: tableView.rx.itemSelected,
+                                            searchBarReturnTap: searchBar.rx.searchButtonClicked,
+                                            searchBarText: searchBar.rx.text.orEmpty)
         
         let output = viewModel.transform(input: input)
         
@@ -132,9 +134,8 @@ final class HomeworkViewController: UIViewController {
             .debounce(.seconds(1), scheduler: MainScheduler.instance) //1초 이후 동작 수행
             .bind(with: self) { owner, _ in
                 let text = owner.searchBar.text ?? ""
-                (text == "") ?
-                output.tableDatasource.accept(Person.dummy) :
-                output.tableDatasource.accept(output.tableDatasource.value.filter {
+                print("current text: \(text)")
+                output.tableDatasource.accept(Person.dummy.filter {
                     $0.name.uppercased().contains(text.uppercased())
                 })
             }.disposed(by: disposeBag)
@@ -143,10 +144,10 @@ final class HomeworkViewController: UIViewController {
         //MARK: - 필수과제 추가구현
         //+@ searchBar 공백 시
         output.searchBarText
-            .debounce(.seconds(1), scheduler: MainScheduler.instance)
-            .distinctUntilChanged()
             .bind(with: self) { owner, text in
-                output.tableDatasource.accept(Person.dummy)
+                if text == "" {
+                    output.tableDatasource.accept(Person.dummy)
+                }
             }.disposed(by: disposeBag)
         
         /*
@@ -155,7 +156,7 @@ final class HomeworkViewController: UIViewController {
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .bind(with: self) { owner, searchText in
-                print(searchText)
+                print(searchText)ㅅ
                 (searchText == "") ?
                 owner.tableDatasource.accept(Person.dummy) :
                 owner.tableDatasource.accept(owner.tableDatasource.value.filter {
