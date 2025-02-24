@@ -29,6 +29,9 @@
 		9EA269B42D65CF0800029A14 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269B32D65CF0800029A14 /* Dummy.swift */; };
 		9EA269B72D65E8F900029A14 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9EA269B62D65E8F900029A14 /* Kingfisher */; };
 		9EA269B92D65F5B000029A14 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269B82D65F5B000029A14 /* DetailViewController.swift */; };
+		9EA26AB82D6C425000029A14 /* LotteryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AB72D6C425000029A14 /* LotteryViewController.swift */; };
+		9EA26ABC2D6C446D00029A14 /* LotteryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ABB2D6C446D00029A14 /* LotteryModel.swift */; };
+		9EA26ABE2D6C448300029A14 /* LotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ABD2D6C448300029A14 /* LotteryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +54,9 @@
 		9EA269AE2D65CE4100029A14 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		9EA269B32D65CF0800029A14 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		9EA269B82D65F5B000029A14 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9EA26AB72D6C425000029A14 /* LotteryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewController.swift; sourceTree = "<group>"; };
+		9EA26ABB2D6C446D00029A14 /* LotteryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryModel.swift; sourceTree = "<group>"; };
+		9EA26ABD2D6C448300029A14 /* LotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,7 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26AB52D6C423500029A14 /* Lottery */,
 				9E092EA92D649EE3003B36C4 /* SimpleTable */,
 				9E092EAE2D64A581003B36C4 /* Numbers */,
 				9E092EB92D64AA99003B36C4 /* SimpleValidation */,
@@ -222,6 +229,40 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		9EA26AB52D6C423500029A14 /* Lottery */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26ABA2D6C444E00029A14 /* Model */,
+				9EA26AB92D6C444800029A14 /* ViewModel */,
+				9EA26AB62D6C424300029A14 /* View */,
+			);
+			path = Lottery;
+			sourceTree = "<group>";
+		};
+		9EA26AB62D6C424300029A14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AB72D6C425000029A14 /* LotteryViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9EA26AB92D6C444800029A14 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26ABD2D6C448300029A14 /* LotteryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9EA26ABA2D6C444E00029A14 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26ABB2D6C446D00029A14 /* LotteryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -310,10 +351,13 @@
 				9E092E8E2D649888003B36C4 /* AppDelegate.swift in Sources */,
 				9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */,
 				9E092EC12D64B76B003B36C4 /* PointButton.swift in Sources */,
+				9EA26ABE2D6C448300029A14 /* LotteryViewModel.swift in Sources */,
+				9EA26ABC2D6C446D00029A14 /* LotteryModel.swift in Sources */,
 				9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */,
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
 				9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */,
 				9E092EBE2D64B652003B36C4 /* BirthdayViewController.swift in Sources */,
+				9EA26AB82D6C425000029A14 /* LotteryViewController.swift in Sources */,
 				9EA269B42D65CF0800029A14 /* Dummy.swift in Sources */,
 				9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */,
 				9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */,
