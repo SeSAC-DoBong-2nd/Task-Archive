@@ -7,22 +7,32 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
 import SnapKit
 import Then
-import Kingfisher
 
 final class LotteryViewController: UIViewController {
     
+    init(viewModel: LotteryViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    
     //MARK: - Property
     let stackViewSpacing = 5
-    lazy var lottoArr = Array(Array(1...getLatestLottoDate()).reversed())
+    
     //(screen width - (ballStackView inset 값 + spacing*7)) / 8
     lazy var ballSize = (self.view.bounds.width - CGFloat((30 + stackViewSpacing * 7))) / 8
+    private let viewModel: LotteryViewModel
+    private let disposeBag = DisposeBag()
     
     
     //MARK: - UI Property
     private let lottoTextField = UITextField()
-    private let lottoPickerView = UIPickerView()
+    private lazy var lottoPickerView = UIPickerView()
     private let introduceLabel = UILabel()
     private let dateLabel = UILabel()
     private let underLineView = UIView()
@@ -37,6 +47,8 @@ final class LotteryViewController: UIViewController {
     private let plusLabelView = UIView()
     private let bonusWinNumView = UIView()
     private let bonusLabel = UILabel()
+    private let observableBtn = UIButton()
+    private let singleBtn = UIButton()
     
     lazy var stackViewList = [
         firstWinNumView,
@@ -48,23 +60,23 @@ final class LotteryViewController: UIViewController {
         plusLabelView,
         bonusWinNumView
     ]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setRegister()
-//        getLottoAPI(numStr: "\(latestRound)")
         setHierarchy()
         setLayout()
         setStyle()
-        setLotteryUI(with: LotteryModel(drwNoDate: "2025.02.03", drwNo: 1234, drwtNo1: 1, drwtNo2: 2, drwtNo3: 3, drwtNo4: 4, drwtNo5: 5, drwtNo6: 6, bnusNo: 7))
+        bind()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-
 }
 
-//UI
+//MARK: - UI
 private extension LotteryViewController {
     
     func setHierarchy() {
@@ -74,7 +86,9 @@ private extension LotteryViewController {
          underLineView,
          resultLabel,
          ballStackView,
-         bonusLabel].forEach { i in
+         bonusLabel,
+         observableBtn,
+         singleBtn].forEach { i in
             view.addSubview(i)
         }
         
@@ -126,6 +140,18 @@ private extension LotteryViewController {
         bonusLabel.snp.makeConstraints {
             $0.top.equalTo(bonusWinNumView.snp.bottom).offset(5)
             $0.centerX.equalTo(bonusWinNumView.snp.centerX)
+        }
+        
+        observableBtn.snp.makeConstraints {
+            $0.top.equalTo(bonusLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(30)
+            //            $0.size.equalTo(60)
+        }
+        
+        singleBtn.snp.makeConstraints {
+            $0.top.equalTo(bonusLabel.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().inset(30)
+            //            $0.size.equalTo(60)
         }
     }
     
@@ -181,6 +207,20 @@ private extension LotteryViewController {
             $0.text = "보너스"
             $0.font = .systemFont(ofSize: 12)
             $0.textAlignment = .center
+        }
+        
+        observableBtn.do {
+            $0.setTitle("옵저버블버튼", for: .normal)
+            $0.setTitleColor(UIColor.red, for: .normal)
+            $0.layer.borderWidth = 1
+            $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
+        }
+        
+        singleBtn.do {
+            $0.setTitle("싱글버튼", for: .normal)
+            $0.setTitleColor(UIColor.blue, for: .normal)
+            $0.layer.borderWidth = 1
+            $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
         }
     }
     
@@ -250,87 +290,42 @@ private extension LotteryViewController {
     
 }
 
+
+//MARK: - Bind
 private extension LotteryViewController {
     
-    
-    
-//
-//    func getLottoAPI(numStr: String) {
-//        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=\(numStr)"
-//        AF.request(url, method: .get).responseDecodable(of: LotteryModel.self) { response in
-//            switch response.result {
-//            case .success(let result):
-//                self.setLotteryUI(round: result.drwNo,
-//                                  date: result.drwNoDate,
-//                                  no1: result.drwtNo1,
-//                                  no2: result.drwtNo2,
-//                                  no3: result.drwtNo3,
-//                                  no4: result.drwtNo4,
-//                                  no5: result.drwtNo5,
-//                                  no6: result.drwtNo6,
-//                                  noBonus: result.bnusNo)
-//            case .failure(let error):
-//                print(error)
-//                let alert = UIAlertUtil.showAlert(title: "조회 실패", message: "다시 시도하여 주세요.")
-//                self.present(alert, animated: true)
-//            }
-//        }
-//    }
-
-    
-    
-    func getLatestLottoDate() -> Int {
-        //로또 시작 날짜 (2002년 12월 7일)
-        let calendar = Calendar.current
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+    func bind() {
+        let input = LotteryViewModel.Input(
+            changePickerNum: lottoPickerView.rx.modelSelected(Int.self)
+                .compactMap {"\($0.first ?? 0)"},
+            observableBtnTapped: observableBtn.rx.tap,
+            singleBtnTapped: singleBtn.rx.tap
+        )
         
-        guard let startDate = dateFormatter.date(from: "2002-12-07") else {
-            print("getLatestLottoDate Error")
-            return 0
-        }
+        let output = viewModel.transform(input: input)
         
-        let now = Date()
+        output.textFieldText
+            .drive(with: self, onNext: { owner, text in
+                owner.lottoTextField.text = text
+                owner.lottoTextField.resignFirstResponder()
+            })
+            .disposed(by: disposeBag)
         
-        //시작부터 현재 날짜까지의 주차 계산
-        guard let weeks = calendar.dateComponents([.weekOfYear], from: startDate, to: now).weekOfYear else {
-            print("getLatestLottoDate Error")
-            return 0
-        }
+        //PickerView 각 Title 설정
+        output.lottoPickerList
+            .observe(on: MainScheduler.instance)
+            .bind(to: lottoPickerView.rx.itemTitles) { (_, item) -> String in
+                return "\(item)"
+            }
+            .disposed(by: disposeBag)
         
-        //최신 회차와 해당 날짜 계산
-        //1주차부터 시작이니 +1
-        let latestRound = weeks + 1
-        return latestRound
+        //lotto API 통신 이후 UI 세팅
+        output.lottoBallList
+            .observe(on: MainScheduler.instance)
+            .bind(with: self, onNext: { owner, model in
+                owner.setLotteryUI(with: model)
+            })
+            .disposed(by: disposeBag)
     }
     
 }
-
-extension LotteryViewController: UIPickerViewDelegate {
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(#function)
-        let lottoStr = String(lottoArr[row])
-//        choiceRound = lottoStr
-//        getLottoAPI(numStr: lottoStr)
-        view.endEditing(true)
-    }
-    
-}
-
-extension LotteryViewController: UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return lottoArr.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(lottoArr[row])
-    }
-    
-}
-
