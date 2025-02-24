@@ -227,6 +227,7 @@ private extension LotteryViewController {
     func setLotteryUI(with model: LotteryModel) {
         let round = model.drwNo
         lottoTextField.text = String(round)
+        lottoTextField.sendActions(for: .editingChanged) //이처럼 강제로 rx 이벤트를 줘도되나?
         setResultLabelHilightColor(str: "\(round)회 당첨결과")
         
         dateLabel.text = "\(model.drwNoDate) 추첨"
@@ -296,6 +297,7 @@ private extension LotteryViewController {
     
     func bind() {
         let input = LotteryViewModel.Input(
+            lottoTextFieldText: lottoTextField.rx.text.orEmpty,
             changePickerNum: lottoPickerView.rx.modelSelected(Int.self)
                 .compactMap {"\($0.first ?? 0)"},
             observableBtnTapped: observableBtn.rx.tap,
@@ -303,7 +305,7 @@ private extension LotteryViewController {
         )
         
         let output = viewModel.transform(input: input)
-        
+
         output.textFieldText
             .drive(with: self, onNext: { owner, text in
                 owner.lottoTextField.text = text

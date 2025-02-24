@@ -16,6 +16,7 @@ final class LotteryViewModel: ViewModelProtocol {
     private lazy var lottoArr = Array(Array(1...getLatestLottoDate()).reversed())
     
     struct Input {
+        let lottoTextFieldText: ControlProperty<String>
         let changePickerNum: Observable<String> //picker 동작 시
         let observableBtnTapped: ControlEvent<Void> //옵저버블 버튼 탭
         let singleBtnTapped: ControlEvent<Void> //싱글 버튼 탭
@@ -44,26 +45,27 @@ final class LotteryViewModel: ViewModelProtocol {
             .subscribe(with: self) { owner, model in
                 lottoBallList.onNext(model)
             } onError: { owner, error in
-                print("onError \(error)")
+                print("recentestLotto onError \(error)")
             } onCompleted: { owner in
-                print("onCompleted")
+                print("recentestLotto onCompleted")
             } onDisposed: { owner in
-                print("onDisposed")
+                print("recentestLotto onDisposed")
             }.disposed(by: disposeBag)
         
         input.changePickerNum
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
-            .bind(with: self) { owner, text in
+            .subscribe(with: self) { owner, text in
                 currentTextFieldText.onNext(text)
             }.disposed(by: disposeBag)
         
         input.observableBtnTapped
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .withLatestFrom(input.changePickerNum)
+            .withLatestFrom(input.lottoTextFieldText)
             .distinctUntilChanged()
             .flatMap { value in
                 LotteryNetworkManager.shared.callLotteryAPI(round: value)
+                    .do(onCompleted: { print("callLotteryAPI onCompleted!") })
             }
             .subscribe(with: self) { owner, model in
                 lottoBallList.onNext(model)
@@ -77,10 +79,11 @@ final class LotteryViewModel: ViewModelProtocol {
         
         input.singleBtnTapped
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .withLatestFrom(input.changePickerNum)
+            .withLatestFrom(input.lottoTextFieldText)
             .distinctUntilChanged()
             .flatMap { value in
                 LotteryNetworkManager.shared.callLotteryAPIWithSingle(round: value)
+                    .do(onSuccess: { _ in print("callLotteryAPIWithSingle onSuccess!")})
             }
             .subscribe(with: self) { owner, model in
                 lottoBallList.onNext(model)

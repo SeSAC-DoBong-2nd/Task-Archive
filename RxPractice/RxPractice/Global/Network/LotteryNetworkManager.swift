@@ -53,6 +53,7 @@ final class LotteryNetworkManager {
                             let result = try JSONDecoder().decode(LotteryModel.self, from: data)
                             value.onNext(result)
                             value.onCompleted()
+                            print("케케몬!!!")
                         } catch {
                             //디코딩 에러
                             print("❌ 디코딩 실패: \(error)")
@@ -97,6 +98,7 @@ final class LotteryNetworkManager {
                         do {
                             let result = try JSONDecoder().decode(LotteryModel.self, from: data)
                             value(.success(result))
+                            print("케케몬!!!")
                         } catch {
                             print("❌ 디코딩 실패: \(error)")
                             value(.failure(APIError.decodingError))
