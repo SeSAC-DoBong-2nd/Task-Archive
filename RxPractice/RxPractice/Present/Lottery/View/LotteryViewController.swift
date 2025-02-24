@@ -14,26 +14,26 @@ import Kingfisher
 final class LotteryViewController: UIViewController {
     
     //MARK: - UI Property
-    let lottoTextField = UITextField()
+    private let lottoTextField = UITextField()
+
+    private let introduceLabel = UILabel()
+    private let dateLabel = UILabel()
+    private let underLineView = UIView()
     
-    let introduceLabel = UILabel()
-    let dateLabel = UILabel()
-    let underLineView = UIView()
+    private let resultLabel = UILabel()
+    private let bonusLabel = UILabel()
     
-    let resultLabel = UILabel()
-    let bonusLabel = UILabel()
+    private let ballStackView = UIStackView()
+    private let firstWinNumView = UIView()
+    private let secondWinNumView = UIView()
+    private let thirdWinNumView = UIView()
+    private let fourthWinNumView = UIView()
+    private let fifthWinNumView = UIView()
+    private let sixthWinNumView = UIView()
+    private let plusLabelView = UIView()
+    private let bonusWinNumView = UIView()
     
-    let ballStackView = UIStackView()
-    let firstWinNumView = UIView()
-    let secondWinNumView = UIView()
-    let thirdWinNumView = UIView()
-    let fourthWinNumView = UIView()
-    let fifthWinNumView = UIView()
-    let sixthWinNumView = UIView()
-    let plusLabelView = UIView()
-    let bonusWinNumView = UIView()
-    
-    let lottoPickerView = UIPickerView()
+    private let lottoPickerView = UIPickerView()
     
     //MARK: - Property
     let stackViewSpacing = 5
@@ -61,25 +61,27 @@ final class LotteryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setRegister()
-        getLottoAPI(numStr: "\(latestRound)")
+//        setRegister()
+//        getLottoAPI(numStr: "\(latestRound)")
     }
     
-    override func setHierarchy() {
-        view.addSubviews(lottoTextField,
-                         introduceLabel,
-                         dateLabel,
-                         underLineView,
-                         resultLabel,
-                         ballStackView,
-                         bonusLabel)
+    func setHierarchy() {
+        [lottoTextField,
+         introduceLabel,
+         dateLabel,
+         underLineView,
+         resultLabel,
+         ballStackView,
+         bonusLabel].forEach { i in
+            view.addSubview(i)
+        }
         
         stackViewList.forEach { i in
             ballStackView.addArrangedSubview(i)
         }
     }
     
-    override func setLayout() {
+    func setLayout() {
         lottoTextField.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.horizontalEdges.equalToSuperview().inset(30)
@@ -126,7 +128,7 @@ final class LotteryViewController: UIViewController {
         }
     }
     
-    override func setStyle() {
+    func setStyle() {
         view.backgroundColor = .white
         
         lottoTextField.do {
@@ -142,13 +144,21 @@ final class LotteryViewController: UIViewController {
         
         underLineView.backgroundColor = .lightGray
         
-        introduceLabel.setLabelUI("당첨번호 안내", font: .systemFont(ofSize: 14, weight: .black))
+        introduceLabel.do {
+            $0.text = "당첨번호 안내"
+            $0.font = .systemFont(ofSize: 14, weight: .black)
+        }
         
-        dateLabel.setLabelUI("2888-88-88 추첨",
-                             font: .systemFont(ofSize: 12, weight: .regular),
-                             textColor: .lightGray)
+        dateLabel.do {
+            $0.text = "2888-88-88 추첨"
+            $0.font = .systemFont(ofSize: 12, weight: .regular)
+            $0.textColor = .lightGray
+        }
         
-        resultLabel.setLabelUI("888회 당첨결과", font: .systemFont(ofSize: 22, weight: .black))
+        resultLabel.do {
+            $0.text = "888회 당첨결과"
+            $0.font = .systemFont(ofSize: 22, weight: .black)
+        }
         
         ballStackView.do {
             $0.axis = .horizontal
@@ -166,20 +176,22 @@ final class LotteryViewController: UIViewController {
             }
         }
         
-        bonusLabel.setLabelUI("보너스",
-                              font: .systemFont(ofSize: 8),
-                              alignment: .right)
+        bonusLabel.do {
+            $0.text = "보너스"
+            $0.font = .systemFont(ofSize: 8)
+            $0.textAlignment = .right
+        }
     }
 
 }
 
 private extension LotteryViewController {
     
-    func setRegister() {
-        lottoPickerView.delegate = self
-        lottoPickerView.dataSource = self
-    }
-    
+//    func setRegister() {
+//        lottoPickerView.delegate = self
+//        lottoPickerView.dataSource = self
+//    }
+//    
     func setResultLabelHilightColor(str: String) {
         let attributedText = NSMutableAttributedString(
             string: str,
@@ -195,29 +207,29 @@ private extension LotteryViewController {
         
         resultLabel.attributedText = attributedText
     }
-    
-    func getLottoAPI(numStr: String) {
-        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=\(numStr)"
-        AF.request(url, method: .get).responseDecodable(of: LotteryModel.self) { response in
-            switch response.result {
-            case .success(let result):
-                self.setLotteryUI(round: result.drwNo,
-                                  date: result.drwNoDate,
-                                  no1: result.drwtNo1,
-                                  no2: result.drwtNo2,
-                                  no3: result.drwtNo3,
-                                  no4: result.drwtNo4,
-                                  no5: result.drwtNo5,
-                                  no6: result.drwtNo6,
-                                  noBonus: result.bnusNo)
-            case .failure(let error):
-                print(error)
-                let alert = UIAlertUtil.showAlert(title: "조회 실패", message: "다시 시도하여 주세요.")
-                self.present(alert, animated: true)
-            }
-        }
-    }
-    
+//    
+//    func getLottoAPI(numStr: String) {
+//        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=\(numStr)"
+//        AF.request(url, method: .get).responseDecodable(of: LotteryModel.self) { response in
+//            switch response.result {
+//            case .success(let result):
+//                self.setLotteryUI(round: result.drwNo,
+//                                  date: result.drwNoDate,
+//                                  no1: result.drwtNo1,
+//                                  no2: result.drwtNo2,
+//                                  no3: result.drwtNo3,
+//                                  no4: result.drwtNo4,
+//                                  no5: result.drwtNo5,
+//                                  no6: result.drwtNo6,
+//                                  noBonus: result.bnusNo)
+//            case .failure(let error):
+//                print(error)
+//                let alert = UIAlertUtil.showAlert(title: "조회 실패", message: "다시 시도하여 주세요.")
+//                self.present(alert, animated: true)
+//            }
+//        }
+//    }
+
     func setLotteryUI(round: Int,
                       date: String,
                       no1: Int,
@@ -244,10 +256,13 @@ private extension LotteryViewController {
             let numLabel = UILabel()
             let text = (i == 6) ? "+" : String(selectedLottoArr[i])
             let textColor = (i == 6) ? UIColor(.black) : UIColor(.white)
-            numLabel.setLabelUI(text,
-                                font: .systemFont(ofSize: 16, weight: .bold),
-                                textColor: textColor,
-                                alignment: .center)
+            
+            numLabel.do {
+                $0.text = text
+                $0.font = .systemFont(ofSize: 16, weight: .bold)
+                $0.textColor = textColor
+                $0.textAlignment = .center
+            }
             
             stackViewList[i].addSubview(numLabel)
             
@@ -270,7 +285,6 @@ private extension LotteryViewController {
                 print("")
             }
         }
-        
     }
     
     func getLatestLottoDate() -> Int {
@@ -306,7 +320,7 @@ extension LotteryViewController: UIPickerViewDelegate {
         print(#function)
         let lottoStr = String(lottoArr[row])
         choiceRound = lottoStr
-        getLottoAPI(numStr: lottoStr)
+//        getLottoAPI(numStr: lottoStr)
         view.endEditing(true)
     }
     
