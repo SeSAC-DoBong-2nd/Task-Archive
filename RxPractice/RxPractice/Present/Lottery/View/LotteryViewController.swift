@@ -198,7 +198,7 @@ private extension LotteryViewController {
     
     func getLottoAPI(numStr: String) {
         let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=\(numStr)"
-        AF.request(url, method: .get).responseDecodable(of: LotteryResponseModel.self) { response in
+        AF.request(url, method: .get).responseDecodable(of: LotteryModel.self) { response in
             switch response.result {
             case .success(let result):
                 self.setLotteryUI(round: result.drwNo,
