@@ -32,6 +32,7 @@
 		9EA26AB82D6C425000029A14 /* LotteryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AB72D6C425000029A14 /* LotteryViewController.swift */; };
 		9EA26ABC2D6C446D00029A14 /* LotteryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ABB2D6C446D00029A14 /* LotteryModel.swift */; };
 		9EA26ABE2D6C448300029A14 /* LotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ABD2D6C448300029A14 /* LotteryViewModel.swift */; };
+		9EA26AC12D6C4A5400029A14 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AC02D6C4A5400029A14 /* ViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		9EA26AB72D6C425000029A14 /* LotteryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewController.swift; sourceTree = "<group>"; };
 		9EA26ABB2D6C446D00029A14 /* LotteryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryModel.swift; sourceTree = "<group>"; };
 		9EA26ABD2D6C448300029A14 /* LotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewModel.swift; sourceTree = "<group>"; };
+		9EA26AC02D6C4A5400029A14 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 		9E092EA52D649B8B003B36C4 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26ABF2D6C4A4500029A14 /* Protocols */,
 				9E092EA62D649B9D003B36C4 /* Utility */,
 				9E092EA12D649927003B36C4 /* Resources */,
 			);
@@ -263,6 +266,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9EA26ABF2D6C4A4500029A14 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AC02D6C4A5400029A14 /* ViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -350,6 +361,7 @@
 				9EA269AB2D65CE2E00029A14 /* HomeworkViewModel.swift in Sources */,
 				9E092E8E2D649888003B36C4 /* AppDelegate.swift in Sources */,
 				9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */,
+				9EA26AC12D6C4A5400029A14 /* ViewModelProtocol.swift in Sources */,
 				9E092EC12D64B76B003B36C4 /* PointButton.swift in Sources */,
 				9EA26ABE2D6C448300029A14 /* LotteryViewModel.swift in Sources */,
 				9EA26ABC2D6C446D00029A14 /* LotteryModel.swift in Sources */,
