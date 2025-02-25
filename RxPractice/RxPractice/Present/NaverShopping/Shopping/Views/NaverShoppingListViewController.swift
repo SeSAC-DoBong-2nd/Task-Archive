@@ -16,10 +16,11 @@ final class NaverShoppingListViewController: BaseViewController {
 
     private let viewModel: NaverShoppingListViewModel
     
-    init(viewModel: NaverShoppingListViewModel) {
+    init(viewModel: NaverShoppingListViewModel, navtitle: String) {
         self.viewModel = viewModel
         
         super.init()
+        self.navigationItem.title = navtitle
     }
     
     deinit {
@@ -45,8 +46,9 @@ final class NaverShoppingListViewController: BaseViewController {
     }
     
     override func setStyle() {
-        navigationController?.navigationBar.tintColor = .white
         view.backgroundColor = .black
+        navigationController?.navigationBar.tintColor = .white
+        
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
                                                            style: .done,

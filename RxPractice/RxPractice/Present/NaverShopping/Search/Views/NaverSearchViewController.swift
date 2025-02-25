@@ -7,11 +7,14 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
 import SnapKit
 import Then
 
 final class NaverSearchViewController: BaseViewController {
     
+    private let disposeBag = DisposeBag()
     private let viewModel = NaverSearchViewModel()
     
     private let searchView = NaverSearchView()
@@ -22,59 +25,38 @@ final class NaverSearchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setDelegate()
-//        bindViewModel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        searchView.imageView.isHidden = false
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        searchView.imageView.isHidden = true
-    }
-    
-    override func setStyle() {
-        view.backgroundColor = .black
+        
+        navigationItem.title = "psy의 쇼핑쇼핑"
+        bind()
     }
 
 }
 
 private extension NaverSearchViewController {
     
-    func setDelegate() {
-        searchView.searchBar.delegate = self
+    func bind() {
+        let input = NaverSearchViewModel.Input(
+            searchText: searchView.searchBar.rx.text.orEmpty,
+            searchReturnClicked: searchView.searchBar.rx.searchButtonClicked
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.isValidSearchText
+            .compactMap { $0 }
+            .drive(with: self) { owner, value in
+                switch value {
+                case true:
+                    let viewModel = NaverShoppingListViewModel()
+                    let vc = NaverShoppingListViewController(viewModel: viewModel, navtitle: owner.viewModel.currentSearchText)
+                    
+                    print("owner.viewModel.currentSearchText: \(owner.viewModel.currentSearchText)")
+                    owner.navigationController?.pushViewController(vc, animated: true)
+                case false:
+                    let alert = UIAlertManager.showAlert(title: "검색 실패", message: "2글자 이상 검색해주세요.")
+                    owner.present(alert, animated: true)
+                }
+            }.disposed(by: disposeBag)
     }
-    
-//    func bindViewModel() {
-//        viewModel.outputNavtitle.bind { [weak self] title in
-//            guard let self else {return}
-//            self.navigationItem.title = title
-//        }
-//        
-//        viewModel.outputIsValidSearchText.lazyBind { [weak self] value in
-//            guard let self else {return}
-//            switch value {
-//            case true:
-//                let vcViewModel = NaverShoppingListViewModel()
-//                vcViewModel.outputNavTitle.value = self.viewModel.inputSearchText.value ?? "실패"
-//                let vc = NaverShoppingListViewController(viewModel: vcViewModel)
-//                self.navigationController?.pushViewController(vc, animated: true)
-//            case false:
-//                let alert = UIAlertUtil.showAlert(title: "조회 실패", message: "2글자 이상 입력해주세요.")
-//                self.present(alert, animated: true)
-//            }
-//        }
-//    }
-    
-}
-
-extension NaverSearchViewController: UISearchBarDelegate {
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        viewModel.inputSearchText.value = searchBar.text
-//        view.endEditing(true)
-//    }
     
 }

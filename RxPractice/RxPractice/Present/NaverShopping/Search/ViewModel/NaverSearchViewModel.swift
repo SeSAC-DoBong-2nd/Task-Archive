@@ -7,39 +7,49 @@
 
 import Foundation
 
-final class NaverSearchViewModel {
-    
-//    let inputSearchText: Observable<String?> = Observable("")
-//    
-//    let outputIsValidSearchText: Observable<Bool> = Observable(false)
-//    let outputNavtitle: Observable<String> = Observable("psy의 쇼핑쇼핑")
-//    
-//    init() {
-//        bindViewModel()
-//    }
-//    
-//    private func bindViewModel() {
-//        inputSearchText.lazyBind { [weak self] text in
-//            guard let self else {return}
-//            self.isValidSearchText(text: text)
-//        }
-//    }
-    
-}
+import RxCocoa
+import RxSwift
 
-private extension NaverSearchViewModel {
+final class NaverSearchViewModel: ViewModelProtocol {
     
-//    func isValidSearchText(text: String?) {
-//        guard let text = text?.trimmingCharacters(in: .whitespaces) else {
-//            print("searchBarSearchButtonClicked error")
-//            return
-//        }
-//        switch text.count < 2 {
-//        case true:
-//            outputIsValidSearchText.value = false
-//        case false:
-//            outputIsValidSearchText.value = true
-//        }
-//    }
+    var currentSearchText = ""
+    private let disposeBag = DisposeBag()
+    
+    struct Input {
+        let searchText: ControlProperty<String>
+        let searchReturnClicked: ControlEvent<Void> //서치바 리턴버튼 클릭
+    }
+    
+    struct Output {
+        let isValidSearchText: Driver<Bool>
+    }
+    
+    func transform(input: Input) -> Output {
+        let outputIsValidSearchText = PublishRelay<Bool>()
+        
+        input.searchText
+//            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+                    //위는 searchText를 계속 관찰해야하기에 debounce와 같은 시간 제약이 없어야함
+            .distinctUntilChanged()
+            .subscribe(with: self) { owner, value in
+                owner.currentSearchText = value
+            }.disposed(by: disposeBag)
+        
+        input.searchReturnClicked
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .withLatestFrom(input.searchText)
+//            .distinctUntilChanged() //같은 값도 재검색 할 수 있어야하기에 빼야함.
+            .map {
+                $0.count >= 2
+            }
+            .bind(with: self) { owner, value in
+                outputIsValidSearchText.accept(value)
+            }.disposed(by: disposeBag)
+        
+        
+        
+        
+        return Output(isValidSearchText: outputIsValidSearchText.asDriver(onErrorDriveWith: .empty()))
+    }
     
 }

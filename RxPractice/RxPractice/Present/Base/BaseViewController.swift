@@ -18,6 +18,8 @@ class BaseViewController: UIViewController {
         setHierarchy()
         setLayout()
         setStyle()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        view.backgroundColor = .black
     }
     
     init() {
