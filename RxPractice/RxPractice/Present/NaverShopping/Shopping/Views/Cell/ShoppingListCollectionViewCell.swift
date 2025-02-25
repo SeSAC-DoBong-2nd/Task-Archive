@@ -20,10 +20,12 @@ final class ShoppingListCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setHierarchy() {
-        contentView.addSubviews(imageView,
-                                mallNameLabel,
-                                productLabel,
-                                priceLabel)
+        [imageView,
+         mallNameLabel,
+         productLabel,
+         priceLabel].forEach { i in
+            contentView.addSubview(i)
+        }
         
         imageView.addSubview(heartButton)
     }
@@ -76,17 +78,25 @@ final class ShoppingListCollectionViewCell: BaseCollectionViewCell {
     {
         imageView.setImageKfDownSampling(with: imageUrl, cornerRadius: 20)
         
-        mallNameLabel.setLabelUI(shoppingMallName,
-                                     font: .systemFont(ofSize: 12, weight: .light),
-                                     textColor: .lightGray)
+        mallNameLabel.do {
+            $0.text = shoppingMallName
+            $0.font = .systemFont(ofSize: 12, weight: .light)
+            $0.textColor = .lightGray
+        }
         
-        productLabel.setLabelUI(productName,
-                                font: .systemFont(ofSize: 13, weight: .regular),
-                                textColor: .white, numberOfLines: 2)
+        productLabel.do {
+            $0.text = productName
+            $0.font = .systemFont(ofSize: 13, weight: .regular)
+            $0.textColor = .white
+            $0.numberOfLines = 2
+        }
         
-        priceLabel.setLabelUI(CustomFormatter.shard.setDecimalNumber(num: price),
-                              font: .systemFont(ofSize: 16, weight: .medium),
-                              textColor: .white)
+        priceLabel.do {
+            $0.text = DateFormatterManager.shard.setDecimalNumber(num: price)
+            $0.font = .systemFont(ofSize: 16, weight: .medium)
+            $0.textColor = .white
+        }
+        
         isHeartBtnSelected
         ? heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         : heartButton.setImage(UIImage(systemName: "heart"), for: .normal)

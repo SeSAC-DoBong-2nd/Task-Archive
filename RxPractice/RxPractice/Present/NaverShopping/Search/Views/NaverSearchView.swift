@@ -13,7 +13,8 @@ final class NaverSearchView: BaseView {
     let imageView = UIImageView()
 
     override func setHierarchy() {
-        self.addSubviews(searchBar, imageView)
+        self.addSubview(searchBar)
+        self.addSubview(imageView)
     }
     
     override func setLayout() {
@@ -37,7 +38,7 @@ final class NaverSearchView: BaseView {
         }
         
         imageView.do {
-            $0.image = UIImage(resource: .shoppingHome)
+            $0.image = UIImage(systemName: "cart")
         }
     }
 

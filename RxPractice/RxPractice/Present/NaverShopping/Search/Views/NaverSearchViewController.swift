@@ -24,7 +24,7 @@ final class NaverSearchViewController: BaseViewController {
         super.viewDidLoad()
 
         setDelegate()
-        bindViewModel()
+//        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,34 +47,34 @@ private extension NaverSearchViewController {
         searchView.searchBar.delegate = self
     }
     
-    func bindViewModel() {
-        viewModel.outputNavtitle.bind { [weak self] title in
-            guard let self else {return}
-            self.navigationItem.title = title
-        }
-        
-        viewModel.outputIsValidSearchText.lazyBind { [weak self] value in
-            guard let self else {return}
-            switch value {
-            case true:
-                let vcViewModel = NaverShoppingListViewModel()
-                vcViewModel.outputNavTitle.value = self.viewModel.inputSearchText.value ?? "실패"
-                let vc = NaverShoppingListViewController(viewModel: vcViewModel)
-                self.navigationController?.pushViewController(vc, animated: true)
-            case false:
-                let alert = UIAlertUtil.showAlert(title: "조회 실패", message: "2글자 이상 입력해주세요.")
-                self.present(alert, animated: true)
-            }
-        }
-    }
+//    func bindViewModel() {
+//        viewModel.outputNavtitle.bind { [weak self] title in
+//            guard let self else {return}
+//            self.navigationItem.title = title
+//        }
+//        
+//        viewModel.outputIsValidSearchText.lazyBind { [weak self] value in
+//            guard let self else {return}
+//            switch value {
+//            case true:
+//                let vcViewModel = NaverShoppingListViewModel()
+//                vcViewModel.outputNavTitle.value = self.viewModel.inputSearchText.value ?? "실패"
+//                let vc = NaverShoppingListViewController(viewModel: vcViewModel)
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            case false:
+//                let alert = UIAlertUtil.showAlert(title: "조회 실패", message: "2글자 이상 입력해주세요.")
+//                self.present(alert, animated: true)
+//            }
+//        }
+//    }
     
 }
 
 extension NaverSearchViewController: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.inputSearchText.value = searchBar.text
-        view.endEditing(true)
-    }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        viewModel.inputSearchText.value = searchBar.text
+//        view.endEditing(true)
+//    }
     
 }

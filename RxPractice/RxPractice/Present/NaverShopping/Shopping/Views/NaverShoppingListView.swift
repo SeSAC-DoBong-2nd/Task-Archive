@@ -31,15 +31,20 @@ final class NaverShoppingListView: BaseView {
     
     
     override func setHierarchy() {
-        self.addSubviews(resultCntLabel,
-                         filterContainerView,
-                         shoppingCollectionView,
-                         indicatorView)
+        [resultCntLabel,
+         filterContainerView,
+         shoppingCollectionView,
+         indicatorView].forEach { i in
+            self.addSubview(i)
+        }
         
-        filterContainerView.addSubviews(accuracyButton,
-                                        byDateButton,
-                                        priceHigherButton,
-                                        priceLowestButton)
+        [accuracyButton,
+         byDateButton,
+         priceHigherButton,
+         priceLowestButton].forEach { i in
+            filterContainerView.addSubview(i)
+        }
+        
     }
     
     override func setLayout() {
@@ -90,9 +95,11 @@ final class NaverShoppingListView: BaseView {
             $0.color = .lightGray
         }
         
-        resultCntLabel.setLabelUI("",
-                                  font: .boldSystemFont(ofSize: 16),
-                                  textColor: .systemGreen)
+        resultCntLabel.do {
+            $0.text = ""
+            $0.font = .boldSystemFont(ofSize: 16)
+            $0.textColor = .systemGreen
+        }
         
         shoppingCollectionView.do {
             let itemSpacing: CGFloat = 10

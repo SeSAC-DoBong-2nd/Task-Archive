@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         
-        self.window?.rootViewController = UINavigationController(rootViewController: LotteryViewController(viewModel: LotteryViewModel()))
+        self.window?.rootViewController = UINavigationController(rootViewController: NaverSearchViewController())
         
         self.window?.makeKeyAndVisible()
     }

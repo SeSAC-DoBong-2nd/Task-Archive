@@ -49,6 +49,8 @@
 		9EA26AF82D6DC98E00029A14 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AF52D6DC98E00029A14 /* BaseView.swift */; };
 		9EA26AF92D6DC98E00029A14 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AF42D6DC98E00029A14 /* BaseCollectionViewCell.swift */; };
 		9EA26AFA2D6DC98E00029A14 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AF62D6DC98E00029A14 /* BaseViewController.swift */; };
+		9EA26AFD2D6DCB8B00029A14 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AFC2D6DCB8B00029A14 /* UIImageView+.swift */; };
+		9EA26AFF2D6DCC7D00029A14 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +90,8 @@
 		9EA26AF42D6DC98E00029A14 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		9EA26AF52D6DC98E00029A14 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		9EA26AF62D6DC98E00029A14 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9EA26AFC2D6DCB8B00029A14 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +177,7 @@
 		9E092EA52D649B8B003B36C4 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26AFB2D6DCB7D00029A14 /* Extensions */,
 				9EA26AC22D6CADD700029A14 /* Network */,
 				9EA26ABF2D6C4A4500029A14 /* Protocols */,
 				9E092EA62D649B9D003B36C4 /* Utility */,
@@ -185,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				9E092EA72D649BD6003B36C4 /* UIAlertManager.swift */,
+				9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -407,6 +413,14 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		9EA26AFB2D6DCB7D00029A14 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AFC2D6DCB8B00029A14 /* UIImageView+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -508,6 +522,7 @@
 				9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */,
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
 				9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */,
+				9EA26AFD2D6DCB8B00029A14 /* UIImageView+.swift in Sources */,
 				9E092EBE2D64B652003B36C4 /* BirthdayViewController.swift in Sources */,
 				9EA26AE92D6DC8E900029A14 /* NaverSearchView.swift in Sources */,
 				9EA26AEA2D6DC8E900029A14 /* NaverShoppingListViewController.swift in Sources */,
@@ -523,6 +538,7 @@
 				9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */,
 				9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */,
 				9EA269B92D65F5B000029A14 /* DetailViewController.swift in Sources */,
+				9EA26AFF2D6DCC7D00029A14 /* DateFormatterManager.swift in Sources */,
 				9EA269B12D65CE4100029A14 /* PersonTableViewCell.swift in Sources */,
 				9E092E8F2D649888003B36C4 /* SceneDelegate.swift in Sources */,
 				9EA26AF82D6DC98E00029A14 /* BaseView.swift in Sources */,
