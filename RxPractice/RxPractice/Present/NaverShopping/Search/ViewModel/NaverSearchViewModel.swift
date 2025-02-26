@@ -18,10 +18,12 @@ final class NaverSearchViewModel: ViewModelProtocol {
     struct Input {
         let searchText: ControlProperty<String>
         let searchReturnClicked: ControlEvent<Void> //서치바 리턴버튼 클릭
+        let tapNavLeftBtn: ControlEvent<Void>?
     }
     
     struct Output {
         let isValidSearchText: Driver<Bool>
+        let tapNavLeftBtnResult: Observable<Void>?
     }
     
     func transform(input: Input) -> Output {
@@ -49,10 +51,7 @@ final class NaverSearchViewModel: ViewModelProtocol {
                 outputIsValidSearchText.accept(value)
             }.disposed(by: disposeBag)
         
-        
-        
-        
-        return Output(isValidSearchText: outputIsValidSearchText.asDriver(onErrorDriveWith: .empty()))
+        return Output(isValidSearchText: outputIsValidSearchText.asDriver(onErrorDriveWith: .empty()), tapNavLeftBtnResult: input.tapNavLeftBtn?.asObservable())
     }
     
 }
