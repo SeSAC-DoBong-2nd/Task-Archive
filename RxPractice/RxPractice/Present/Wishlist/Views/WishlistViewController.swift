@@ -14,26 +14,7 @@ import Then
 
 final class WishlistViewController: BaseViewController {
     
-    //MARK: - WishlistItem Model
-    //이도 해당 class에서만 사용되기에 안에 종속
-    struct WishlistItem: Hashable, Identifiable {
-        let id = UUID() //Identifiable 채택함으로써 id 변수 사용 강제화
-        let name: String
-        let date: Date
-        let price: Int
-        
-        //상품 추가 일자
-        var formattedDate: String {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            return formatter.string(from: date)
-        }
-        
-        //상품 가격
-        var formattedPrice: String {
-            return "\(price.formatted())원"
-        }
-    }
+    
     
     enum Section: CaseIterable {
         case main
@@ -43,22 +24,16 @@ final class WishlistViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private var wishlistItems: [WishlistItem] = []
     
-    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
-        $0.backgroundColor = .systemBackground
-        $0.delegate = self
-    }
+    //MARK: - UI Properties
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
     
-    private lazy var searchBar = UISearchBar().then {
-        $0.placeholder = "위시리스트 항목 추가"
-        $0.searchBarStyle = .minimal
-    }
+    private let searchBar = UISearchBar()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, WishlistItem>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
         configureDataSource()
         bindSearchBar()
         updateSnapshot(with: wishlistItems)
@@ -66,24 +41,39 @@ final class WishlistViewController: BaseViewController {
         navigationItem.title = "위시리스트"
     }
     
-    //MARK: - UI
-    private func configureUI() {
-        view.backgroundColor = .systemBackground
-        
+    override func setHierarchy() {
+        view.addSubview(collectionView)
         view.addSubview(searchBar)
+    }
+    
+    override func setLayout() {
         searchBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
         }
         
-        view.addSubview(collectionView)
+        
         collectionView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom).offset(8)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    //MARK: - 레이아웃
+    override func setStyle() {
+        view.backgroundColor = .systemBackground
+        
+        collectionView.do {
+            $0.backgroundColor = .systemBackground
+            $0.delegate = self
+        }
+        
+        searchBar.do {
+            $0.placeholder = "위시리스트 항목 추가"
+            $0.searchBarStyle = .minimal
+        }
+    }
+    
+    //MARK: - 컬렉션 뷰 레이아웃
     private func createLayout() -> UICollectionViewLayout {
         var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         configuration.showsSeparators = true
