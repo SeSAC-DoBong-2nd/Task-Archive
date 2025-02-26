@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 enum APIError: Error {
+    case authError
     case urlError
     case responseError
     case statusCodeError

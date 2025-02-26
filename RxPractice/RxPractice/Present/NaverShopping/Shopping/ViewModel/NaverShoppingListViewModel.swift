@@ -7,120 +7,136 @@
 
 import Foundation
 
-final class NaverShoppingListViewModel {
+import RxCocoa
+import RxSwift
+
+final class NaverShoppingListViewModel: ViewModelProtocol {
     
-//    var currentFilter = ""
+    var currentSearchText = ""
+    private var currentFilter = ""
 //    var total = ""
-//    var start = 1
-//    var isEnd = false
-//    
-//    let inputFilterBtnTapped: Observable<String?> = Observable(nil)
-//    let inputCallGetShoppingAPI: Observable<IndexPath> = Observable(IndexPath())
-//    
-//    let outputNavTitle: Observable<String> = Observable("title")
-//    let outputShoppingList: Observable<[Items]> = Observable([])
-//    lazy var heartSelectedArr = Array(repeating: false, count: outputShoppingList.value.count)
-//    let outputIsSuccessGetShoppingAPI: Observable<Bool?> = Observable(nil)
-//    
-//    init() {
-//        bindViewModel()
-//    }
-//    
-//    deinit {
-//        print("NaverShoppingListViewModel",#function)
-//    }
+    var start = 1
+    private var isEnd = false
     
+    private let disposeBag = DisposeBag()
+    
+    struct Input {
+        let tapNavLeftBtn: ControlEvent<Void>?
+        let filterBtnTapped: Observable<String>
+//        let loadMoreData: Observable<IndexPath>
+        let loadMoreData: ControlEvent<[IndexPath]>
+    }
+    
+    struct Output {
+        let tapNavLeftBtn: Driver<Void>?
+        let shoppingList: Driver<[Items]>
+        let isSuccessGetShoppingAPI: Driver<Bool?>
+        let totalCount: Driver<String>
+    }
+    
+    //BehaviorRelay 사용하여 값을 저장하고 Observable로 방출
+    private let shoppingListRelay = BehaviorRelay<[Items]>(value: [])
+    private let isSuccessRelay = BehaviorRelay<Bool?>(value: nil)
+    private let totalCountRelay = BehaviorRelay<String>(value: "")
+    
+    var heartSelectedArr: [Bool] = []
+    
+    func transform(input: Input) -> Output {
+        //navLeftBtn 탭 처리
+        let tapNavLeftBtn = input.tapNavLeftBtn?.asDriver()
+        
+        //필터 버튼 탭 처리
+        input.filterBtnTapped
+            .subscribe(onNext: { [weak self] btnTitle in
+                self?.filterBtnTapped(btnTitle: btnTitle)
+            })
+            .disposed(by: disposeBag)
+        
+        //추가 데이터 로드 처리
+        input.loadMoreData
+            .throttle(.seconds(1), scheduler: MainScheduler.asyncInstance)
+            .compactMap { $0.last }
+            .bind(with: self) { owner, indexPath in
+                owner.isValid(index: indexPath)
+            }.disposed(by: disposeBag)
+        
+        return Output(
+            tapNavLeftBtn: tapNavLeftBtn,
+            shoppingList: shoppingListRelay.asDriver(),
+            isSuccessGetShoppingAPI: isSuccessRelay.asDriver(),
+            totalCount: totalCountRelay.asDriver()
+        )
+    }
+    
+    deinit {
+        print("NaverShoppingListViewModel", #function)
+    }
 }
 
 private extension NaverShoppingListViewModel {
     
-//    func bindViewModel() {
-//        inputFilterBtnTapped.lazyBind { [weak self] btnTitle in
-//            print("inputFilterBtnTapped.lazyBind")
-//            self?.filterBtnTapped(btnTitle: btnTitle)
-//        }
-//        
-//        inputCallGetShoppingAPI.lazyBind { [weak self] index in
-//            self?.isValid(index: index)
-//        }
-//    }
-//    
-//    func filterBtnTapped(btnTitle: String?) {
-//        print("filterBtnTapped")
-//        guard let title = btnTitle?.trimmingCharacters(in: .whitespaces) else {
-//            print("filterBtnTapped error")
-//            return
-//        }
-//        
-//        var currentBtnName: String {
-//            switch title {
-//            case "정확도":
-//                "sim"
-//            case "날짜순":
-//                "date"
-//            case "가격높은순":
-//                "dsc"
-//            case "가격낮은순":
-//                "asc"
-//            default:
-//                ""
-//            }
-//        }
-//        
-//        if currentBtnName != currentFilter {
-//            start = 1
-//            outputShoppingList.value.removeAll()
-//            getNaverShoppingAPI(query: outputNavTitle.value, start: self.start, filter: currentBtnName)
-//        }
-//         else {
-//            print("같은 버튼 눌렀지롱~")
-//        }
-//    }
-//    
-//    func isValid(index: IndexPath) {
-//        if (outputShoppingList.value.count - 6) == index.item && isEnd == false  {
-//            start += 1
-//            getNaverShoppingAPI(query: outputNavTitle.value, start: start, filter: currentFilter)
-//        }
-//    }
-//    
-//    func getNaverShoppingAPI(query: String, start: Int, filter: String) {
-//        print("getNaverShoppingAPI")
-//        let url = "https://openapi.naver.com/v1/search/shop.json"
-//        let parameters = ["query": query, "display": 100, "start": start, "sort": filter] as [String : Any]
-//        
-//        guard let clientID = Bundle.main.naverClientId else {
-//            print("clientID 키를 로드하지 못했습니다.")
-//            return
-//        }
-//        
-//        guard let clientSecret = Bundle.main.naverClientSecret else {
-//            print("clientSecret 키를 로드하지 못했습니다.")
-//            return
-//        }
-//        
-//        NaverNetworkManager.shared.getNaverShoppingList(url: url,
-//                                                        parameters: parameters,
-//                                                        clientID: clientID,
-//                                                        clientSecret: clientSecret) { response, statusCode  in
-//            switch statusCode {
-//            case (200..<299):
-//                print("200")
-//                self.currentFilter = filter
-//                self.total = "\(Int(response.total).formatted()) 개의 검색 결과"
-//                self.outputShoppingList.value.append(contentsOf: response.items)
-//                
-//                if (Int(response.total) - (start * 30)) < 0 {
-//                    self.isEnd = true
-//                }
-//                
-//                self.outputIsSuccessGetShoppingAPI.value = true
-//            default:
-//                print("400")
-//                self.outputIsSuccessGetShoppingAPI.value = false
-//            }
-//            
-//        }
-//    }
+    func filterBtnTapped(btnTitle: String) {
+        print("filterBtnTapped")
+        let title = btnTitle.trimmingCharacters(in: .whitespaces)
+        
+        let currentBtnName: String = {
+            switch title {
+            case "정확도":
+                return "sim"
+            case "날짜순":
+                return "date"
+            case "가격높은순":
+                return "dsc"
+            case "가격낮은순":
+                return "asc"
+            default:
+                return ""
+            }
+        }()
+        
+        if currentBtnName != currentFilter {
+            self.start = 1
+            shoppingListRelay.accept([])
+            getNaverShoppingAPI(query: currentSearchText, start: self.start, filter: currentBtnName)
+        } else {
+            print("같은 버튼 눌렀지롱~")
+        }
+    }
+    
+    func isValid(index: IndexPath) {
+        if (shoppingListRelay.value.count - 6) == index.item && isEnd == false {
+            start += 1
+            getNaverShoppingAPI(query: currentSearchText, start: start, filter: currentFilter)
+        }
+    }
+    
+    func getNaverShoppingAPI(query: String, start: Int, filter: String) {
+        print("getNaverShoppingAPI")
+        let url = "https://openapi.naver.com/v1/search/shop.json"
+        let parameters = ["query": query, "display": 100, "start": start, "sort": filter] as [String : Any]
+        
+        NaverNetworkManager.shared.getNaverShoppingList(url: url, parameters: parameters)
+            .asDriver(onErrorDriveWith: .empty())
+            .drive(with: self) { owner, result in
+                switch result {
+                    
+                case .success(let model):
+                    print("지금이니!!!: \(model)")
+                    
+                    var updatedList = owner.shoppingListRelay.value
+                    updatedList.append(contentsOf: model.items)
+                    owner.shoppingListRelay.accept(updatedList)
+                    
+                    if (Int(model.total) - (start * 30)) < 0 {
+                        owner.isEnd = true
+                    }
+                    owner.heartSelectedArr = Array(repeating: false, count: updatedList.count)
+                    owner.isSuccessRelay.accept(true)
+                case .failure(let error):
+                    print("failure!!!: \(error.localizedDescription)")
+                    owner.isSuccessRelay.accept(false)
+                }
+            }.disposed(by: disposeBag)
+    }
     
 }

@@ -8,23 +8,29 @@
 import UIKit
 
 import Alamofire
+import RxCocoa
+import RxSwift
 import Kingfisher
 import SnapKit
 import Then
 
 final class NaverShoppingListViewController: BaseViewController {
-
+    
     private let viewModel: NaverShoppingListViewModel
+    private let disposeBag = DisposeBag()
+    private let filterButtonTappedSubject = PublishSubject<String>()
+    private let loadMoreDataSubject = PublishSubject<IndexPath>()
     
     init(viewModel: NaverShoppingListViewModel, navtitle: String) {
         self.viewModel = viewModel
         
         super.init()
         self.navigationItem.title = navtitle
+        self.viewModel.currentSearchText = navtitle
     }
     
     deinit {
-        print("NaverShoppingListViewController",#function)
+        print("NaverShoppingListViewController", #function)
     }
     
     private let naverShoppingListView = NaverShoppingListView()
@@ -37,80 +43,156 @@ final class NaverShoppingListViewController: BaseViewController {
         super.viewDidLoad()
         
         setDelegate()
-//        bindViewModel()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         naverShoppingListView.indicatorView.startAnimating()
-        filterBtnTapped(naverShoppingListView.accuracyButton)
+        naverShoppingListView.accuracyButton.sendActions(for: .touchUpInside)
     }
     
     override func setStyle() {
         view.backgroundColor = .black
         navigationController?.navigationBar.tintColor = .white
-        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
                                                            style: .done,
-                                                           target: self,
-                                                           action: #selector(navLeftBtnTapped))
+                                                           target: nil,
+                                                           action: nil)
     }
     
+    private func bind() {
+        let input = NaverShoppingListViewModel.Input(
+            tapNavLeftBtn: navigationItem.leftBarButtonItem?.rx.tap,
+            filterBtnTapped: filterButtonTappedSubject.asObservable(),
+            loadMoreData: naverShoppingListView.shoppingCollectionView.rx.prefetchItems
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        //navLeftBtn 탭 처리
+        output.tapNavLeftBtn?
+            .drive(with: self, onNext: { owner, _ in
+                owner.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        //CollectionView에 데이터 바인딩
+        output.shoppingList
+            .drive(naverShoppingListView.shoppingCollectionView.rx.items(
+                cellIdentifier: ShoppingListCollectionViewCell.cellIdentifier,
+                cellType: ShoppingListCollectionViewCell.self)) { [weak self] index, item, cell in
+                    guard let self = self else { return }
+                    
+                    //heartSelectedArr 배열 크기 관리 (좋아요 담당 배열)
+                    if self.viewModel.heartSelectedArr.count <= index {
+                        self.viewModel.heartSelectedArr.append(false)
+                    }
+                    
+                    //셀 구성
+                    cell.configureShppingListCell(
+                        imageUrl: item.image,
+                        shoppingMallName: item.mallName,
+                        productName: item.title
+                            .replacingOccurrences(of: "<[^>]+>|&quot;",
+                                                  with: "",
+                                                  options: .regularExpression,
+                                                  range: nil),
+                        price: Int(item.lprice) ?? 0,
+                        isHeartBtnSelected: self.viewModel.heartSelectedArr[index]
+                    )
+                    
+                    //하트 버튼 태그 및 액션 설정
+                    cell.heartButton.tag = index
+                    cell.heartButton.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            guard let self = self else { return }
+                            self.viewModel.heartSelectedArr[index].toggle()
+                            
+                            let heartImage = self.viewModel.heartSelectedArr[index]
+                            ? UIImage(systemName: "heart.fill")
+                            : UIImage(systemName: "heart")
+                            cell.heartButton.setImage(heartImage, for: .normal)
+                        })
+                        .disposed(by: cell.disposeBag)
+                            //셀이 재사용 시 dispose 필요하기에 셀의 disposeBag에서 관리
+                }
+                .disposed(by: disposeBag)
+        
+        //셀 선택 처리
+        naverShoppingListView.shoppingCollectionView.rx.itemSelected
+            .subscribe(with: self) { owner, indexPath in
+                // 셀 선택 시 작업 추후 추가
+                print("Selected item at \(indexPath)")
+            }.disposed(by: disposeBag)
+        
+        //스크롤 시 최상단 이동 여부
+        output.shoppingList
+            .drive(with: self, onNext: { owner, items in
+                if !items.isEmpty && owner.viewModel.start == 1 {
+                    owner.naverShoppingListView.shoppingCollectionView.scrollsToTop = true
+                    // 실제로 스크롤을 맨 위로 이동
+                    owner.naverShoppingListView.shoppingCollectionView.scrollToItem(
+                        at: IndexPath(item: 0, section: 0),
+                        at: .top,
+                        animated: true
+                    )
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        //API 호출 결과 처리
+        output.isSuccessGetShoppingAPI
+            .drive(with: self, onNext: { owner, isSuccess in
+                guard let isSuccess = isSuccess else { return }
+                
+                switch isSuccess {
+                case true:
+                    owner.naverShoppingListView.indicatorView.stopAnimating()
+                case false:
+                    let alert = UIAlertManager.showAlert(title: "요청 실패", message: "Error")
+                    owner.present(alert, animated: true)
+                    print("에러 발생")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        //검색 결과 수 업데이트
+        output.totalCount
+            .drive(naverShoppingListView.resultCntLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
 }
 
 private extension NaverShoppingListViewController {
     
-//    func bindViewModel() {
-//        viewModel.outputNavTitle.bind { [weak self] title in
-//            guard let self else {return}
-//            self.navigationItem.title = title
-//        }
-//        
-//        viewModel.outputShoppingList.lazyBind { [weak self] _ in
-//            guard let self else {return}
-//            self.naverShoppingListView.shoppingCollectionView.reloadData()
-//            self.viewModel.heartSelectedArr = Array(repeating: false, count: viewModel.outputShoppingList.value.count)
-//        }
-//        
-//        viewModel.outputIsSuccessGetShoppingAPI.lazyBind { [weak self] isSuccess in
-//            guard let self, let isSuccess else {return}
-//            
-//            switch isSuccess {
-//            case true:
-//                self.naverShoppingListView.resultCntLabel.text = viewModel.total
-//                
-//                if viewModel.start == 1 {
-//                    self.naverShoppingListView.shoppingCollectionView.scrollsToTop = true
-//                }
-//                self.naverShoppingListView.indicatorView.stopAnimating()
-//            case false:
-//                let alert = UIAlertUtil.showAlert(title: "요청 실패", message: "Error")
-//                self.present(alert, animated: true)
-//                print("에러 발생")
-//            }
-//        }
-//        
-//    }
-    
     func setDelegate() {
-//        naverShoppingListView.shoppingCollectionView.delegate = self
-//        naverShoppingListView.shoppingCollectionView.dataSource = self
-//        naverShoppingListView.shoppingCollectionView.prefetchDataSource = self
-        
-        naverShoppingListView.buttonArr.forEach { i in
-            i.addTarget(self, action: #selector(filterBtnTapped), for: .touchUpInside)
+        //버튼 바인딩
+        for (_, button) in naverShoppingListView.buttonArr.enumerated() {
+            button.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    guard let self = self else { return }
+                    self.setSelectedButtonUI(button)
+                    if let title = button.titleLabel?.text {
+                        self.filterButtonTappedSubject.onNext(title)
+                    }
+                })
+                .disposed(by: disposeBag)
         }
     }
     
     func setSelectedButtonUI(_ sender: UIButton) {
-        for i in naverShoppingListView.buttonArr {
-            if i == sender {
-                i.do {
+        for button in naverShoppingListView.buttonArr {
+            if button == sender {
+                button.do {
                     $0.backgroundColor = .white
                     $0.setTitleColor(.black, for: .normal)
                 }
             } else {
-                i.do {
+                button.do {
                     $0.backgroundColor = .black
                     $0.setTitleColor(.white, for: .normal)
                 }
@@ -118,78 +200,4 @@ private extension NaverShoppingListViewController {
         }
     }
     
-    @objc
-    func filterBtnTapped(_ sender: UIButton) {
-        print(#function)
-//        viewModel.inputFilterBtnTapped.value = sender.titleLabel?.text
-//        setSelectedButtonUI(sender)
-    }
-    
-    @objc
-    func heartButtonTapped(_ sender: UIButton) {
-//        viewModel.heartSelectedArr[sender.tag].toggle()
-//        switch viewModel.heartSelectedArr[sender.tag] {
-//        case true:
-//            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-//        case false:
-//            sender.setImage(UIImage(systemName: "heart"), for: .normal)
-//        }
-    }
-    
-    @objc
-    func navLeftBtnTapped() {
-        print(#function)
-        navigationController?.popViewController(animated: true)
-    }
-    
 }
-
-//extension NaverShoppingListViewController: UICollectionViewDataSourcePrefetching {
-//    
-//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-//        print(#function, indexPaths)
-//        for i in indexPaths {
-//            viewModel.inputCallGetShoppingAPI.value = i
-//        }
-//        
-//    }
-//    
-//}
-//
-//extension NaverShoppingListViewController: UICollectionViewDelegate {
-//    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print(#function, viewModel.outputShoppingList.value[indexPath.item])
-//    }
-//    
-//}
-//
-//extension NaverShoppingListViewController: UICollectionViewDataSource {
-//    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.outputShoppingList.value.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShoppingListCollectionViewCell.cellIdentifier, for: indexPath) as? ShoppingListCollectionViewCell else { return UICollectionViewCell() }
-//        
-//        let index = viewModel.outputShoppingList.value[indexPath.item]
-//        cell.heartButton.tag = indexPath.item
-//        cell.heartButton.addTarget(self, action: #selector(heartButtonTapped), for: .touchUpInside)
-//        
-//        cell.configureShppingListCell(
-//            imageUrl: index.image,
-//            shoppingMallName: index.mallName,
-//            productName: index.title
-//                .replacingOccurrences(of: "<[^>]+>|&quot;",
-//                                      with: "",
-//                                      options: .regularExpression,
-//                                      range: nil),
-//            price: Int(index.lprice) ?? 0,
-//            isHeartBtnSelected: viewModel.heartSelectedArr[indexPath.row]
-//        )
-//        
-//        return cell
-//    }
-//    
-//}

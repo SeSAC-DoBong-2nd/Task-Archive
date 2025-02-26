@@ -8,37 +8,58 @@
 import UIKit
 
 import Alamofire
+import RxCocoa
+import RxSwift
 
-enum NetworkResult<T> {
-    case success(T)
-}
-
-class NaverNetworkManager {
+final class NaverNetworkManager {
     
     static let shared = NaverNetworkManager()
     
     private init() {}
     
     func getNaverShoppingList(url: String,
-                              parameters: [String: Any],
-                              clientID: String,
-                              clientSecret: String,
-                              complition: @escaping (NaverShoppingResponseModel, Int) -> ()) {
-        AF.request(url,method: .get,parameters: parameters,headers: [
-                    HTTPHeader(name: "X-Naver-Client-Id", value: clientID),
-                    HTTPHeader(name: "X-Naver-Client-Secret",value: clientSecret)
-                   ]).responseDecodable(of: NaverShoppingResponseModel.self)
-        { response in
-            guard let statusCode = response.response?.statusCode else {
-                return
+                              parameters: [String: Any]) -> Observable<Result<NaverShoppingResponseModel, APIError>> {
+        
+        return Observable<Result<NaverShoppingResponseModel, APIError>>.create { value in
+            
+            guard let clientID = Bundle.main.naverClientId else {
+                print("clientID 키를 로드하지 못했습니다.")
+                value.onNext(.failure(.authError))
+                return Disposables.create {
+                    print("url 에러로 끝")
+                }
             }
-            switch response.result {
-            case .success(let result):
-                print("success")
-                complition(result, statusCode)
-            case .failure(let error):
-                print("🔥",error)
+            
+            guard let clientSecret = Bundle.main.naverClientSecret else {
+                print("clientSecret 키를 로드하지 못했습니다.")
+                value.onNext(.failure(.authError))
+                return Disposables.create {
+                    print("url 에러로 끝")
+                }
             }
+            
+            AF.request(url,method: .get,parameters: parameters,headers: [
+                HTTPHeader(name: "X-Naver-Client-Id", value: clientID),
+                HTTPHeader(name: "X-Naver-Client-Secret",value: clientSecret)
+            ]).responseDecodable(of: NaverShoppingResponseModel.self)
+                
+            { response in
+//                print("response: \(response)")
+                guard (response.response?.statusCode) != nil else {
+                    value.onNext(.failure(.statusCodeError))
+                    return
+                }
+                switch response.result {
+                case .success(let result):
+                    print("success")
+//                    print(result)
+                    value.onNext(.success(result))
+                    value.onCompleted()
+                case .failure(_):
+                    value.onNext(.failure(.responseError))
+                }
+            }
+            return Disposables.create()
         }
     }
     

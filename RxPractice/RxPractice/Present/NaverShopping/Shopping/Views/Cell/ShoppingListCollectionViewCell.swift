@@ -7,8 +7,11 @@
 
 import UIKit
 
+import RxSwift
+
 final class ShoppingListCollectionViewCell: BaseCollectionViewCell {
     
+    var disposeBag = DisposeBag()
     private let imageView = UIImageView()
     private let mallNameLabel = UILabel()
     private let productLabel = UILabel()
@@ -17,6 +20,8 @@ final class ShoppingListCollectionViewCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        imageView.image = nil
+        disposeBag = DisposeBag()
     }
     
     override func setHierarchy() {

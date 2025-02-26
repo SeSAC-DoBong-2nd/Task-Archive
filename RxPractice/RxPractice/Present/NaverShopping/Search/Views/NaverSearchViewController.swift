@@ -48,6 +48,7 @@ private extension NaverSearchViewController {
                 switch value {
                 case true:
                     let viewModel = NaverShoppingListViewModel()
+                    viewModel.currentSearchText = owner.viewModel.currentSearchText
                     let vc = NaverShoppingListViewController(viewModel: viewModel, navtitle: owner.viewModel.currentSearchText)
                     
                     print("owner.viewModel.currentSearchText: \(owner.viewModel.currentSearchText)")
