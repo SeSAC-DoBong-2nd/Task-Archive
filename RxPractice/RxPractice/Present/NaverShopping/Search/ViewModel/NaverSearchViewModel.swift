@@ -36,6 +36,9 @@ final class NaverSearchViewModel: ViewModelProtocol {
             }.disposed(by: disposeBag)
         
         input.searchReturnClicked
+        //전환과 관련된 친구는 debounce가 나은듯?!
+        //즉발 필요할 때?
+        //반복적인 필요하면 스로틀
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(input.searchText)
 //            .distinctUntilChanged() //같은 값도 재검색 할 수 있어야하기에 빼야함.
