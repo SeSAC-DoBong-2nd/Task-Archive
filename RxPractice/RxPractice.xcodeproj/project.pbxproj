@@ -34,6 +34,25 @@
 		9EA26ABE2D6C448300029A14 /* LotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ABD2D6C448300029A14 /* LotteryViewModel.swift */; };
 		9EA26AC12D6C4A5400029A14 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AC02D6C4A5400029A14 /* ViewModelProtocol.swift */; };
 		9EA26AC42D6CADE600029A14 /* LotteryNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AC32D6CADE600029A14 /* LotteryNetworkManager.swift */; };
+		9EA26ACE2D6DC87D00029A14 /* NaverNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ACD2D6DC87D00029A14 /* NaverNetworkManager.swift */; };
+		9EA26AD12D6DC89900029A14 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9EA26AD02D6DC89900029A14 /* Alamofire */; };
+		9EA26AD42D6DC8B400029A14 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 9EA26AD32D6DC8B400029A14 /* Differentiator */; };
+		9EA26AD62D6DC8B400029A14 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 9EA26AD52D6DC8B400029A14 /* RxDataSources */; };
+		9EA26AE92D6DC8E900029A14 /* NaverSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AD82D6DC8E900029A14 /* NaverSearchView.swift */; };
+		9EA26AEA2D6DC8E900029A14 /* NaverShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AE42D6DC8E900029A14 /* NaverShoppingListViewController.swift */; };
+		9EA26AEB2D6DC8E900029A14 /* NaverSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ADC2D6DC8E900029A14 /* NaverSearchViewController.swift */; };
+		9EA26AEC2D6DC8E900029A14 /* ShoppingListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ADE2D6DC8E900029A14 /* ShoppingListCollectionViewCell.swift */; };
+		9EA26AED2D6DC8E900029A14 /* NaverShoppingResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AE72D6DC8E900029A14 /* NaverShoppingResponseModel.swift */; };
+		9EA26AEE2D6DC8E900029A14 /* NaverShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AE22D6DC8E900029A14 /* NaverShoppingListViewModel.swift */; };
+		9EA26AEF2D6DC8E900029A14 /* NaverSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26ADA2D6DC8E900029A14 /* NaverSearchViewModel.swift */; };
+		9EA26AF02D6DC8E900029A14 /* NaverShoppingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AE02D6DC8E900029A14 /* NaverShoppingListView.swift */; };
+		9EA26AF82D6DC98E00029A14 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AF52D6DC98E00029A14 /* BaseView.swift */; };
+		9EA26AF92D6DC98E00029A14 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AF42D6DC98E00029A14 /* BaseCollectionViewCell.swift */; };
+		9EA26AFA2D6DC98E00029A14 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AF62D6DC98E00029A14 /* BaseViewController.swift */; };
+		9EA26AFD2D6DCB8B00029A14 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AFC2D6DCB8B00029A14 /* UIImageView+.swift */; };
+		9EA26AFF2D6DCC7D00029A14 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */; };
+		9EA26B012D6DEAE800029A14 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9EA26B002D6DEAE800029A14 /* Secret.xcconfig */; };
+		9EA26B032D6DEBC400029A14 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B022D6DEBC400029A14 /* Bundle+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +80,22 @@
 		9EA26ABD2D6C448300029A14 /* LotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewModel.swift; sourceTree = "<group>"; };
 		9EA26AC02D6C4A5400029A14 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		9EA26AC32D6CADE600029A14 /* LotteryNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryNetworkManager.swift; sourceTree = "<group>"; };
+		9EA26ACD2D6DC87D00029A14 /* NaverNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverNetworkManager.swift; sourceTree = "<group>"; };
+		9EA26AD82D6DC8E900029A14 /* NaverSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchView.swift; sourceTree = "<group>"; };
+		9EA26ADA2D6DC8E900029A14 /* NaverSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchViewModel.swift; sourceTree = "<group>"; };
+		9EA26ADC2D6DC8E900029A14 /* NaverSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverSearchViewController.swift; sourceTree = "<group>"; };
+		9EA26ADE2D6DC8E900029A14 /* ShoppingListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListCollectionViewCell.swift; sourceTree = "<group>"; };
+		9EA26AE02D6DC8E900029A14 /* NaverShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverShoppingListView.swift; sourceTree = "<group>"; };
+		9EA26AE22D6DC8E900029A14 /* NaverShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverShoppingListViewModel.swift; sourceTree = "<group>"; };
+		9EA26AE42D6DC8E900029A14 /* NaverShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverShoppingListViewController.swift; sourceTree = "<group>"; };
+		9EA26AE72D6DC8E900029A14 /* NaverShoppingResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverShoppingResponseModel.swift; sourceTree = "<group>"; };
+		9EA26AF42D6DC98E00029A14 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		9EA26AF52D6DC98E00029A14 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		9EA26AF62D6DC98E00029A14 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9EA26AFC2D6DCB8B00029A14 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
+		9EA26B002D6DEAE800029A14 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		9EA26B022D6DEBC400029A14 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +103,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EA26AD42D6DC8B400029A14 /* Differentiator in Frameworks */,
 				9E092E9C2D649902003B36C4 /* SnapKit in Frameworks */,
 				9E092E992D6498F4003B36C4 /* RxSwift in Frameworks */,
 				9E092E972D6498F4003B36C4 /* RxCocoa in Frameworks */,
+				9EA26AD12D6DC89900029A14 /* Alamofire in Frameworks */,
+				9EA26AD62D6DC8B400029A14 /* RxDataSources in Frameworks */,
 				9E092E9F2D64990D003B36C4 /* Then in Frameworks */,
 				9EA269B72D65E8F900029A14 /* Kingfisher in Frameworks */,
 			);
@@ -112,6 +150,7 @@
 				9E092E842D649888003B36C4 /* AppDelegate.swift */,
 				9E092E8B2D649888003B36C4 /* SceneDelegate.swift */,
 				9E092E882D649888003B36C4 /* LaunchScreen.storyboard */,
+				9EA26B002D6DEAE800029A14 /* Secret.xcconfig */,
 				9E092E862D649888003B36C4 /* Info.plist */,
 			);
 			path = Application;
@@ -128,12 +167,14 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26AD72D6DC8BD00029A14 /* NaverShopping */,
 				9EA26AB52D6C423500029A14 /* Lottery */,
 				9E092EA92D649EE3003B36C4 /* SimpleTable */,
 				9E092EAE2D64A581003B36C4 /* Numbers */,
 				9E092EB92D64AA99003B36C4 /* SimpleValidation */,
 				9E092EBC2D64B615003B36C4 /* Birthday */,
 				9EA269A72D65CDF000029A14 /* Homework */,
+				9EA26AF72D6DC98E00029A14 /* Base */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -141,6 +182,7 @@
 		9E092EA52D649B8B003B36C4 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26AFB2D6DCB7D00029A14 /* Extensions */,
 				9EA26AC22D6CADD700029A14 /* Network */,
 				9EA26ABF2D6C4A4500029A14 /* Protocols */,
 				9E092EA62D649B9D003B36C4 /* Utility */,
@@ -153,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				9E092EA72D649BD6003B36C4 /* UIAlertManager.swift */,
+				9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -281,8 +324,107 @@
 			isa = PBXGroup;
 			children = (
 				9EA26AC32D6CADE600029A14 /* LotteryNetworkManager.swift */,
+				9EA26ACD2D6DC87D00029A14 /* NaverNetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		9EA26AD72D6DC8BD00029A14 /* NaverShopping */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AF12D6DC91600029A14 /* Model */,
+				9EA26ADD2D6DC8E900029A14 /* Search */,
+				9EA26AE52D6DC8E900029A14 /* Shopping */,
+			);
+			path = NaverShopping;
+			sourceTree = "<group>";
+		};
+		9EA26AD92D6DC8E900029A14 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26ADC2D6DC8E900029A14 /* NaverSearchViewController.swift */,
+				9EA26AD82D6DC8E900029A14 /* NaverSearchView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9EA26ADB2D6DC8E900029A14 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26ADA2D6DC8E900029A14 /* NaverSearchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9EA26ADD2D6DC8E900029A14 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26ADB2D6DC8E900029A14 /* ViewModel */,
+				9EA26AD92D6DC8E900029A14 /* Views */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		9EA26ADF2D6DC8E900029A14 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26ADE2D6DC8E900029A14 /* ShoppingListCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9EA26AE32D6DC8E900029A14 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AE22D6DC8E900029A14 /* NaverShoppingListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9EA26AE52D6DC8E900029A14 /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AE32D6DC8E900029A14 /* ViewModel */,
+				9EA26AF22D6DC92600029A14 /* Views */,
+			);
+			path = Shopping;
+			sourceTree = "<group>";
+		};
+		9EA26AF12D6DC91600029A14 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AE72D6DC8E900029A14 /* NaverShoppingResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9EA26AF22D6DC92600029A14 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AE42D6DC8E900029A14 /* NaverShoppingListViewController.swift */,
+				9EA26AE02D6DC8E900029A14 /* NaverShoppingListView.swift */,
+				9EA26ADF2D6DC8E900029A14 /* Cell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9EA26AF72D6DC98E00029A14 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AF42D6DC98E00029A14 /* BaseCollectionViewCell.swift */,
+				9EA26AF52D6DC98E00029A14 /* BaseView.swift */,
+				9EA26AF62D6DC98E00029A14 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		9EA26AFB2D6DCB7D00029A14 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26AFC2D6DCB8B00029A14 /* UIImageView+.swift */,
+				9EA26B022D6DEBC400029A14 /* Bundle+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +449,9 @@
 				9E092E9B2D649902003B36C4 /* SnapKit */,
 				9E092E9E2D64990D003B36C4 /* Then */,
 				9EA269B62D65E8F900029A14 /* Kingfisher */,
+				9EA26AD02D6DC89900029A14 /* Alamofire */,
+				9EA26AD32D6DC8B400029A14 /* Differentiator */,
+				9EA26AD52D6DC8B400029A14 /* RxDataSources */,
 			);
 			productName = RxPractice;
 			productReference = 9E092E6C2D649880003B36C4 /* RxPractice.app */;
@@ -341,6 +486,8 @@
 				9E092E9A2D649902003B36C4 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9E092E9D2D64990D003B36C4 /* XCRemoteSwiftPackageReference "Then" */,
 				9EA269B52D65E8F900029A14 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				9EA26ACF2D6DC89900029A14 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9EA26AD22D6DC8B400029A14 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9E092E6D2D649880003B36C4 /* Products */;
@@ -357,6 +504,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EA26B012D6DEAE800029A14 /* Secret.xcconfig in Resources */,
 				9E092E912D649888003B36C4 /* Assets.xcassets in Resources */,
 				9E092E932D649888003B36C4 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -370,25 +518,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EA269AB2D65CE2E00029A14 /* HomeworkViewModel.swift in Sources */,
+				9EA26B032D6DEBC400029A14 /* Bundle+Extension.swift in Sources */,
 				9E092E8E2D649888003B36C4 /* AppDelegate.swift in Sources */,
 				9EA26AC42D6CADE600029A14 /* LotteryNetworkManager.swift in Sources */,
 				9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */,
 				9EA26AC12D6C4A5400029A14 /* ViewModelProtocol.swift in Sources */,
 				9E092EC12D64B76B003B36C4 /* PointButton.swift in Sources */,
+				9EA26ACE2D6DC87D00029A14 /* NaverNetworkManager.swift in Sources */,
 				9EA26ABE2D6C448300029A14 /* LotteryViewModel.swift in Sources */,
 				9EA26ABC2D6C446D00029A14 /* LotteryModel.swift in Sources */,
 				9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */,
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
 				9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */,
+				9EA26AFD2D6DCB8B00029A14 /* UIImageView+.swift in Sources */,
 				9E092EBE2D64B652003B36C4 /* BirthdayViewController.swift in Sources */,
+				9EA26AE92D6DC8E900029A14 /* NaverSearchView.swift in Sources */,
+				9EA26AEA2D6DC8E900029A14 /* NaverShoppingListViewController.swift in Sources */,
+				9EA26AEB2D6DC8E900029A14 /* NaverSearchViewController.swift in Sources */,
+				9EA26AEC2D6DC8E900029A14 /* ShoppingListCollectionViewCell.swift in Sources */,
+				9EA26AED2D6DC8E900029A14 /* NaverShoppingResponseModel.swift in Sources */,
+				9EA26AEE2D6DC8E900029A14 /* NaverShoppingListViewModel.swift in Sources */,
+				9EA26AEF2D6DC8E900029A14 /* NaverSearchViewModel.swift in Sources */,
+				9EA26AF02D6DC8E900029A14 /* NaverShoppingListView.swift in Sources */,
 				9EA26AB82D6C425000029A14 /* LotteryViewController.swift in Sources */,
 				9EA269B42D65CF0800029A14 /* Dummy.swift in Sources */,
 				9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */,
 				9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */,
 				9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */,
 				9EA269B92D65F5B000029A14 /* DetailViewController.swift in Sources */,
+				9EA26AFF2D6DCC7D00029A14 /* DateFormatterManager.swift in Sources */,
 				9EA269B12D65CE4100029A14 /* PersonTableViewCell.swift in Sources */,
 				9E092E8F2D649888003B36C4 /* SceneDelegate.swift in Sources */,
+				9EA26AF82D6DC98E00029A14 /* BaseView.swift in Sources */,
+				9EA26AF92D6DC98E00029A14 /* BaseCollectionViewCell.swift in Sources */,
+				9EA26AFA2D6DC98E00029A14 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +571,7 @@
 /* Begin XCBuildConfiguration section */
 		9E092E802D649883003B36C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EA26B002D6DEAE800029A14 /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -439,6 +603,7 @@
 		};
 		9E092E812D649883003B36C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EA26B002D6DEAE800029A14 /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -643,6 +808,22 @@
 				minimumVersion = 8.2.0;
 			};
 		};
+		9EA26ACF2D6DC89900029A14 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		9EA26AD22D6DC8B400029A14 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -670,6 +851,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9EA269B52D65E8F900029A14 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		9EA26AD02D6DC89900029A14 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EA26ACF2D6DC89900029A14 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		9EA26AD32D6DC8B400029A14 /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EA26AD22D6DC8B400029A14 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		9EA26AD52D6DC8B400029A14 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EA26AD22D6DC8B400029A14 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
