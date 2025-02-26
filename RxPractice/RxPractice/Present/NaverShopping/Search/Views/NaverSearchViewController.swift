@@ -27,9 +27,25 @@ final class NaverSearchViewController: BaseViewController {
         super.viewDidLoad()
         
         navigationItem.title = "psy의 쇼핑쇼핑"
+        setupNavigationBar()
         bind()
     }
-
+    
+    private func setupNavigationBar() {
+        let wishlistButton = UIBarButtonItem(
+            image: UIImage(systemName: "heart.fill"),
+            style: .plain,
+            target: self,
+            action: #selector(showWishlist)
+        )
+        
+        navigationItem.leftBarButtonItem = wishlistButton
+    }
+    
+    @objc private func showWishlist() {
+        let wishlistVC = WishlistViewController()
+        navigationController?.pushViewController(wishlistVC, animated: true)
+    }
 }
 
 private extension NaverSearchViewController {
@@ -54,10 +70,9 @@ private extension NaverSearchViewController {
                     print("owner.viewModel.currentSearchText: \(owner.viewModel.currentSearchText)")
                     owner.navigationController?.pushViewController(vc, animated: true)
                 case false:
-                    let alert = UIAlertManager.showAlert(title: "검색 실패", message: "2글자 이상 검색해주세요.")
+                    let alert = UIAlertManager.shared.showAlert(title: "검색 실패", message: "2글자 이상 검색해주세요.")
                     owner.present(alert, animated: true)
                 }
             }.disposed(by: disposeBag)
     }
-    
 }

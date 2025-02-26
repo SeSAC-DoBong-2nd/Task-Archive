@@ -53,6 +53,7 @@
 		9EA26AFF2D6DCC7D00029A14 /* DateFormatterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */; };
 		9EA26B012D6DEAE800029A14 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9EA26B002D6DEAE800029A14 /* Secret.xcconfig */; };
 		9EA26B032D6DEBC400029A14 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B022D6DEBC400029A14 /* Bundle+Extension.swift */; };
+		9EA26B0E2D6F68CA00029A14 /* WishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B0D2D6F68CA00029A14 /* WishlistViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		9EA26AFE2D6DCC7D00029A14 /* DateFormatterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManager.swift; sourceTree = "<group>"; };
 		9EA26B002D6DEAE800029A14 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		9EA26B022D6DEBC400029A14 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		9EA26B0D2D6F68CA00029A14 /* WishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26B0B2D6F68AD00029A14 /* Wishlist */,
 				9EA26AD72D6DC8BD00029A14 /* NaverShopping */,
 				9EA26AB52D6C423500029A14 /* Lottery */,
 				9E092EA92D649EE3003B36C4 /* SimpleTable */,
@@ -427,6 +430,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		9EA26B0B2D6F68AD00029A14 /* Wishlist */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26B0C2D6F68B700029A14 /* Views */,
+			);
+			path = Wishlist;
+			sourceTree = "<group>";
+		};
+		9EA26B0C2D6F68B700029A14 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26B0D2D6F68CA00029A14 /* WishlistViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -530,6 +549,7 @@
 				9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */,
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
 				9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */,
+				9EA26B0E2D6F68CA00029A14 /* WishlistViewController.swift in Sources */,
 				9EA26AFD2D6DCB8B00029A14 /* UIImageView+.swift in Sources */,
 				9E092EBE2D64B652003B36C4 /* BirthdayViewController.swift in Sources */,
 				9EA26AE92D6DC8E900029A14 /* NaverSearchView.swift in Sources */,
