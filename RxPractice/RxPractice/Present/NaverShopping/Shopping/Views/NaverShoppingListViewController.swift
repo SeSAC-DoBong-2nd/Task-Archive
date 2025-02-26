@@ -132,8 +132,8 @@ final class NaverShoppingListViewController: BaseViewController {
         //스크롤 시 최상단 이동 여부
         output.shoppingList
             .drive(with: self, onNext: { owner, items in
-                if !items.isEmpty && owner.viewModel.start == 1 {
-                    owner.naverShoppingListView.shoppingCollectionView.scrollsToTop = true
+                if !items.isEmpty && owner.viewModel.start == 1  {
+//                    owner.naverShoppingListView.shoppingCollectionView.scrollsToTop = true
                     // 실제로 스크롤을 맨 위로 이동
                     owner.naverShoppingListView.shoppingCollectionView.scrollToItem(
                         at: IndexPath(item: 0, section: 0),
@@ -153,7 +153,7 @@ final class NaverShoppingListViewController: BaseViewController {
                 case true:
                     owner.naverShoppingListView.indicatorView.stopAnimating()
                 case false:
-                    let alert = UIAlertManager.showAlert(title: "요청 실패", message: "Error")
+                    let alert = UIAlertManager.shared.showAlert(title: "요청 실패", message: "Error")
                     owner.present(alert, animated: true)
                     print("에러 발생")
                 }

@@ -56,7 +56,7 @@ final class SimpleTableViewExampleViewController : UIViewController, UITableView
 //        tableView.rx
 //            .modelSelected(String.self)
 //            .subscribe(onNext:  { value in
-//                let alert = UIAlertManager.showAlert(title: "start alert", message: "Tapped `\(value)`")
+//                let alert = UIAlertManager.shared.showAlert(title: "start alert", message: "Tapped `\(value)`")
 //                self.present(alert, animated: true)
 //            })
 //            .disposed(by: disposeBag)
@@ -66,7 +66,7 @@ final class SimpleTableViewExampleViewController : UIViewController, UITableView
 //        tableView.rx
 //            .itemAccessoryButtonTapped
 //            .subscribe(onNext: { indexPath in
-//                let alert = UIAlertManager.showAlert(title: "start alert", message: "Tapped Detail @ \(indexPath.section),\(indexPath.row)")
+//                let alert = UIAlertManager.shared.showAlert(title: "start alert", message: "Tapped Detail @ \(indexPath.section),\(indexPath.row)")
 //                self.present(alert, animated: true)
 //            })
 //            .disposed(by: disposeBag)
@@ -79,7 +79,7 @@ final class SimpleTableViewExampleViewController : UIViewController, UITableView
 //            tableView.rx.itemAccessoryButtonTapped
 //        )
 //        .subscribe(with: self) { owner, value in
-//            let alert = UIAlertManager.showAlert(title: "start alert", message: "Tapped `\(value.0)`\nTapped Detail @ \(value.1.section),\(value.1.row)")
+//            let alert = UIAlertManager.shared.showAlert(title: "start alert", message: "Tapped `\(value.0)`\nTapped Detail @ \(value.1.section),\(value.1.row)")
 //            owner.present(alert, animated: true)
 //        }
 //        .disposed(by: disposeBag)
@@ -96,7 +96,7 @@ final class SimpleTableViewExampleViewController : UIViewController, UITableView
                 .map { indexPath in "Tapped Detail @ \(indexPath.section),\(indexPath.row)" }
         )
         .subscribe(with: self) { owner, message in
-            let alert = UIAlertManager.showAlert(title: "Merged Event", message: message)
+            let alert = UIAlertManager.shared.showAlert(title: "Merged Event", message: message)
             owner.present(alert, animated: true)
         }
         .disposed(by: disposeBag)
