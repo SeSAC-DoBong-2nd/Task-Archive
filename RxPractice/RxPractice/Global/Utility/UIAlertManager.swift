@@ -10,9 +10,11 @@ import UIKit
 
 final class UIAlertManager {
     
+    static let shared = UIAlertManager()
+    
     private init() {}
     
-    static func showAlert(title: String, message: String, cancelFunc: Bool? = false) -> UIAlertController {
+    func showAlert(title: String, message: String, cancelFunc: Bool? = false) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if cancelFunc == true {
             alert.addAction(UIAlertAction(title: "취소", style: .destructive))
@@ -22,7 +24,7 @@ final class UIAlertManager {
         return alert
     }
     
-    static func showAlertWithAction(title: String, message: String, cancelFunc: Bool? = false, doneAction: UIAlertAction) -> UIAlertController {
+    func showAlertWithAction(title: String, message: String, cancelFunc: Bool? = false, doneAction: UIAlertAction) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if cancelFunc == true {
             alert.addAction(UIAlertAction(title: "취소", style: .destructive))
@@ -32,7 +34,7 @@ final class UIAlertManager {
         return alert
     }
     
-    static func showActionSheet(title: String, message: String, actionArr: [String]) -> UIAlertController {
+    func showActionSheet(title: String, message: String, actionArr: [String]) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         
         for i in actionArr {

@@ -18,6 +18,7 @@ final class NaverSearchViewController: BaseViewController {
     private let viewModel = NaverSearchViewModel()
     
     private let searchView = NaverSearchView()
+    private let wishlistButton = UIBarButtonItem()
     
     override func loadView() {
         self.view = searchView
@@ -26,10 +27,19 @@ final class NaverSearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "psy의 쇼핑쇼핑"
         bind()
     }
-
+    
+    override func setStyle() {
+        navigationItem.title = "psy의 쇼핑쇼핑"
+        
+        wishlistButton.do {
+            $0.image = UIImage(systemName: "heart.fill")
+            $0.style = .plain
+            $0.tintColor = .white
+        }
+        navigationItem.leftBarButtonItem = wishlistButton
+    }
 }
 
 private extension NaverSearchViewController {
@@ -37,7 +47,7 @@ private extension NaverSearchViewController {
     func bind() {
         let input = NaverSearchViewModel.Input(
             searchText: searchView.searchBar.rx.text.orEmpty,
-            searchReturnClicked: searchView.searchBar.rx.searchButtonClicked
+            searchReturnClicked: searchView.searchBar.rx.searchButtonClicked, tapNavLeftBtn: navigationItem.leftBarButtonItem?.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -54,10 +64,16 @@ private extension NaverSearchViewController {
                     print("owner.viewModel.currentSearchText: \(owner.viewModel.currentSearchText)")
                     owner.navigationController?.pushViewController(vc, animated: true)
                 case false:
-                    let alert = UIAlertManager.showAlert(title: "검색 실패", message: "2글자 이상 검색해주세요.")
+                    let alert = UIAlertManager.shared.showAlert(title: "검색 실패", message: "2글자 이상 검색해주세요.")
                     owner.present(alert, animated: true)
                 }
             }.disposed(by: disposeBag)
+        
+        output.tapNavLeftBtnResult?
+            .bind(with: self, onNext: { owner, _ in
+                let wishlistVC = WishlistViewController()
+                owner.navigationController?.pushViewController(wishlistVC, animated: true)
+            }).disposed(by: disposeBag)
+            
     }
-    
 }

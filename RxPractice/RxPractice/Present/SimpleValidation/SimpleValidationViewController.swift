@@ -167,7 +167,7 @@ final class SimpleValidationViewController : UIViewController {
         let defaultAction = UIAlertAction(title: "Ok",
                                           style: .default,
                                           handler: nil)
-        let alert = UIAlertManager.showAlertWithAction(title: "RxExample", message: "This is wonderful", doneAction: defaultAction)
+        let alert = UIAlertManager.shared.showAlertWithAction(title: "RxExample", message: "This is wonderful", doneAction: defaultAction)
         
         self.present(alert, animated: true, completion: nil)
     }
