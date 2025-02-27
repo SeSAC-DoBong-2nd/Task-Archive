@@ -56,6 +56,7 @@
 		9EA26B0E2D6F68CA00029A14 /* WishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B0D2D6F68CA00029A14 /* WishlistViewController.swift */; };
 		9EA26B122D6FDFA500029A14 /* WishlistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B112D6FDFA500029A14 /* WishlistItem.swift */; };
 		9EA26B142D6FDFFF00029A14 /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B132D6FDFFF00029A14 /* WishlistViewModel.swift */; };
+		9EA26B1B2D703FA600029A14 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B1A2D703FA600029A14 /* WebViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		9EA26B0D2D6F68CA00029A14 /* WishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewController.swift; sourceTree = "<group>"; };
 		9EA26B112D6FDFA500029A14 /* WishlistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistItem.swift; sourceTree = "<group>"; };
 		9EA26B132D6FDFFF00029A14 /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
+		9EA26B1A2D703FA600029A14 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26B192D703F9100029A14 /* WebView */,
 				9EA26B0B2D6F68AD00029A14 /* Wishlist */,
 				9EA26AD72D6DC8BD00029A14 /* NaverShopping */,
 				9EA26AB52D6C423500029A14 /* Lottery */,
@@ -468,6 +471,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9EA26B192D703F9100029A14 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				9EA26B1A2D703FA600029A14 /* WebViewViewController.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -592,6 +603,7 @@
 				9EA269B92D65F5B000029A14 /* DetailViewController.swift in Sources */,
 				9EA26AFF2D6DCC7D00029A14 /* DateFormatterManager.swift in Sources */,
 				9EA269B12D65CE4100029A14 /* PersonTableViewCell.swift in Sources */,
+				9EA26B1B2D703FA600029A14 /* WebViewViewController.swift in Sources */,
 				9E092E8F2D649888003B36C4 /* SceneDelegate.swift in Sources */,
 				9EA26AF82D6DC98E00029A14 /* BaseView.swift in Sources */,
 				9EA26AF92D6DC98E00029A14 /* BaseCollectionViewCell.swift in Sources */,

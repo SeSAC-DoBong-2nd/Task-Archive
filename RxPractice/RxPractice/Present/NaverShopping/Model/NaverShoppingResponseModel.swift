@@ -14,8 +14,9 @@ struct NaverShoppingResponseModel: Decodable {
 
 struct Items: Decodable {
     let image: String
+    let productId: String
     let mallName: String
     let title: String
     let lprice: String
+    let link: String
 }
-
