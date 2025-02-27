@@ -14,15 +14,14 @@ import Then
 
 final class WishlistViewController: BaseViewController {
     
-    
-    
     enum Section: CaseIterable {
         case main
     }
     
     //MARK: - Properties
     private let disposeBag = DisposeBag()
-    private var wishlistItems: [WishlistItem] = []
+    private let viewModel = WishlistViewModel()
+    
     
     //MARK: - UI Properties
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -36,9 +35,10 @@ final class WishlistViewController: BaseViewController {
         
         configureDataSource()
         bindSearchBar()
-        updateSnapshot(with: wishlistItems)
+        updateSnapshot(with: viewModel.wishlistItems)
         
         navigationItem.title = "위시리스트"
+        view.backgroundColor = .white
     }
     
     override func setHierarchy() {
@@ -60,8 +60,6 @@ final class WishlistViewController: BaseViewController {
     }
     
     override func setStyle() {
-        view.backgroundColor = .systemBackground
-        
         collectionView.do {
             $0.backgroundColor = .systemBackground
             $0.delegate = self
@@ -89,13 +87,13 @@ final class WishlistViewController: BaseViewController {
             content.text = item.name
             content.secondaryText = "\(item.formattedPrice) - 추가일: \(item.formattedDate)"
             content.textProperties.font = .boldSystemFont(ofSize: 16)
-            content.textProperties.color = .white
+            content.textProperties.color = .black
             content.secondaryTextProperties.font = .systemFont(ofSize: 14)
-            content.secondaryTextProperties.color = .secondaryLabel
+            content.secondaryTextProperties.color = .lightGray
             
             var backgroundConfig = UIBackgroundConfiguration.listCell()
-            backgroundConfig.backgroundColor = .black
-            backgroundConfig.cornerRadius = 6
+            backgroundConfig.backgroundColor = .white
+            backgroundConfig.cornerRadius = 10
             backgroundConfig.strokeColor = .orange
             backgroundConfig.strokeWidth = 1
             
@@ -118,23 +116,20 @@ final class WishlistViewController: BaseViewController {
     
     // MARK: - 서치바 리턴 시 동작
     private func bindSearchBar() {
-        searchBar.rx.searchButtonClicked
-            .withLatestFrom(searchBar.rx.text.orEmpty)
-            .subscribe(onNext: { [weak self] text in
-                guard let self = self, !text.isEmpty else { return }
+        let input = WishlistViewModel.Input(searchBarText: searchBar.rx.text.orEmpty, tapSearchBarReturnBtn: searchBar.rx.searchButtonClicked)
+        let output = viewModel.transform(input: input)
         
-                let newItem = WishlistItem(
-                    name: text,
-                    date: Date(),
-                    price: Int.random(in: 10000...100000) * 100 //랜덤 가격
-                )
-                
-                self.wishlistItems.append(newItem)
-                self.updateSnapshot(with: self.wishlistItems)
-                self.searchBar.text = ""
-                self.searchBar.resignFirstResponder()
-            })
-            .disposed(by: disposeBag)
+        output.tapSearchBarReturnBtnResult
+            .drive(with: self, onNext: { owner, model in
+                owner.updateSnapshot(with: model)
+                owner.resetUI()
+            }).disposed(by: disposeBag)
+    }
+    
+    // MARK: - UI Reset
+    private func resetUI() {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
     
     // MARK: - 아이템 삭제
@@ -142,8 +137,8 @@ final class WishlistViewController: BaseViewController {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         
         //고유한 값으로 비교하여 실수 방지
-        wishlistItems.removeAll { $0.id == item.id }
-        updateSnapshot(with: wishlistItems)
+        viewModel.wishlistItems.removeAll { $0.id == item.id }
+        updateSnapshot(with: viewModel.wishlistItems)
     }
 }
 
@@ -154,7 +149,7 @@ extension WishlistViewController: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let itemName = dataSource.itemIdentifier(for: indexPath)?.name
-        let doneAction = UIAlertAction(title: "제거", style: .destructive) { [weak self] _ in
+        let doneAction = UIAlertAction(title: "제거", style: .default) { [weak self] _ in
             self?.removeItem(at: indexPath)
         }
         

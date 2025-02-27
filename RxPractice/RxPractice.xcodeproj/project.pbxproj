@@ -55,6 +55,7 @@
 		9EA26B032D6DEBC400029A14 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B022D6DEBC400029A14 /* Bundle+Extension.swift */; };
 		9EA26B0E2D6F68CA00029A14 /* WishlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B0D2D6F68CA00029A14 /* WishlistViewController.swift */; };
 		9EA26B122D6FDFA500029A14 /* WishlistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B112D6FDFA500029A14 /* WishlistItem.swift */; };
+		9EA26B142D6FDFFF00029A14 /* WishlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B132D6FDFFF00029A14 /* WishlistViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		9EA26B022D6DEBC400029A14 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		9EA26B0D2D6F68CA00029A14 /* WishlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewController.swift; sourceTree = "<group>"; };
 		9EA26B112D6FDFA500029A14 /* WishlistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistItem.swift; sourceTree = "<group>"; };
+		9EA26B132D6FDFFF00029A14 /* WishlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,6 +455,7 @@
 		9EA26B0F2D6FDF3000029A14 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9EA26B132D6FDFFF00029A14 /* WishlistViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				9EA26AEB2D6DC8E900029A14 /* NaverSearchViewController.swift in Sources */,
 				9EA26AEC2D6DC8E900029A14 /* ShoppingListCollectionViewCell.swift in Sources */,
 				9EA26AED2D6DC8E900029A14 /* NaverShoppingResponseModel.swift in Sources */,
+				9EA26B142D6FDFFF00029A14 /* WishlistViewModel.swift in Sources */,
 				9EA26AEE2D6DC8E900029A14 /* NaverShoppingListViewModel.swift in Sources */,
 				9EA26AEF2D6DC8E900029A14 /* NaverSearchViewModel.swift in Sources */,
 				9EA26AF02D6DC8E900029A14 /* NaverShoppingListView.swift in Sources */,

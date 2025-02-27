@@ -36,6 +36,7 @@ final class NaverSearchViewController: BaseViewController {
         wishlistButton.do {
             $0.image = UIImage(systemName: "heart.fill")
             $0.style = .plain
+            $0.tintColor = .white
         }
         navigationItem.leftBarButtonItem = wishlistButton
     }
