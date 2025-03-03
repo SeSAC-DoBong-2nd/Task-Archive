@@ -73,6 +73,18 @@ final class NaverShoppingListViewController: BaseViewController {
         
         let output = viewModel.transform(input: input)
         
+        naverShoppingListView.shoppingCollectionView.rx.modelSelected(Items.self)
+            .bind(with: self) { owner, model in
+                print("model: \(model)")
+                guard let url = URL(string: model.link) else {return}
+                let vc = WebViewViewController(navTitle: model.title
+                    .replacingOccurrences(of: "<[^>]+>|&quot;",
+                                          with: "",
+                                          options: .regularExpression,
+                                          range: nil), request: URLRequest(url: url))
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }.disposed(by: disposeBag)
+        
         //navLeftBtn 탭 처리
         output.tapNavLeftBtn?
             .drive(with: self, onNext: { owner, _ in
