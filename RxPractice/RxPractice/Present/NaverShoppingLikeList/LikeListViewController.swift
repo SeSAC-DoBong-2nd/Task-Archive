@@ -16,20 +16,18 @@ import Then
 
 final class LikeListViewController: BaseViewController {
     
-    private let viewModel: NaverShoppingListViewModel
+    private let viewModel: LikeListViewModel
     private let disposeBag = DisposeBag()
-//    private let filterButtonTappedSubject = PublishSubject<String>()
-//    private let loadMoreDataSubject = PublishSubject<IndexPath>()
     
-    init(viewModel: NaverShoppingListViewModel) {
+    init(viewModel: LikeListViewModel) {
         self.viewModel = viewModel
         
         super.init()
-        self.navigationItem.title = "Like List "
+        self.navigationItem.title = "Like List"
     }
     
     deinit {
-        print("NaverShoppingListViewController", #function)
+        print("LikeListViewController", #function)
     }
     
     private let naverShoppingListView = NaverShoppingListView()
@@ -41,9 +39,12 @@ final class LikeListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setDelegate()
-//        bind()
+        bind()
         naverShoppingListView.filterContainerView.isHidden = true
+        naverShoppingListView.shoppingCollectionView.backgroundColor = .brown
+        naverShoppingListView.shoppingCollectionView.snp.remakeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,13 +63,15 @@ final class LikeListViewController: BaseViewController {
                                                            action: nil)
     }
     
-//    private func bind() {
-//        let input = NaverShoppingListViewModel.Input(
-//            tapNavLeftBtn: navigationItem.leftBarButtonItem?.rx.tap,
-//            filterBtnTapped: filterButtonTappedSubject.asObservable(),
-//            loadMoreData: naverShoppingListView.shoppingCollectionView.rx.prefetchItems
-//        )
-//        
+    private func bind() {
+        let input = LikeListViewModel.Input(tapNavLeftBtn: navigationItem.leftBarButtonItem?.rx.tap)
+        let output = viewModel.transform(input: input)
+        
+        output.tapNavLeftBtnResult?
+            .bind(with: self, onNext: { owner, _ in
+                self.navigationController?.popViewController(animated: true)
+            }).disposed(by: disposeBag)
+//
 //        let output = viewModel.transform(input: input)
 //        
 //        naverShoppingListView.shoppingCollectionView.rx.modelSelected(Items.self)
@@ -169,10 +172,5 @@ final class LikeListViewController: BaseViewController {
 //                }
 //            })
 //            .disposed(by: disposeBag)
-//        
-//        //검색 결과 수 업데이트
-//        output.totalCount
-//            .drive(naverShoppingListView.resultCntLabel.rx.text)
-//            .disposed(by: disposeBag)
-//    }
+    }
 }
