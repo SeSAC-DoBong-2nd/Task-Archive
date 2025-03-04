@@ -19,15 +19,17 @@ final class NaverSearchViewModel: ViewModelProtocol {
         let searchText: ControlProperty<String>
         let searchReturnClicked: ControlEvent<Void> //서치바 리턴버튼 클릭
         let tapNavLeftBtn: ControlEvent<Void>?
+        let tapNavRightBtn: ControlEvent<Void>?
     }
     
     struct Output {
         let isValidSearchText: Driver<Bool>
-        let tapNavLeftBtnResult: Observable<Void>?
+        let tapNavBtnResult: Observable<String>
     }
     
     func transform(input: Input) -> Output {
         let outputIsValidSearchText = PublishRelay<Bool>()
+        let outputTapNavBtnResult = PublishRelay<String>()
         
         input.searchText
 //            .debounce(.seconds(1), scheduler: MainScheduler.instance)
@@ -51,7 +53,22 @@ final class NaverSearchViewModel: ViewModelProtocol {
                 outputIsValidSearchText.accept(value)
             }.disposed(by: disposeBag)
         
-        return Output(isValidSearchText: outputIsValidSearchText.asDriver(onErrorDriveWith: .empty()), tapNavLeftBtnResult: input.tapNavLeftBtn?.asObservable())
+        input.tapNavLeftBtn?
+            .subscribe(with: self, onNext: { owner, _ in
+                outputTapNavBtnResult.accept("Left")
+            }).disposed(by: disposeBag)
+        
+        input.tapNavRightBtn?
+            .subscribe(with: self, onNext: { owner, _ in
+                outputTapNavBtnResult.accept("Right")
+            }).disposed(by: disposeBag)
+        
+            
+        
+        return Output(
+            isValidSearchText: outputIsValidSearchText.asDriver(onErrorDriveWith: .empty()),
+            tapNavBtnResult: outputTapNavBtnResult.asObservable()
+        )
     }
     
 }

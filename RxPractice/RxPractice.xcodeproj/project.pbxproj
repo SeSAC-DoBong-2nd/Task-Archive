@@ -22,6 +22,11 @@
 		9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EBA2D64AAD5003B36C4 /* SimpleValidationViewController.swift */; };
 		9E092EBE2D64B652003B36C4 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EBD2D64B652003B36C4 /* BirthdayViewController.swift */; };
 		9E092EC12D64B76B003B36C4 /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EC02D64B76B003B36C4 /* PointButton.swift */; };
+		9E7FC1362D76DF8400CEF423 /* LikeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1352D76DF8400CEF423 /* LikeListViewController.swift */; };
+		9E7FC13A2D76E1F200CEF423 /* LikeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1392D76E1F200CEF423 /* LikeListViewModel.swift */; };
+		9E7FC13D2D76F18600CEF423 /* LikeListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC13C2D76F18600CEF423 /* LikeListTable.swift */; };
+		9E7FC1402D775B8A00CEF423 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 9E7FC13F2D775B8A00CEF423 /* Toast */; };
+		9E7FC1432D77628E00CEF423 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9E7FC1422D77628E00CEF423 /* RealmSwift */; };
 		9EA269AB2D65CE2E00029A14 /* HomeworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AA2D65CE2E00029A14 /* HomeworkViewModel.swift */; };
 		9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AE2D65CE4100029A14 /* UserCollectionViewCell.swift */; };
 		9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */; };
@@ -59,6 +64,19 @@
 		9EA26B1B2D703FA600029A14 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA26B1A2D703FA600029A14 /* WebViewViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9E7FC1342D76DB6700CEF423 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9E092E6C2D649880003B36C4 /* RxPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E092E842D649888003B36C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +91,9 @@
 		9E092EBA2D64AAD5003B36C4 /* SimpleValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleValidationViewController.swift; sourceTree = "<group>"; };
 		9E092EBD2D64B652003B36C4 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
 		9E092EC02D64B76B003B36C4 /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
+		9E7FC1352D76DF8400CEF423 /* LikeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewController.swift; sourceTree = "<group>"; };
+		9E7FC1392D76E1F200CEF423 /* LikeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewModel.swift; sourceTree = "<group>"; };
+		9E7FC13C2D76F18600CEF423 /* LikeListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTable.swift; sourceTree = "<group>"; };
 		9EA269AA2D65CE2E00029A14 /* HomeworkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewModel.swift; sourceTree = "<group>"; };
 		9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewController.swift; sourceTree = "<group>"; };
 		9EA269AD2D65CE4100029A14 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
@@ -118,6 +139,8 @@
 				9EA26AD12D6DC89900029A14 /* Alamofire in Frameworks */,
 				9EA26AD62D6DC8B400029A14 /* RxDataSources in Frameworks */,
 				9E092E9F2D64990D003B36C4 /* Then in Frameworks */,
+				9E7FC1402D775B8A00CEF423 /* Toast in Frameworks */,
+				9E7FC1432D77628E00CEF423 /* RealmSwift in Frameworks */,
 				9EA269B72D65E8F900029A14 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +198,7 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				9E7FC1382D76E1C800CEF423 /* NaverShoppingLikeList */,
 				9EA26B192D703F9100029A14 /* WebView */,
 				9EA26B0B2D6F68AD00029A14 /* Wishlist */,
 				9EA26AD72D6DC8BD00029A14 /* NaverShopping */,
@@ -249,6 +273,24 @@
 				9E092EC02D64B76B003B36C4 /* PointButton.swift */,
 			);
 			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		9E7FC1382D76E1C800CEF423 /* NaverShoppingLikeList */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC13B2D76F17A00CEF423 /* Database */,
+				9E7FC1352D76DF8400CEF423 /* LikeListViewController.swift */,
+				9E7FC1392D76E1F200CEF423 /* LikeListViewModel.swift */,
+			);
+			path = NaverShoppingLikeList;
+			sourceTree = "<group>";
+		};
+		9E7FC13B2D76F17A00CEF423 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC13C2D76F18600CEF423 /* LikeListTable.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		9EA269A72D65CDF000029A14 /* Homework */ = {
@@ -489,6 +531,7 @@
 				9E092E682D649880003B36C4 /* Sources */,
 				9E092E692D649880003B36C4 /* Frameworks */,
 				9E092E6A2D649880003B36C4 /* Resources */,
+				9E7FC1342D76DB6700CEF423 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -504,6 +547,8 @@
 				9EA26AD02D6DC89900029A14 /* Alamofire */,
 				9EA26AD32D6DC8B400029A14 /* Differentiator */,
 				9EA26AD52D6DC8B400029A14 /* RxDataSources */,
+				9E7FC13F2D775B8A00CEF423 /* Toast */,
+				9E7FC1422D77628E00CEF423 /* RealmSwift */,
 			);
 			productName = RxPractice;
 			productReference = 9E092E6C2D649880003B36C4 /* RxPractice.app */;
@@ -540,6 +585,8 @@
 				9EA269B52D65E8F900029A14 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				9EA26ACF2D6DC89900029A14 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9EA26AD22D6DC8B400029A14 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				9E7FC13E2D775B8A00CEF423 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				9E7FC1412D77628E00CEF423 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9E092E6D2D649880003B36C4 /* Products */;
@@ -572,6 +619,7 @@
 				9EA269AB2D65CE2E00029A14 /* HomeworkViewModel.swift in Sources */,
 				9EA26B032D6DEBC400029A14 /* Bundle+Extension.swift in Sources */,
 				9E092E8E2D649888003B36C4 /* AppDelegate.swift in Sources */,
+				9E7FC13A2D76E1F200CEF423 /* LikeListViewModel.swift in Sources */,
 				9EA26AC42D6CADE600029A14 /* LotteryNetworkManager.swift in Sources */,
 				9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */,
 				9EA26AC12D6C4A5400029A14 /* ViewModelProtocol.swift in Sources */,
@@ -581,6 +629,7 @@
 				9EA26ABC2D6C446D00029A14 /* LotteryModel.swift in Sources */,
 				9E092EA42D649B2A003B36C4 /* SimpleTableViewExampleViewController.swift in Sources */,
 				9E092EA82D649BD6003B36C4 /* UIAlertManager.swift in Sources */,
+				9E7FC13D2D76F18600CEF423 /* LikeListTable.swift in Sources */,
 				9E092EB02D64A594003B36C4 /* NumbersViewController.swift in Sources */,
 				9EA26B0E2D6F68CA00029A14 /* WishlistViewController.swift in Sources */,
 				9EA26AFD2D6DCB8B00029A14 /* UIImageView+.swift in Sources */,
@@ -592,6 +641,7 @@
 				9EA26AED2D6DC8E900029A14 /* NaverShoppingResponseModel.swift in Sources */,
 				9EA26B142D6FDFFF00029A14 /* WishlistViewModel.swift in Sources */,
 				9EA26AEE2D6DC8E900029A14 /* NaverShoppingListViewModel.swift in Sources */,
+				9E7FC1362D76DF8400CEF423 /* LikeListViewController.swift in Sources */,
 				9EA26AEF2D6DC8E900029A14 /* NaverSearchViewModel.swift in Sources */,
 				9EA26AF02D6DC8E900029A14 /* NaverShoppingListView.swift in Sources */,
 				9EA26AB82D6C425000029A14 /* LotteryViewController.swift in Sources */,
@@ -856,6 +906,22 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		9E7FC13E2D775B8A00CEF423 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
+		9E7FC1412D77628E00CEF423 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 20.0.1;
+			};
+		};
 		9EA269B52D65E8F900029A14 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -902,6 +968,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9E092E9D2D64990D003B36C4 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		9E7FC13F2D775B8A00CEF423 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9E7FC13E2D775B8A00CEF423 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		9E7FC1422D77628E00CEF423 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9E7FC1412D77628E00CEF423 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		9EA269B62D65E8F900029A14 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

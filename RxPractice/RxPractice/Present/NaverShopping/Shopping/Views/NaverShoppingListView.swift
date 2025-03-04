@@ -22,7 +22,7 @@ final class NaverShoppingListView: BaseView {
     
     let indicatorView = UIActivityIndicatorView(style: .large)
     let resultCntLabel = UILabel()
-    private let filterContainerView = UIView()
+    let filterContainerView = UIView()
     let accuracyButton = UIButton()
     private let byDateButton = UIButton()
     private let priceHigherButton = UIButton()
