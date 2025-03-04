@@ -24,6 +24,7 @@
 		9E092EC12D64B76B003B36C4 /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E092EC02D64B76B003B36C4 /* PointButton.swift */; };
 		9E7FC1322D76DB5E00CEF423 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9E7FC1312D76DB5E00CEF423 /* RealmSwift */; };
 		9E7FC1332D76DB6700CEF423 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 9E7FC1312D76DB5E00CEF423 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9E7FC1362D76DF8400CEF423 /* LikeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1352D76DF8400CEF423 /* LikeListViewController.swift */; };
 		9EA269AB2D65CE2E00029A14 /* HomeworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AA2D65CE2E00029A14 /* HomeworkViewModel.swift */; };
 		9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AE2D65CE4100029A14 /* UserCollectionViewCell.swift */; };
 		9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */; };
@@ -89,6 +90,7 @@
 		9E092EBA2D64AAD5003B36C4 /* SimpleValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleValidationViewController.swift; sourceTree = "<group>"; };
 		9E092EBD2D64B652003B36C4 /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
 		9E092EC02D64B76B003B36C4 /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
+		9E7FC1352D76DF8400CEF423 /* LikeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewController.swift; sourceTree = "<group>"; };
 		9EA269AA2D65CE2E00029A14 /* HomeworkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewModel.swift; sourceTree = "<group>"; };
 		9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewController.swift; sourceTree = "<group>"; };
 		9EA269AD2D65CE4100029A14 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				9EA26AE42D6DC8E900029A14 /* NaverShoppingListViewController.swift */,
 				9EA26AE02D6DC8E900029A14 /* NaverShoppingListView.swift */,
 				9EA26ADF2D6DC8E900029A14 /* Cell */,
+				9E7FC1352D76DF8400CEF423 /* LikeListViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				9EA26AED2D6DC8E900029A14 /* NaverShoppingResponseModel.swift in Sources */,
 				9EA26B142D6FDFFF00029A14 /* WishlistViewModel.swift in Sources */,
 				9EA26AEE2D6DC8E900029A14 /* NaverShoppingListViewModel.swift in Sources */,
+				9E7FC1362D76DF8400CEF423 /* LikeListViewController.swift in Sources */,
 				9EA26AEF2D6DC8E900029A14 /* NaverSearchViewModel.swift in Sources */,
 				9EA26AF02D6DC8E900029A14 /* NaverShoppingListView.swift in Sources */,
 				9EA26AB82D6C425000029A14 /* LotteryViewController.swift in Sources */,

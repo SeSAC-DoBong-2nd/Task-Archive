@@ -19,6 +19,7 @@ final class NaverSearchViewController: BaseViewController {
     
     private let searchView = NaverSearchView()
     private let wishlistButton = UIBarButtonItem()
+    private let likeButton = UIBarButtonItem()
     
     override func loadView() {
         self.view = searchView
@@ -34,11 +35,18 @@ final class NaverSearchViewController: BaseViewController {
         navigationItem.title = "psy의 쇼핑쇼핑"
         
         wishlistButton.do {
-            $0.image = UIImage(systemName: "heart.fill")
+            $0.image = UIImage(systemName: "cart.circle")
             $0.style = .plain
             $0.tintColor = .white
         }
         navigationItem.leftBarButtonItem = wishlistButton
+        
+        likeButton.do {
+            $0.image = UIImage(systemName: "heart.circle")
+            $0.style = .plain
+            $0.tintColor = .white
+        }
+        navigationItem.rightBarButtonItem = likeButton
     }
 }
 
@@ -75,5 +83,9 @@ private extension NaverSearchViewController {
                 owner.navigationController?.pushViewController(wishlistVC, animated: true)
             }).disposed(by: disposeBag)
             
+        self.navigationItem.rightBarButtonItem?.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.pushViewController(LikeListViewController(viewModel: NaverShoppingListViewModel()), animated: true)
+            }.disposed(by: disposeBag)
     }
 }
