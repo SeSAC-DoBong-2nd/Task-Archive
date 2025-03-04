@@ -107,4 +107,33 @@ final class ShoppingListCollectionViewCell: BaseCollectionViewCell {
         : heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
     
+    func configureShppingListCell(model: LikeListTable)
+    {
+        imageView.setImageKfDownSampling(with: model.imageUrl, cornerRadius: 20)
+        
+        mallNameLabel.do {
+            $0.text = model.mallName
+            $0.font = .systemFont(ofSize: 12, weight: .light)
+            $0.textColor = .lightGray
+        }
+        
+        productLabel.do {
+            $0.text = model.productName
+            $0.font = .systemFont(ofSize: 13, weight: .regular)
+            $0.textColor = .white
+            $0.numberOfLines = 2
+        }
+        
+        priceLabel.do {
+            $0.text = DateFormatterManager.shard.setDecimalNumber(num: model.price)
+            $0.font = .systemFont(ofSize: 16, weight: .medium)
+            $0.textColor = .white
+        }
+        
+        model.isLike
+        ? heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        : heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+    }
+    
+    
 }

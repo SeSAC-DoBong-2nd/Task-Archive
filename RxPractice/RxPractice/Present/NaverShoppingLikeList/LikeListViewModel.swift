@@ -17,17 +17,31 @@ final class LikeListViewModel: ViewModelProtocol {
     
     struct Input {
         let tapNavLeftBtn: ControlEvent<Void>?
+        let searchBarText: ControlProperty<String>
     }
     
     struct Output {
         let tapNavLeftBtnResult: Observable<Void>?
+        let searchBarTextResult: Driver<String>
     }
     
     func transform(input: Input) -> Output {
-        
+        let searchBarTextResult = PublishRelay<String>()
+        input.searchBarText
+            .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .subscribe(onNext: { text in
+                searchBarTextResult.accept(text)
+            })
+            .disposed(by: disposeBag)
+
         
         return Output(
-            tapNavLeftBtnResult: input.tapNavLeftBtn?.asObservable())
+            tapNavLeftBtnResult: input.tapNavLeftBtn?.asObservable(),
+            searchBarTextResult: searchBarTextResult.asDriver(
+                onErrorDriveWith: .empty()
+            )
+        )
     }
     
     deinit {

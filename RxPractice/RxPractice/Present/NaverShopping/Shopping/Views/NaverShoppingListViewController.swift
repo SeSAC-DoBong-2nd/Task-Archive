@@ -8,6 +8,7 @@
 import UIKit
 
 import Alamofire
+import RealmSwift
 import RxCocoa
 import RxSwift
 import Kingfisher
@@ -16,6 +17,7 @@ import Then
 
 final class NaverShoppingListViewController: BaseViewController {
     
+    private let realm = try! Realm()
     private let viewModel: NaverShoppingListViewModel
     private let disposeBag = DisposeBag()
     private let filterButtonTappedSubject = PublishSubject<String>()
@@ -127,6 +129,16 @@ final class NaverShoppingListViewController: BaseViewController {
                             let heartImage = self.viewModel.heartSelectedArr[index]
                             ? UIImage(systemName: "heart.fill")
                             : UIImage(systemName: "heart")
+                            
+                            
+                            //아직 userdefaults 활용하여 like 다루는 기능을 추가하지 않아 아래와 같이 대체하였습니다요..
+                            switch heartImage == UIImage(systemName: "heart.fill") {
+                                
+                            case true:
+                                self.doThisRealm(model: item, isHeart: true)
+                            case false:
+                                self.doThisRealm(model: item, isHeart: false)
+                            }
                             cell.heartButton.setImage(heartImage, for: .normal)
                         })
                         .disposed(by: cell.disposeBag)
@@ -139,6 +151,7 @@ final class NaverShoppingListViewController: BaseViewController {
             .subscribe(with: self) { owner, indexPath in
                 // 셀 선택 시 작업 추후 추가
                 print("Selected item at \(indexPath)")
+                
             }.disposed(by: disposeBag)
         
         //스크롤 시 최상단 이동 여부
@@ -176,6 +189,48 @@ final class NaverShoppingListViewController: BaseViewController {
         output.totalCount
             .drive(naverShoppingListView.resultCntLabel.rx.text)
             .disposed(by: disposeBag)
+    }
+    
+    private func doThisRealm(model: Items, isHeart: Bool) {
+        do {
+            try realm.write {
+                if isHeart {
+                    //좋아요 추가 로직
+                    let data = LikeListTable(
+                        productName: model.title
+                            .replacingOccurrences(of: "<[^>]+>|&quot;",
+                                                  with: "",
+                                                  options: .regularExpression,
+                                                  range: nil),
+                        imageUrl: model.image,
+                        mallName: model.mallName,
+                        price: Int(model.lprice) ?? 0,
+                        isLike: true
+                    )
+                    
+                    realm.add(data)
+                    print("realm 저장 성공한 경우")
+                } else {
+                    //좋아요 해제 시 해당 데이터 삭제
+                    let productName = model.title
+                        .replacingOccurrences(of: "<[^>]+>|&quot;",
+                                              with: "",
+                                              options: .regularExpression,
+                                              range: nil)
+                    
+                    //제품 이름으로 Realm 객체 찾아 삭제
+                    let objectToDelete = realm.objects(LikeListTable.self).filter{ $0.productName == productName }
+                    if !objectToDelete.isEmpty {
+                        realm.delete(objectToDelete)
+                        print("realm 삭제 성공한 경우")
+                    } else {
+                        print("객체 찾기 실패")
+                    }
+                }
+            }
+        } catch {
+            print("realm 작업 실패한 경우")
+        }
     }
 }
 
