@@ -55,7 +55,9 @@ private extension NaverSearchViewController {
     func bind() {
         let input = NaverSearchViewModel.Input(
             searchText: searchView.searchBar.rx.text.orEmpty,
-            searchReturnClicked: searchView.searchBar.rx.searchButtonClicked, tapNavLeftBtn: navigationItem.leftBarButtonItem?.rx.tap
+            searchReturnClicked: searchView.searchBar.rx.searchButtonClicked,
+            tapNavLeftBtn: navigationItem.leftBarButtonItem?.rx.tap,
+            tapNavRightBtn: navigationItem.rightBarButtonItem?.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -77,15 +79,16 @@ private extension NaverSearchViewController {
                 }
             }.disposed(by: disposeBag)
         
-        output.tapNavLeftBtnResult?
-            .bind(with: self, onNext: { owner, _ in
-                let wishlistVC = WishlistViewController()
-                owner.navigationController?.pushViewController(wishlistVC, animated: true)
+        output.tapNavBtnResult
+            .bind(with: self, onNext: { owner, btn in
+                switch btn == "Left" {
+                    
+                case true:
+                    let wishlistVC = WishlistViewController()
+                    owner.navigationController?.pushViewController(wishlistVC, animated: true)
+                case false:
+                    owner.navigationController?.pushViewController(LikeListViewController(viewModel: LikeListViewModel()), animated: true)
+                }
             }).disposed(by: disposeBag)
-            
-        self.navigationItem.rightBarButtonItem?.rx.tap
-            .bind(with: self) { owner, _ in
-                owner.navigationController?.pushViewController(LikeListViewController(viewModel: NaverShoppingListViewModel()), animated: true)
-            }.disposed(by: disposeBag)
     }
 }
