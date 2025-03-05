@@ -67,7 +67,6 @@ final class NewWishListViewController: UIViewController {
     }
     
     private func configureConstraints() {
-         
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -95,7 +94,7 @@ extension NewWishListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = list[indexPath.row]
-        let vm = NewWishListViewModel()
+        let vm = NewWishListDetailViewModel()
         vm.id = data.id
         vm.list = data.detail
         let vc = NewWishListDetailViewController(viewModel: vm, navTitle: data.name)

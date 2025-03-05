@@ -15,7 +15,7 @@ import SnapKit
 final class NewWishListDetailViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
-    private let viewModel: NewWishListViewModel
+    private let viewModel: NewWishListDetailViewModel
     
     let repository: WishListRepositoryProtocol = WishListRepository()
     
@@ -23,7 +23,7 @@ final class NewWishListDetailViewController: UIViewController {
     private let tableView = UITableView()
     private let searchBar = UISearchBar()
     
-    init(viewModel: NewWishListViewModel, navTitle: String) {
+    init(viewModel: NewWishListDetailViewModel, navTitle: String) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         
@@ -71,7 +71,7 @@ final class NewWishListDetailViewController: UIViewController {
     }
     
     private func bind() {
-        let input = NewWishListViewModel.Input(
+        let input = NewWishListDetailViewModel.Input(
             searchBarText: searchBar.rx.text.orEmpty,
             tapSearchBarReturnBtn: searchBar.rx.searchButtonClicked
         )
