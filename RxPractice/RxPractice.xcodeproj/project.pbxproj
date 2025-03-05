@@ -198,10 +198,7 @@
 		9E092EA22D649931003B36C4 /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				9E7FC1382D76E1C800CEF423 /* NaverShoppingLikeList */,
-				9EA26B192D703F9100029A14 /* WebView */,
-				9EA26B0B2D6F68AD00029A14 /* Wishlist */,
-				9EA26AD72D6DC8BD00029A14 /* NaverShopping */,
+				9E7FC14E2D78271F00CEF423 /* NaverShoppingApp */,
 				9EA26AB52D6C423500029A14 /* Lottery */,
 				9E092EA92D649EE3003B36C4 /* SimpleTable */,
 				9E092EAE2D64A581003B36C4 /* Numbers */,
@@ -291,6 +288,17 @@
 				9E7FC13C2D76F18600CEF423 /* LikeListTable.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		9E7FC14E2D78271F00CEF423 /* NaverShoppingApp */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC1382D76E1C800CEF423 /* NaverShoppingLikeList */,
+				9EA26B192D703F9100029A14 /* WebView */,
+				9EA26B0B2D6F68AD00029A14 /* Wishlist */,
+				9EA26AD72D6DC8BD00029A14 /* NaverShopping */,
+			);
+			path = NaverShoppingApp;
 			sourceTree = "<group>";
 		};
 		9EA269A72D65CDF000029A14 /* Homework */ = {
