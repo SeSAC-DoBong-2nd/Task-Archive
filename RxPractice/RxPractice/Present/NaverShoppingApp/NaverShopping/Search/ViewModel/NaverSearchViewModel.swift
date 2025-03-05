@@ -20,6 +20,7 @@ final class NaverSearchViewModel: ViewModelProtocol {
         let searchReturnClicked: ControlEvent<Void> //서치바 리턴버튼 클릭
         let tapNavLeftBtn: ControlEvent<Void>?
         let tapNavRightBtn: ControlEvent<Void>?
+        let tapNavNewWishListBtn: ControlEvent<Void>?
     }
     
     struct Output {
@@ -63,7 +64,10 @@ final class NaverSearchViewModel: ViewModelProtocol {
                 outputTapNavBtnResult.accept("Right")
             }).disposed(by: disposeBag)
         
-            
+        input.tapNavNewWishListBtn?
+            .subscribe(with: self, onNext: { owner, _ in
+                outputTapNavBtnResult.accept("NewWishList")
+            }).disposed(by: disposeBag)
         
         return Output(
             isValidSearchText: outputIsValidSearchText.asDriver(onErrorDriveWith: .empty()),

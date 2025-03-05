@@ -27,6 +27,16 @@
 		9E7FC13D2D76F18600CEF423 /* LikeListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC13C2D76F18600CEF423 /* LikeListTable.swift */; };
 		9E7FC1402D775B8A00CEF423 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 9E7FC13F2D775B8A00CEF423 /* Toast */; };
 		9E7FC1432D77628E00CEF423 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9E7FC1422D77628E00CEF423 /* RealmSwift */; };
+		9E7FC1542D782BA000CEF423 /* NewWishListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1532D782BA000CEF423 /* NewWishListViewController.swift */; };
+		9E7FC1572D782BC400CEF423 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1562D782BC400CEF423 /* ListTableViewCell.swift */; };
+		9E7FC15C2D788DB000CEF423 /* WishListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC15B2D788DB000CEF423 /* WishListTable.swift */; };
+		9E7FC15D2D788DB000CEF423 /* FolderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1592D788DB000CEF423 /* FolderRepository.swift */; };
+		9E7FC15E2D788DB000CEF423 /* WishListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC15A2D788DB000CEF423 /* WishListRepository.swift */; };
+		9E7FC15F2D788DB000CEF423 /* FolderTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1582D788DB000CEF423 /* FolderTable.swift */; };
+		9E7FC1652D788FC000CEF423 /* NewWishListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1612D788FC000CEF423 /* NewWishListDetailViewController.swift */; };
+		9E7FC1672D7896A400CEF423 /* NewWishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1662D7896A400CEF423 /* NewWishListViewModel.swift */; };
+		9E7FC1692D78ADE000CEF423 /* FirstRunTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC1682D78ADE000CEF423 /* FirstRunTable.swift */; };
+		9E7FC16E2D78AEA300CEF423 /* FirstRunRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FC16D2D78AEA300CEF423 /* FirstRunRepository.swift */; };
 		9EA269AB2D65CE2E00029A14 /* HomeworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AA2D65CE2E00029A14 /* HomeworkViewModel.swift */; };
 		9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AE2D65CE4100029A14 /* UserCollectionViewCell.swift */; };
 		9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */; };
@@ -94,6 +104,16 @@
 		9E7FC1352D76DF8400CEF423 /* LikeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewController.swift; sourceTree = "<group>"; };
 		9E7FC1392D76E1F200CEF423 /* LikeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListViewModel.swift; sourceTree = "<group>"; };
 		9E7FC13C2D76F18600CEF423 /* LikeListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTable.swift; sourceTree = "<group>"; };
+		9E7FC1532D782BA000CEF423 /* NewWishListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWishListViewController.swift; sourceTree = "<group>"; };
+		9E7FC1562D782BC400CEF423 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		9E7FC1582D788DB000CEF423 /* FolderTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTable.swift; sourceTree = "<group>"; };
+		9E7FC1592D788DB000CEF423 /* FolderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRepository.swift; sourceTree = "<group>"; };
+		9E7FC15A2D788DB000CEF423 /* WishListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListRepository.swift; sourceTree = "<group>"; };
+		9E7FC15B2D788DB000CEF423 /* WishListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListTable.swift; sourceTree = "<group>"; };
+		9E7FC1612D788FC000CEF423 /* NewWishListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWishListDetailViewController.swift; sourceTree = "<group>"; };
+		9E7FC1662D7896A400CEF423 /* NewWishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWishListViewModel.swift; sourceTree = "<group>"; };
+		9E7FC1682D78ADE000CEF423 /* FirstRunTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunTable.swift; sourceTree = "<group>"; };
+		9E7FC16D2D78AEA300CEF423 /* FirstRunRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunRepository.swift; sourceTree = "<group>"; };
 		9EA269AA2D65CE2E00029A14 /* HomeworkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewModel.swift; sourceTree = "<group>"; };
 		9EA269AC2D65CE4100029A14 /* HomeworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeworkViewController.swift; sourceTree = "<group>"; };
 		9EA269AD2D65CE4100029A14 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
@@ -293,12 +313,86 @@
 		9E7FC14E2D78271F00CEF423 /* NaverShoppingApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E7FC14F2D78282500CEF423 /* NewWishList */,
 				9E7FC1382D76E1C800CEF423 /* NaverShoppingLikeList */,
 				9EA26B192D703F9100029A14 /* WebView */,
 				9EA26B0B2D6F68AD00029A14 /* Wishlist */,
 				9EA26AD72D6DC8BD00029A14 /* NaverShopping */,
 			);
 			path = NaverShoppingApp;
+			sourceTree = "<group>";
+		};
+		9E7FC14F2D78282500CEF423 /* NewWishList */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC1522D782B6100CEF423 /* Table */,
+				9E7FC1512D782B5A00CEF423 /* ViewModel */,
+				9E7FC1552D782BB700CEF423 /* Cell */,
+				9E7FC1502D782B5300CEF423 /* View */,
+			);
+			path = NewWishList;
+			sourceTree = "<group>";
+		};
+		9E7FC1502D782B5300CEF423 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC1532D782BA000CEF423 /* NewWishListViewController.swift */,
+				9E7FC1612D788FC000CEF423 /* NewWishListDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9E7FC1512D782B5A00CEF423 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC1662D7896A400CEF423 /* NewWishListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9E7FC1522D782B6100CEF423 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC16C2D78AE7C00CEF423 /* WishList */,
+				9E7FC16B2D78AE7500CEF423 /* Folder */,
+				9E7FC16A2D78AE6F00CEF423 /* FirstRun */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		9E7FC1552D782BB700CEF423 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC1562D782BC400CEF423 /* ListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9E7FC16A2D78AE6F00CEF423 /* FirstRun */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC1682D78ADE000CEF423 /* FirstRunTable.swift */,
+				9E7FC16D2D78AEA300CEF423 /* FirstRunRepository.swift */,
+			);
+			path = FirstRun;
+			sourceTree = "<group>";
+		};
+		9E7FC16B2D78AE7500CEF423 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC1582D788DB000CEF423 /* FolderTable.swift */,
+				9E7FC1592D788DB000CEF423 /* FolderRepository.swift */,
+			);
+			path = Folder;
+			sourceTree = "<group>";
+		};
+		9E7FC16C2D78AE7C00CEF423 /* WishList */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FC15B2D788DB000CEF423 /* WishListTable.swift */,
+				9E7FC15A2D788DB000CEF423 /* WishListRepository.swift */,
+			);
+			path = WishList;
 			sourceTree = "<group>";
 		};
 		9EA269A72D65CDF000029A14 /* Homework */ = {
@@ -628,6 +722,7 @@
 				9EA26B032D6DEBC400029A14 /* Bundle+Extension.swift in Sources */,
 				9E092E8E2D649888003B36C4 /* AppDelegate.swift in Sources */,
 				9E7FC13A2D76E1F200CEF423 /* LikeListViewModel.swift in Sources */,
+				9E7FC16E2D78AEA300CEF423 /* FirstRunRepository.swift in Sources */,
 				9EA26AC42D6CADE600029A14 /* LotteryNetworkManager.swift in Sources */,
 				9E092EBB2D64AAD5003B36C4 /* SimpleValidationViewController.swift in Sources */,
 				9EA26AC12D6C4A5400029A14 /* ViewModelProtocol.swift in Sources */,
@@ -642,12 +737,17 @@
 				9EA26B0E2D6F68CA00029A14 /* WishlistViewController.swift in Sources */,
 				9EA26AFD2D6DCB8B00029A14 /* UIImageView+.swift in Sources */,
 				9E092EBE2D64B652003B36C4 /* BirthdayViewController.swift in Sources */,
+				9E7FC1542D782BA000CEF423 /* NewWishListViewController.swift in Sources */,
 				9EA26AE92D6DC8E900029A14 /* NaverSearchView.swift in Sources */,
 				9EA26AEA2D6DC8E900029A14 /* NaverShoppingListViewController.swift in Sources */,
 				9EA26AEB2D6DC8E900029A14 /* NaverSearchViewController.swift in Sources */,
 				9EA26AEC2D6DC8E900029A14 /* ShoppingListCollectionViewCell.swift in Sources */,
 				9EA26AED2D6DC8E900029A14 /* NaverShoppingResponseModel.swift in Sources */,
 				9EA26B142D6FDFFF00029A14 /* WishlistViewModel.swift in Sources */,
+				9E7FC15C2D788DB000CEF423 /* WishListTable.swift in Sources */,
+				9E7FC15D2D788DB000CEF423 /* FolderRepository.swift in Sources */,
+				9E7FC15E2D788DB000CEF423 /* WishListRepository.swift in Sources */,
+				9E7FC15F2D788DB000CEF423 /* FolderTable.swift in Sources */,
 				9EA26AEE2D6DC8E900029A14 /* NaverShoppingListViewModel.swift in Sources */,
 				9E7FC1362D76DF8400CEF423 /* LikeListViewController.swift in Sources */,
 				9EA26AEF2D6DC8E900029A14 /* NaverSearchViewModel.swift in Sources */,
@@ -656,6 +756,8 @@
 				9EA269B42D65CF0800029A14 /* Dummy.swift in Sources */,
 				9E092EAB2D649F23003B36C4 /* SimpleTableViewCell.swift in Sources */,
 				9EA269AF2D65CE4100029A14 /* UserCollectionViewCell.swift in Sources */,
+				9E7FC1572D782BC400CEF423 /* ListTableViewCell.swift in Sources */,
+				9E7FC1672D7896A400CEF423 /* NewWishListViewModel.swift in Sources */,
 				9EA26B122D6FDFA500029A14 /* WishlistItem.swift in Sources */,
 				9EA269B02D65CE4100029A14 /* HomeworkViewController.swift in Sources */,
 				9EA269B92D65F5B000029A14 /* DetailViewController.swift in Sources */,
@@ -665,7 +767,9 @@
 				9E092E8F2D649888003B36C4 /* SceneDelegate.swift in Sources */,
 				9EA26AF82D6DC98E00029A14 /* BaseView.swift in Sources */,
 				9EA26AF92D6DC98E00029A14 /* BaseCollectionViewCell.swift in Sources */,
+				9E7FC1652D788FC000CEF423 /* NewWishListDetailViewController.swift in Sources */,
 				9EA26AFA2D6DC98E00029A14 /* BaseViewController.swift in Sources */,
+				9E7FC1692D78ADE000CEF423 /* FirstRunTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
