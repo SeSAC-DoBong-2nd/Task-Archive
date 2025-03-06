@@ -65,5 +65,10 @@ final class ListTableViewCell: UITableViewCell {
         overviewLabel.numberOfLines = 0
         overviewLabel.font = .systemFont(ofSize: 13)
     }
+    
+    func fetchUI(witeFolderModel: FolderTable) {
+        titleLabel.text = witeFolderModel.name
+        subTitleLabel.text = "\(witeFolderModel.detail.count)개"
+    }
 }
 
