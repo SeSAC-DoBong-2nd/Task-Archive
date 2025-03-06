@@ -19,6 +19,7 @@ final class NaverSearchViewController: BaseViewController {
     
     private let searchView = NaverSearchView()
     private let wishlistButton = UIBarButtonItem()
+    private let newWishListButton = UIBarButtonItem()
     private let likeButton = UIBarButtonItem()
     
     override func loadView() {
@@ -39,7 +40,14 @@ final class NaverSearchViewController: BaseViewController {
             $0.style = .plain
             $0.tintColor = .white
         }
-        navigationItem.leftBarButtonItem = wishlistButton
+        
+        newWishListButton.do {
+            $0.image = UIImage(systemName: "square.and.arrow.up.circle")
+            $0.style = .plain
+            $0.tintColor = .white
+        }
+        
+        navigationItem.leftBarButtonItems = [wishlistButton, newWishListButton]
         
         likeButton.do {
             $0.image = UIImage(systemName: "heart.circle")
@@ -56,9 +64,11 @@ private extension NaverSearchViewController {
         let input = NaverSearchViewModel.Input(
             searchText: searchView.searchBar.rx.text.orEmpty,
             searchReturnClicked: searchView.searchBar.rx.searchButtonClicked,
-            tapNavLeftBtn: navigationItem.leftBarButtonItem?.rx.tap,
-            tapNavRightBtn: navigationItem.rightBarButtonItem?.rx.tap
+            tapNavLeftBtn: navigationItem.leftBarButtonItems?[0].rx.tap,
+            tapNavRightBtn: navigationItem.rightBarButtonItem?.rx.tap,
+            tapNavNewWishListBtn: navigationItem.leftBarButtonItems?[1].rx.tap
         )
+        
         
         let output = viewModel.transform(input: input)
         
@@ -81,13 +91,16 @@ private extension NaverSearchViewController {
         
         output.tapNavBtnResult
             .bind(with: self, onNext: { owner, btn in
-                switch btn == "Left" {
-                    
-                case true:
+                switch btn {
+                case "Left":
                     let wishlistVC = WishlistViewController()
                     owner.navigationController?.pushViewController(wishlistVC, animated: true)
-                case false:
+                case "Right":
                     owner.navigationController?.pushViewController(LikeListViewController(viewModel: LikeListViewModel()), animated: true)
+                case "NewWishList":
+                    print("NewWishList")
+                default:
+                    print("default")
                 }
             }).disposed(by: disposeBag)
     }
