@@ -13,6 +13,7 @@
 		9E6F7CDA2D96BBA5009F24FC /* BOJ10807.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F7CD92D96BBA5009F24FC /* BOJ10807.swift */; };
 		9E6F7CDC2D96BF61009F24FC /* BOJ1158.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F7CDB2D96BF61009F24FC /* BOJ1158.swift */; };
 		9E6F7CDE2D96BF67009F24FC /* BOJ1406.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F7CDD2D96BF67009F24FC /* BOJ1406.swift */; };
+		9E6F7E652D9B743B009F24FC /* BOJ_1267.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F7E642D9B743B009F24FC /* BOJ_1267.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,7 @@
 		9E6F7CD92D96BBA5009F24FC /* BOJ10807.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOJ10807.swift; sourceTree = "<group>"; };
 		9E6F7CDB2D96BF61009F24FC /* BOJ1158.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOJ1158.swift; sourceTree = "<group>"; };
 		9E6F7CDD2D96BF67009F24FC /* BOJ1406.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOJ1406.swift; sourceTree = "<group>"; };
+		9E6F7E642D9B743B009F24FC /* BOJ_1267.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOJ_1267.swift; sourceTree = "<group>"; };
 		9EA977F32D891B64008B3AFE /* preview */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = preview; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -68,11 +70,20 @@
 			path = preview;
 			sourceTree = "<group>";
 		};
+		9E6F7E632D9B7413009F24FC /* Stack Task */ = {
+			isa = PBXGroup;
+			children = (
+				9E6F7E642D9B743B009F24FC /* BOJ_1267.swift */,
+			);
+			path = "Stack Task";
+			sourceTree = "<group>";
+		};
 		9EA977EA2D891B64008B3AFE = {
 			isa = PBXGroup;
 			children = (
 				9E6F7CD32D96B8CA009F24FC /* preview */,
 				9E6F7CD12D96B8AE009F24FC /* List Task */,
+				9E6F7E632D9B7413009F24FC /* Stack Task */,
 				9EA977F42D891B64008B3AFE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -149,6 +160,7 @@
 				9E6F7CD62D96B8F9009F24FC /* BOJ3273.swift in Sources */,
 				9E6F7CD82D96BA68009F24FC /* BOJ10808.swift in Sources */,
 				9E6F7CD42D96B8CA009F24FC /* main.swift in Sources */,
+				9E6F7E652D9B743B009F24FC /* BOJ_1267.swift in Sources */,
 				9E6F7CDC2D96BF61009F24FC /* BOJ1158.swift in Sources */,
 				9E6F7CDA2D96BBA5009F24FC /* BOJ10807.swift in Sources */,
 				9E6F7CDE2D96BF67009F24FC /* BOJ1406.swift in Sources */,
