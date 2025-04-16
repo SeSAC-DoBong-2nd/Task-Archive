@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Money: Hashable, Identifiable {
-    
     enum Category: String {
         case study = "자기계발"
         case food = "식비"
@@ -48,83 +47,91 @@ struct Money: Hashable, Identifiable {
 }
 
 struct SpendingHistoryView: View {
+    
     @State private var dummy = Money.mockData
+
     var body: some View {
-        VStack {
-            List {
-                ForEach(dummy, id: \.id) { item in
-                    NavigationLink {
-                        WalletItemDetailView(item: item)
-                            .padding(.horizontal, 40)
-                            .padding(.vertical, 200)
-                    } label: {
-                        WalletItem(item: item)
-                    }
+        List {
+            ForEach(dummy) { item in
+                NavigationLink {
+                    HistoryDetailView(item: item)
+                } label: {
+                    HistoryItemView(item: item)
                 }
             }
         }
-        .navigationTitle("Sean's Wallet")
+        .listStyle(.plain)
+        .navigationTitle("SpendingHistory")
         .navigationBarTitleDisplayMode(.large)
     }
+    
 }
 
-struct WalletItemDetailView: View {
+
+struct HistoryDetailView: View {
+    
     let item: Money
+
     var body: some View {
-        VStack(alignment: .trailing) {
-            HStack(alignment: .bottom) {
+        ZStack {
+            VStack(spacing: 15) {
+                Image(systemName: "star")
+                    .font(.system(size: 40, weight: .light))
+                    .foregroundStyle(.blue)
+                    .padding(.bottom, 10)
+
                 Text(item.product)
-                    .font(.title)
-                    .bold()
-                Spacer()
-                Text("\(item.category)")
-                    .foregroundStyle(.gray)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+
+                Text(item.category.rawValue)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom, 10)
                 
+                 Divider()
+                     .frame(width: 100)
+
+                Text(item.amountFormat)
+                    .font(.title)
+                    .fontWeight(.semibold)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal)
-            
-            Divider()
-                .background(Color(uiColor: .label))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, -10)
-            
-            Spacer()
-            Text(item.amountFormat)
-                .foregroundStyle(Color(uiColor: .label))
-                .padding()
-            
+            .padding(30)
+            .background(.regularMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 25))
+            .frame(maxWidth: 280)
         }
-        .frame(maxHeight: .infinity)
-        .padding()
-        .overlay {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color(uiColor: .label), lineWidth: 2)
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+    
 }
 
-struct WalletItem: View {
+
+struct HistoryItemView: View {
+    
     let item: Money
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(item.product)
                     .font(.headline)
-                Text("\(item.category)")
+                Text(item.category.rawValue)
                     .font(.callout)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.secondary)
             }
             Spacer()
             Text(item.amountFormat)
+                .font(.subheadline)
+                .fontWeight(.medium)
         }
-        .listRowSeparator(.hidden)
+        .padding(.vertical, 4)
     }
     
-    init(item: Money) {
-        self.item = item
-    }
 }
+
+
 
 #Preview {
     NavigationView {

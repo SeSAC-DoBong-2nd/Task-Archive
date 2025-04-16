@@ -8,10 +8,30 @@
 import SwiftUI
 
 struct TabBarView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = .black
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
+    
+    var body: some View {
+        TabView {
+            Tab("홈", systemImage: "house.fill") {
+                SecondView()
+            }
+            Tab("혜택", systemImage: "diamond.fill") {
+                FirstView()
+            }
+        }
+        .background(.black)
+        .tint(.white)
+    }
+    
 }
+
 
 #Preview {
     TabBarView()
