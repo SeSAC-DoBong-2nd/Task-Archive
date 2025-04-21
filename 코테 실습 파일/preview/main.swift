@@ -7,4 +7,4 @@
 import Foundation
 
 
-책페이지()
+boj_1475()
