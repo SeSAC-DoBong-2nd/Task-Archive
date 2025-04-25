@@ -20,7 +20,7 @@ struct DummyLiterals {
         SearchResultAppInfo(
             iconName: "message.fill", // 카카오톡 아이콘 대체
             name: "카카오톡",
-            subtitle: "소셜 네트워킹, 생산성",
+            subtitle: "소셜 네트워킹, 생산ㅁㄴ엄ㄴ오마노라ㅗㅁㄴㄹ마노러ㅏㅗㅁ나ㅓ로ㅓㅁㄴ롸몬러마노란머ㅗ라ㅓ몬라ㅓㅗ만러ㅗ마러ㅗ마ㅓ롬나ㅓ롬너ㅏ롬나ㅓㅗ성",
             developer: "Kakao Corp.",
             category: "Social Networking",
             requiredOS: "iOS 16.0",
@@ -59,7 +59,7 @@ struct DummyLiterals {
         ),
         SearchResultAppInfo(
             iconName: "car.fill", // 카카오내비 아이콘 대체
-            name: "카카오내비 - 주차, 발렛, 전기차충전,..",
+            name: "카카오내비 - 주차, 발렛, 전기차충전,ㅇㄴㅁ암남ㄴㅇㅁㄴㅇ",
             subtitle: "내비게이션",
             developer: "Kakao Mobility Corp.",
             category: "Navigation",
