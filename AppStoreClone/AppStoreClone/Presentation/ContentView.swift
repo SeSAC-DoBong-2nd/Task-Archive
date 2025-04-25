@@ -17,7 +17,7 @@ struct ContentView: View {
                 .tabItem { Label("투데이", systemImage: ImageLiterals.today) }
                 .tag(0)
 
-            SearchDetailView()
+            AppDetailView()
                 .tabItem { Label("게임", systemImage: ImageLiterals.games) }
                 .tag(1)
 
@@ -60,15 +60,6 @@ struct ArcadeView: View {
         NavigationView {
             Text("Arcade 화면")
                 .navigationTitle("Arcade")
-        }
-    }
-}
-
-struct SearchView: View {
-    var body: some View {
-        NavigationView {
-            Text("검색 화면")
-                .navigationTitle("검색")
         }
     }
 }

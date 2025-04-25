@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppArchiveView: View {
 
-    @State private var appData = DummyLiterals.dummyAppArchiveData
+    @State private var appData = DummyLiterals.appArchiveData
     @State private var searchText = "" // 검색 텍스트 상태
 
     var body: some View {

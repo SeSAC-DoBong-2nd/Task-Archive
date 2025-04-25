@@ -43,6 +43,6 @@ struct AppArchiveRowView: View {
 
 
 #Preview {
-    AppArchiveRowView(model: DummyLiterals.dummyAppArchiveData[0])
+    AppArchiveRowView(model: DummyLiterals.appArchiveData[0])
         .padding()
 }

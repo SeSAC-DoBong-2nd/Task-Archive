@@ -1,5 +1,5 @@
 //
-//  SearchDetailView.swift
+//  AppDetailView.swift
 //  AppStoreClone
 //
 //  Created by 박신영 on 4/25/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchDetailModel: Identifiable {
+struct AppDetailModel: Identifiable {
     let id = UUID()
     let appInfo: AppInfo // 기본 정보
     let metadata: [MetadataItem] // 메타데이터 리스트
@@ -17,9 +17,9 @@ struct SearchDetailModel: Identifiable {
     let screenshots: [String] // 스크린샷 이미지 이름 배열
 }
 
-struct SearchDetailView: View {
+struct AppDetailView: View {
     
-    @State private var detailData = DummyLiterals.dummyAppDetailData
+    @State private var detailData = DummyLiterals.appDetailData
     /// 스크린샷 뷰어 표시 상태
     @State private var showingScreenshotViewer = false
     /// 선택된 스크린샷 인덱스
@@ -93,6 +93,6 @@ struct SearchDetailView: View {
 
 #Preview {
     NavigationView {
-        SearchDetailView()
+        AppDetailView()
     }
 }
