@@ -1,5 +1,5 @@
 //
-//  SearchDetailComponents.swift
+//  AppDetailComponents.swift
 //  AppStoreClone
 //
 //  Created by 박신영 on 4/25/25.
