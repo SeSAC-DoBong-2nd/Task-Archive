@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E1EFD452DBB4ED60021DE73 /* AppStoreCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD412DBB4ED60021DE73 /* AppStoreCloneApp.swift */; };
-		9E1EFD462DBB4ED60021DE73 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD432DBB4ED60021DE73 /* TabView.swift */; };
+		9E1EFD462DBB4ED60021DE73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD432DBB4ED60021DE73 /* ContentView.swift */; };
 		9E1EFD472DBB4ED60021DE73 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1EFD3F2DBB4ED60021DE73 /* Preview Assets.xcassets */; };
 		9E1EFD482DBB4ED60021DE73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1EFD422DBB4ED60021DE73 /* Assets.xcassets */; };
 		9E1EFD512DBB4F9E0021DE73 /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD502DBB4F9E0021DE73 /* ImageLiterals.swift */; };
@@ -22,7 +22,7 @@
 		9E1EFD3F2DBB4ED60021DE73 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9E1EFD412DBB4ED60021DE73 /* AppStoreCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreCloneApp.swift; sourceTree = "<group>"; };
 		9E1EFD422DBB4ED60021DE73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9E1EFD432DBB4ED60021DE73 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		9E1EFD432DBB4ED60021DE73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9E1EFD502DBB4F9E0021DE73 /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		9E1EFD552DBB50A40021DE73 /* AppArchiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppArchiveModel.swift; sourceTree = "<group>"; };
 		9E1EFD582DBB510B0021DE73 /* AppArchiveComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppArchiveComponents.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1EFD572DBB50D40021DE73 /* AppArchive */,
-				9E1EFD432DBB4ED60021DE73 /* TabView.swift */,
+				9E1EFD432DBB4ED60021DE73 /* ContentView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -236,7 +236,7 @@
 				9E1EFD592DBB510B0021DE73 /* AppArchiveComponents.swift in Sources */,
 				9E1EFD452DBB4ED60021DE73 /* AppStoreCloneApp.swift in Sources */,
 				9E1EFD512DBB4F9E0021DE73 /* ImageLiterals.swift in Sources */,
-				9E1EFD462DBB4ED60021DE73 /* TabView.swift in Sources */,
+				9E1EFD462DBB4ED60021DE73 /* ContentView.swift in Sources */,
 				9E1EFD5B2DBB52C30021DE73 /* AppArchiveView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabView: View {
+struct ContentView: View {
     // 현재 선택된 탭을 추적하는 상태 변수 (기본값: 0 - 첫 번째 탭)
     @State private var selectedTab: Int = 0
 
@@ -74,5 +74,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    TabView()
+    ContentView()
 }
