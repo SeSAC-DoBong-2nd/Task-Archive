@@ -12,9 +12,13 @@
 		9E1EFD472DBB4ED60021DE73 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1EFD3F2DBB4ED60021DE73 /* Preview Assets.xcassets */; };
 		9E1EFD482DBB4ED60021DE73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1EFD422DBB4ED60021DE73 /* Assets.xcassets */; };
 		9E1EFD512DBB4F9E0021DE73 /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD502DBB4F9E0021DE73 /* ImageLiterals.swift */; };
-		9E1EFD562DBB50A40021DE73 /* AppArchiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD552DBB50A40021DE73 /* AppArchiveModel.swift */; };
+		9E1EFD562DBB50A40021DE73 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD552DBB50A40021DE73 /* AppInfo.swift */; };
 		9E1EFD592DBB510B0021DE73 /* AppArchiveComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD582DBB510B0021DE73 /* AppArchiveComponents.swift */; };
 		9E1EFD5B2DBB52C30021DE73 /* AppArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD5A2DBB52C30021DE73 /* AppArchiveView.swift */; };
+		9E1EFD5E2DBB5F590021DE73 /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD5D2DBB5F590021DE73 /* SearchDetailView.swift */; };
+		9E1EFD602DBB699B0021DE73 /* SearchDetailComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD5F2DBB699B0021DE73 /* SearchDetailComponents.swift */; };
+		9E1EFD642DBB6FED0021DE73 /* DummyLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD632DBB6FED0021DE73 /* DummyLiterals.swift */; };
+		9E1EFD6C2DBB72930021DE73 /* ASCDownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1EFD6B2DBB72930021DE73 /* ASCDownloadButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +28,13 @@
 		9E1EFD422DBB4ED60021DE73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E1EFD432DBB4ED60021DE73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9E1EFD502DBB4F9E0021DE73 /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
-		9E1EFD552DBB50A40021DE73 /* AppArchiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppArchiveModel.swift; sourceTree = "<group>"; };
+		9E1EFD552DBB50A40021DE73 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		9E1EFD582DBB510B0021DE73 /* AppArchiveComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppArchiveComponents.swift; sourceTree = "<group>"; };
 		9E1EFD5A2DBB52C30021DE73 /* AppArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppArchiveView.swift; sourceTree = "<group>"; };
+		9E1EFD5D2DBB5F590021DE73 /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
+		9E1EFD5F2DBB699B0021DE73 /* SearchDetailComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailComponents.swift; sourceTree = "<group>"; };
+		9E1EFD632DBB6FED0021DE73 /* DummyLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyLiterals.swift; sourceTree = "<group>"; };
+		9E1EFD6B2DBB72930021DE73 /* ASCDownloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCDownloadButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +96,8 @@
 		9E1EFD4A2DBB4F240021DE73 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9E1EFD6A2DBB727F0021DE73 /* UIComponent */,
+				9E1EFD5C2DBB5F4E0021DE73 /* SearchDetailView */,
 				9E1EFD572DBB50D40021DE73 /* AppArchive */,
 				9E1EFD432DBB4ED60021DE73 /* ContentView.swift */,
 			);
@@ -115,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1EFD502DBB4F9E0021DE73 /* ImageLiterals.swift */,
+				9E1EFD632DBB6FED0021DE73 /* DummyLiterals.swift */,
 				9E1EFD4F2DBB4F850021DE73 /* Resource */,
 			);
 			path = Core;
@@ -131,7 +142,7 @@
 		9E1EFD522DBB50360021DE73 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				9E1EFD552DBB50A40021DE73 /* AppArchiveModel.swift */,
+				9E1EFD552DBB50A40021DE73 /* AppInfo.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -157,6 +168,23 @@
 				9E1EFD582DBB510B0021DE73 /* AppArchiveComponents.swift */,
 			);
 			path = AppArchive;
+			sourceTree = "<group>";
+		};
+		9E1EFD5C2DBB5F4E0021DE73 /* SearchDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				9E1EFD5F2DBB699B0021DE73 /* SearchDetailComponents.swift */,
+				9E1EFD5D2DBB5F590021DE73 /* SearchDetailView.swift */,
+			);
+			path = SearchDetailView;
+			sourceTree = "<group>";
+		};
+		9E1EFD6A2DBB727F0021DE73 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				9E1EFD6B2DBB72930021DE73 /* ASCDownloadButton.swift */,
+			);
+			path = UIComponent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,11 +260,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E1EFD562DBB50A40021DE73 /* AppArchiveModel.swift in Sources */,
+				9E1EFD562DBB50A40021DE73 /* AppInfo.swift in Sources */,
+				9E1EFD5E2DBB5F590021DE73 /* SearchDetailView.swift in Sources */,
 				9E1EFD592DBB510B0021DE73 /* AppArchiveComponents.swift in Sources */,
+				9E1EFD642DBB6FED0021DE73 /* DummyLiterals.swift in Sources */,
+				9E1EFD6C2DBB72930021DE73 /* ASCDownloadButton.swift in Sources */,
 				9E1EFD452DBB4ED60021DE73 /* AppStoreCloneApp.swift in Sources */,
 				9E1EFD512DBB4F9E0021DE73 /* ImageLiterals.swift in Sources */,
 				9E1EFD462DBB4ED60021DE73 /* ContentView.swift in Sources */,
+				9E1EFD602DBB699B0021DE73 /* SearchDetailComponents.swift in Sources */,
 				9E1EFD5B2DBB52C30021DE73 /* AppArchiveView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +412,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -415,7 +447,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

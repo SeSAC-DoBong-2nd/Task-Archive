@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppArchiveView: View {
 
-    @State private var appData = DummyAppData.apps
+    @State private var appData = DummyLiterals.dummyAppArchiveData
     @State private var searchText = "" // 검색 텍스트 상태
 
     var body: some View {
@@ -23,7 +23,7 @@ struct AppArchiveView: View {
                 }
                 .listStyle(.plain)
                 .navigationTitle("앱")
-                .navigationBarTitleDisplayMode(.large) // 또는 .inline
+                .navigationBarTitleDisplayMode(.large)
                 .searchable(text: $searchText, prompt: "게임, 앱, 스토리 등")
             }
         }
