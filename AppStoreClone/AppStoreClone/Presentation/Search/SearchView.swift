@@ -215,6 +215,7 @@ struct SearchView: View {
         searchResults = [] // 오류 시 결과 없음
         errorMessage = message // 에러 메시지 설정
     }
+    
 }
 
 #Preview {
