@@ -15,7 +15,7 @@ struct AppArchiveView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 List {
-                    ForEach(installedApps, id: \.appID) { app in
+                    ForEach(filteredApps, id: \.appID) { app in
                         AppArchiveRowView(model: app)
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
@@ -24,7 +24,7 @@ struct AppArchiveView: View {
                                     Text("삭제")
                                 }
                             }
-                            .listRowSeparator(.hidden, edges: determineSeparatorEdges(for: installedApps.firstIndex(where: { $0.appID == app.appID }) ?? 0, total: installedApps.count))
+                            .listRowSeparator(.hidden, edges: determineSeparatorEdges(for: filteredApps.firstIndex(where: { $0.appID == app.appID }) ?? 0, total: filteredApps.count))
                     }
                 }
                 .listStyle(.plain)
@@ -38,6 +38,14 @@ struct AppArchiveView: View {
     // 설치된 앱만 추출
     private var installedApps: [AppDownloadInfo] {
         downloadManager.userInstalledApps.compactMap { downloadManager.appDownloadStates[$0] }
+    }
+
+    // 검색어로 필터링된 앱 목록
+    private var filteredApps: [AppDownloadInfo] {
+        guard !searchText.isEmpty else { return installedApps }
+        return installedApps.filter {
+            $0.appName.localizedCaseInsensitiveContains(searchText)
+        }
     }
 
     // 구분선을 숨길 엣지 결정 함수
