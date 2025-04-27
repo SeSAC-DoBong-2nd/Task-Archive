@@ -286,9 +286,19 @@ class AppDownloadManager: ObservableObject {
             userInstalledApps = Set(installedApps)
         }
         
-        // 앱이 강제 종료되었던 경우 다운로드 중이던 앱은 재개 상태로 전환
-        for (appID, info) in appDownloadStates where info.buttonState == .downloading {
-            appDownloadStates[appID]?.buttonState = .resume
+        // 앱이 강제 종료된 경우(즉, 마지막 업데이트 시간이 오래 전이면) 다운로드 중이던 앱을 재개 상태로 전환
+        let lastUpdateTime = UserDefaults.standard.object(forKey: "lastUpdateTime") as? Date
+        let currentTime = Date()
+        if let lastUpdateTime = lastUpdateTime, currentTime.timeIntervalSince(lastUpdateTime) > 10 { // 10초 이상 차이 나면 강제종료로 간주
+            for (appID, info) in appDownloadStates where info.buttonState == .downloading {
+                if info.remainingTime > 0 {
+                    var updated = info
+                    updated.buttonState = .resume
+                    appDownloadStates[appID] = updated
+                } else {
+                    completeDownload(appID: appID)
+                }
+            }
         }
     }
 }
