@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AppDetailModel {
+    let trackId: Int
     let trackName: String
     let description: String
     let artworkUrl512: URL
@@ -87,6 +88,7 @@ struct AppDetailContentView: View {
             VStack(alignment: .leading, spacing: 20) {
                 //MARK: 1. 앱 헤더
                 AppHeaderView(
+                    trackId: detailData.trackId,
                     iconURL: detailData.artworkUrl512,
                     appName: detailData.trackName,
                     buttonState: .get
@@ -141,6 +143,10 @@ struct AppDetailContentView: View {
         }
         .sheet(isPresented: $showingScreenshotViewer) {
             ScreenshotView(
+                trackId: detailData.trackId,
+                iconURL: detailData.artworkUrl512,
+                appName: detailData.trackName,
+                buttonState: .get,
                 screenshots: detailData.screenshotUrls,
                 selectedIndex: $selectedScreenshotIndex
             )

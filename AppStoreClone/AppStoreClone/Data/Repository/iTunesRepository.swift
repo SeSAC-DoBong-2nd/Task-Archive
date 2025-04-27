@@ -61,7 +61,9 @@ final class AppInfoMapper {
 final class AppDetailMapper {
     
     static func mapToAppDetailModel(_ dto: AppDetailResultDTO) -> AppDetailModel {
+        
         return AppDetailModel(
+            trackId: dto.trackId,
             trackName: dto.trackName,
             description: dto.description ?? "",
             artworkUrl512: URL(string: dto.artworkUrl512 ?? "") ?? URL(string: "")!,
@@ -90,7 +92,7 @@ final class AppDetailMapper {
         // 한국 시간대 설정 (KST, UTC+9)
         let kstTimeZone = TimeZone(identifier: "Asia/Seoul")!
         let calendar = Calendar.current
-        var kstComponents = calendar.dateComponents(in: kstTimeZone, from: date)
+        let kstComponents = calendar.dateComponents(in: kstTimeZone, from: date)
         
         // 입력된 날짜를 KST로 변환
         guard let kstDate = calendar.date(from: kstComponents) else {

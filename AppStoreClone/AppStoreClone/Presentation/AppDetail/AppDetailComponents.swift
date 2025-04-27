@@ -11,9 +11,11 @@ import SwiftUI
 //MARK: - 앱 헤더
 
 struct AppHeaderView: View {
+    let trackId: Int
     let iconURL: URL
     let appName: String
     var buttonState: ASCDownloadButtonState
+    @EnvironmentObject private var downloadManager: AppDownloadManager
 
     var body: some View {
         HStack(spacing: 15) {
@@ -32,7 +34,12 @@ struct AppHeaderView: View {
                     .font(.title2).bold()
                 Spacer()
 
-                ASCDownloadButton(state: buttonState)
+                ASCDownloadButton(
+                    appID: String(trackId),
+                    appName: appName,
+                    appIconURL: iconURL,
+                    initialState: buttonState
+                )
             }
 
             
@@ -153,6 +160,12 @@ struct ScreenshotPreviewImage: View {
 
 struct ScreenshotView: View {
 
+    let trackId: Int
+    let iconURL: URL
+    let appName: String
+    var buttonState: ASCDownloadButtonState
+    @EnvironmentObject private var downloadManager: AppDownloadManager
+    
     let screenshots: [URL]
     @Binding var selectedIndex: Int
     @Environment(\.dismiss) var dismiss
@@ -183,7 +196,12 @@ struct ScreenshotView: View {
                     Button {
                         print("App Action Button Tapped!")
                     } label: {
-                        ASCDownloadButton(state: .get)
+                        ASCDownloadButton(
+                            appID: String(trackId),
+                            appName: appName,
+                            appIconURL: iconURL,
+                            initialState: buttonState
+                        )
                     }
                 }
             }

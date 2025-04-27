@@ -38,7 +38,7 @@ struct ContentView: View {
 
 struct TodayView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Text("투데이 화면")
                 .navigationTitle("투데이")
         }
@@ -47,17 +47,16 @@ struct TodayView: View {
 
 struct GamesView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Text("게임 화면")
                 .navigationTitle("게임")
         }
     }
 }
 
-
 struct ArcadeView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Text("Arcade 화면")
                 .navigationTitle("Arcade")
         }

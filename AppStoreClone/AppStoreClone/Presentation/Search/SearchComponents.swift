@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchResultRowView: View {
     
     let appInfo: SearchResultModel
+    @EnvironmentObject private var downloadManager: AppDownloadManager
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -38,8 +39,15 @@ struct SearchResultRowView: View {
                 
                 Spacer()
                 
-                ASCDownloadButton(state: appInfo.buttonState) // 상태 버튼
-                    .padding(.top, 5)
+                // 새로운 다운로드 버튼으로 교체
+                // 앱 ID를 고유 식별자로 사용
+                ASCDownloadButton(
+                    appID: String(appInfo.trackId),
+                    appName: appInfo.name,
+                    appIconURL: appInfo.iconName,
+                    initialState: appInfo.buttonState
+                )
+                .padding(.top, 5)
             }
             
             HStack {
@@ -68,13 +76,11 @@ struct SearchResultRowView: View {
             //MARK: 스크린샷 스크롤 파트
             if let urls = appInfo.screenshotURLs, !urls.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
+                    HStack() {
                         ForEach(urls, id: \.absoluteString) { url in
                             asyncImage(url: url)
                                 .scaledToFill()
                                 .frame(width: 120, height: 210)
-                                .border(Color(uiColor: .systemGray6), width: 1)
-                                .clipped()
                                 .clipShape(RoundedRectangle(cornerRadius: 18))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 18)

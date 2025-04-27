@@ -9,12 +9,13 @@ import SwiftUI
 
 struct AppArchiveRowView: View {
     
-    let model: AppInfoModel
+    let model: AppDownloadInfo
+    @EnvironmentObject private var downloadManager: AppDownloadManager
 
     var body: some View {
         HStack(spacing: 15) {
             // 앱 아이콘
-            asyncImage(url: model.iconName)
+            asyncImage(url: model.appIconURL)
                 .scaledToFit()
                 .frame(width: 60, height: 60)
                 .background(Color.gray.opacity(0.2))
@@ -26,9 +27,9 @@ struct AppArchiveRowView: View {
 
             // 앱 이름 및 날짜
             VStack(alignment: .leading, spacing: 4) {
-                Text(model.name)
+                Text(model.appName)
                     .font(.headline)
-                Text(model.date ?? "")
+                Text("날짜 필요")
                     .font(.caption)
                     .foregroundColor(.gray)
             }
@@ -36,7 +37,12 @@ struct AppArchiveRowView: View {
             Spacer() // 버튼을 오른쪽으로 밀기
 
             // 상태별 버튼
-            ASCDownloadButton(state: model.buttonState)
+            ASCDownloadButton(
+                appID: model.appID,
+                appName: model.appName,
+                appIconURL: model.appIconURL,
+                initialState: model.buttonState
+            )
         }
         .padding(.vertical, 8) // 행 상하 여백
     }

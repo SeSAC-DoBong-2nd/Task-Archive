@@ -12,6 +12,7 @@ struct AppStoreCloneApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(AppDownloadManager.shared)
         }
     }
 }

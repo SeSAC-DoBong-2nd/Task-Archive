@@ -15,6 +15,7 @@ struct SearchView: View {
     @State private var hasSearched = false
     // 에러 메시지 표시 상태 (선택 사항)
     @State private var errorMessage: String? = nil
+    @State private var path: [Int] = [] // navigation path
     let repo: ITunesRepository
     
     init(repo: ITunesRepository) {
@@ -22,7 +23,7 @@ struct SearchView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             ZStack {
                 // 검색 결과 리스트 또는 메시지
                 List {
@@ -39,7 +40,9 @@ struct SearchView: View {
                                 .padding(.top, 50)
                         } else {
                             ForEach(searchResults) { result in
-                                NavigationLink(destination: AppDetailView(trackId: result.trackId, repo: repo)) {
+                                Button {
+                                    path.append(result.trackId)
+                                } label: {
                                     SearchResultRowView(appInfo: result)
                                 }
                             }
@@ -74,6 +77,9 @@ struct SearchView: View {
                 if newValue.isEmpty && hasSearched { // 검색한 적이 있을 때만 초기화
                     clearSearch()
                 }
+            }
+            .navigationDestination(for: Int.self) { trackId in
+                AppDetailView(trackId: trackId, repo: repo)
             }
         }
     }
@@ -123,7 +129,3 @@ struct SearchView: View {
     }
     
 }
-
-//#Preview {
-//    SearchView()
-//}
