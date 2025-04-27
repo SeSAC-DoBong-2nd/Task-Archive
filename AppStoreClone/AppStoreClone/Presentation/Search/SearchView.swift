@@ -66,6 +66,9 @@ struct SearchView: View {
                 }
                 .listStyle(.plain)
                 .navigationTitle("검색")
+                .refreshable {
+                    await performSearch()
+                }
                 
                 // 로딩 인디케이터
                 if isLoading {
