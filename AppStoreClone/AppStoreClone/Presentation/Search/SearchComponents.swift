@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchResultRowView: View {
     
-    let appInfo: SearchResultAppInfo
+    let appInfo: SearchResultModel
     
     var body: some View {
         VStack(alignment: .leading) {

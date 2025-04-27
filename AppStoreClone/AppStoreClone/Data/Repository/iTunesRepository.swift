@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ITunesRepository {
-    func searchApps(query: String) async throws -> [SearchResultAppInfo]
+    func searchApps(query: String) async throws -> [SearchResultModel]
 }
 
 final class ITunesRepositoryImpl: ITunesRepository {
@@ -19,7 +19,7 @@ final class ITunesRepositoryImpl: ITunesRepository {
         self.networkService = networkService
     }
     
-    func searchApps(query: String) async throws -> [SearchResultAppInfo] {
+    func searchApps(query: String) async throws -> [SearchResultModel] {
         let response = try await networkService.callRequest(api: iTunesRouter.search(term: query), type: ITunesSearchResponse.self)
         
         return AppInfoMapper.mapToSearchResultAppInfos(response)
@@ -29,13 +29,13 @@ final class ITunesRepositoryImpl: ITunesRepository {
 
 final class AppInfoMapper {
     
-    static func mapToSearchResultAppInfos(_ response: ITunesSearchResponse) -> [SearchResultAppInfo] {
+    static func mapToSearchResultAppInfos(_ response: ITunesSearchResponse) -> [SearchResultModel] {
         return response.results.map { dto in
             let buttonState = ASCDownloadButtonState.get
             let screenshotURLs: [URL]? = dto.screenshotUrls.compactMap { URL(string: $0) }
             let iconURL: URL? = URL(string: dto.artworkUrl100)
             
-            return SearchResultAppInfo(
+            return SearchResultModel(
                 iconName: iconURL,
                 name: dto.trackName,
                 subtitle: dto.primaryGenreName,

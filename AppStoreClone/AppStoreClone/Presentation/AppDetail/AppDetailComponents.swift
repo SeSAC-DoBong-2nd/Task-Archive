@@ -11,7 +11,7 @@ import SwiftUI
 //MARK: - 앱 헤더
 
 struct AppHeaderView: View {
-    let appInfo: AppInfo
+    let appInfo: AppInfoModel
 
     var body: some View {
         HStack(spacing: 15) {
@@ -151,7 +151,7 @@ struct ScreenshotPreviewImage: View {
 
 struct ScreenshotView: View {
 
-    let appInfo: AppInfo
+    let appInfo: AppInfoModel
     let screenshots: [String]
     @Binding var selectedIndex: Int
     @Environment(\.dismiss) var dismiss

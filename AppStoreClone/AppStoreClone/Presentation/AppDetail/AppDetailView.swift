@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppDetailModel: Identifiable {
     let id = UUID()
-    let appInfo: AppInfo // 기본 정보
+    let appInfo: AppInfoModel // 기본 정보
     let metadata: [MetadataItem] // 메타데이터 리스트
     let version: String
     let updateDate: String // 예: "3일 전"

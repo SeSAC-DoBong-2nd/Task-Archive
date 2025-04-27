@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppArchiveRowView: View {
     
-    let model: AppInfo
+    let model: AppInfoModel
 
     var body: some View {
         HStack(spacing: 15) {

@@ -11,7 +11,7 @@ struct SearchView: View {
     
     @State private var searchText = ""
     @State private var isLoading = false
-    @State private var searchResults: [SearchResultAppInfo] = []
+    @State private var searchResults: [SearchResultModel] = []
     @State private var hasSearched = false
     // 에러 메시지 표시 상태 (선택 사항)
     @State private var errorMessage: String? = nil
