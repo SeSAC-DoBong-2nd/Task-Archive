@@ -11,28 +11,31 @@ import SwiftUI
 //MARK: - 앱 헤더
 
 struct AppHeaderView: View {
-    let appInfo: AppInfoModel
+    let iconURL: URL
+    let appName: String
+    var buttonState: ASCDownloadButtonState
 
     var body: some View {
         HStack(spacing: 15) {
-            Image(systemName: appInfo.iconName)
-                .resizable()
+            asyncImage(url: iconURL)
                 .scaledToFit()
-                .frame(width: 60, height: 60)
+                .frame(width: 120, height: 120)
                 .background(Color.gray.opacity(0.2))
-                .cornerRadius(12)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color(uiColor: .systemGray6), lineWidth: 1)
+                )
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(appInfo.name) // 이름
+                Text(appName) // 이름
                     .font(.title2).bold()
-                Text("Placeholder Developer")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                Spacer()
+
+                ASCDownloadButton(state: buttonState)
             }
 
-            Spacer()
-
-            ASCDownloadButton(state: appInfo.buttonState)
+            
         }
         .padding(.horizontal)
     }
@@ -46,27 +49,24 @@ struct MetadataItem: Identifiable {
     let id = UUID()
     let title: String // 예: "15.6+"
     let subtitle: String // 예: "버전"
-    let description: String? // 예: "만 4세 이상"
 }
 
 struct MetadataView: View {
-    let item: MetadataItem
+    let data: MetadataItem
 
     var body: some View {
-        VStack(spacing: 2) {
-            Text(item.subtitle)
+        VStack(spacing: 4) {
+            Text(data.subtitle)
                 .font(.caption)
                 .foregroundColor(.gray)
-            Text(item.title)
-                .font(.headline) // 필요시 .title3 등으로 조절
+            Spacer()
+            Text(data.title)
+                .font((data.subtitle == "버전" || data.subtitle == "연령") ? .title3 : .caption)
+                .foregroundColor(.gray)
                 .lineLimit(1)
-            if let description = item.description {
-                Text(description)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
         }
-        .frame(width: 80) // 각 항목 너비 고정 (조절 가능)
+        .frame(width: 100)
+        .frame(maxWidth: .infinity)
         .padding(.vertical, 5)
     }
 }
@@ -82,7 +82,7 @@ struct WhatsNewView: View {
     @State private var isExpanded: Bool = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 20) {
             HStack {
                 Text("새로운 소식")
                     .font(.title2).bold()
@@ -132,16 +132,18 @@ struct WhatsNewView: View {
 //MARK: -  미리보기
 
 struct ScreenshotPreviewImage: View {
-    let imageName: String
+    let imageName: URL?
     let action: () -> Void // 탭 액션 규정
 
     var body: some View {
-        Image(imageName)
-            .resizable()
+        asyncImage(url: imageName)
             .scaledToFill()
             .frame(width: 200, height: 400)
-            .clipped()
-            .cornerRadius(18)
+            .clipShape(RoundedRectangle(cornerRadius: 18))
+            .overlay(
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(Color(uiColor: .systemGray6), lineWidth: 1)
+            )
             .onTapGesture(perform: action) // 탭 제스처
     }
 }
@@ -151,22 +153,22 @@ struct ScreenshotPreviewImage: View {
 
 struct ScreenshotView: View {
 
-    let appInfo: AppInfoModel
-    let screenshots: [String]
+    let screenshots: [URL]
     @Binding var selectedIndex: Int
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
             TabView(selection: $selectedIndex) {
-                ForEach(screenshots.indices, id: \.self) { index in
-                    Image(screenshots[index])
-                        .resizable()
+                ForEach(screenshots, id: \.self) { url in
+                    asyncImage(url: url)
                         .scaledToFit()
-                        .tag(index)
-                        .clipped()
-                        .cornerRadius(18)
-                        .padding(.all, 40)
+                        .clipShape(RoundedRectangle(cornerRadius: 18))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 18)
+                                .stroke(Color(uiColor: .systemGray6), lineWidth: 1)
+                        )
+                        .padding(.all, 20)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -181,7 +183,7 @@ struct ScreenshotView: View {
                     Button {
                         print("App Action Button Tapped!")
                     } label: {
-                        ASCDownloadButton(state: appInfo.buttonState)
+                        ASCDownloadButton(state: .get)
                     }
                 }
             }

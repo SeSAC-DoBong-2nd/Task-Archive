@@ -53,7 +53,11 @@ struct ASCDownloadButton: View {
                 .frame(minWidth: 60) // 최소 너비
                 .background(state.buttonBackgroundColor)
                 .foregroundColor(state.buttonForegroundColor)
-                .cornerRadius(15)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color(uiColor: .systemGray6), lineWidth: 1)
+                )
         }
         .buttonStyle(.plain)
     }

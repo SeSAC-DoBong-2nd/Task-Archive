@@ -9,17 +9,17 @@ import SwiftUI
 
 struct AppArchiveView: View {
 
-    @State private var appData = DummyLiterals.appArchiveData
+//    @State private var appData = DummyLiterals.appArchiveData
     @State private var searchText = "" // 검색 텍스트 상태
 
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 List {
-                    ForEach(Array(appData.enumerated()), id: \.element.id) { index, app in
-                        AppArchiveRowView(model: app)
-                            .listRowSeparator(.hidden, edges: determineSeparatorEdges(for: index, total: appData.count))
-                    }
+//                    ForEach(Array(appData.enumerated()), id: \.element.id) { index, app in
+//                        AppArchiveRowView(model: app)
+//                            .listRowSeparator(.hidden, edges: determineSeparatorEdges(for: index, total: appData.count))
+//                    }
                 }
                 .listStyle(.plain)
                 .navigationTitle("앱")

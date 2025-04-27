@@ -39,7 +39,9 @@ struct SearchView: View {
                                 .padding(.top, 50)
                         } else {
                             ForEach(searchResults) { result in
-                                SearchResultRowView(appInfo: result)
+                                NavigationLink(destination: AppDetailView(trackId: result.trackId, repo: repo)) {
+                                    SearchResultRowView(appInfo: result)
+                                }
                             }
                         }
                     } else if !isLoading && !hasSearched {

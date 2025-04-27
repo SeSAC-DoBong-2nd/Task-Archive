@@ -5,6 +5,8 @@
 //  Created by 박신영 on 4/27/25.
 //
 
+import Foundation
+
 // iTunes API 전체 응답 구조체
 struct ITunesSearchResponse: Decodable {
     let resultCount: Int
@@ -25,3 +27,4 @@ struct AppResultDTO: Codable {
     let description: String?     // 앱 설명 (필요시 사용)
     let releaseNotes: String?    // 릴리즈 노트 (필요시 사용)
 }
+

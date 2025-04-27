@@ -17,7 +17,7 @@ struct ContentView: View {
                 .tabItem { Label("투데이", systemImage: ImageLiterals.today) }
                 .tag(0)
 
-            AppDetailView()
+            ArcadeView()
                 .tabItem { Label("게임", systemImage: ImageLiterals.games) }
                 .tag(1)
 

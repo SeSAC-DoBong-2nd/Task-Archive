@@ -9,6 +9,7 @@ import Foundation
 
 enum iTunesRouter: APIRouter {
     case search(term: String)
+    case lookup(trackId: Int)
 }
 
 extension iTunesRouter {
@@ -21,6 +22,8 @@ extension iTunesRouter {
         switch self {
         case .search:
             return "/search"
+        case .lookup:
+            return "/lookup"
         }
     }
     
@@ -37,6 +40,11 @@ extension iTunesRouter {
                 "media": "software",
                 "entity": "software",
                 "limit": "15"
+            ]
+        case .lookup(let trackId):
+            return [
+                "id": trackId,
+                "country": "kr"
             ]
         }
     }

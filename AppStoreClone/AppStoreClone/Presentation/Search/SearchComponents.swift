@@ -19,7 +19,11 @@ struct SearchResultRowView: View {
                     .scaledToFit()
                     .frame(width: 55, height: 55)
                     .background(Color.gray.opacity(0.1))
-                    .cornerRadius(12)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color(uiColor: .systemGray6), lineWidth: 1)
+                    )
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(appInfo.name) // 이름
@@ -69,6 +73,13 @@ struct SearchResultRowView: View {
                             asyncImage(url: url)
                                 .scaledToFill()
                                 .frame(width: 120, height: 210)
+                                .border(Color(uiColor: .systemGray6), width: 1)
+                                .clipped()
+                                .clipShape(RoundedRectangle(cornerRadius: 18))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 18)
+                                        .stroke(Color(uiColor: .systemGray6), lineWidth: 1)
+                                )
                         }
                     }
                 }

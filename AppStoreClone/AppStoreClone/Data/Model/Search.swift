@@ -10,6 +10,7 @@ import Foundation
 /// 검색 결과 앱 정보 구조체
 struct SearchResultModel: Identifiable {
     let id = UUID()
+    let trackId: Int
     let iconName: URL?
     let name: String
     let subtitle: String
