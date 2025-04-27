@@ -21,6 +21,7 @@ struct SearchView: View {
     @State private var canLoadMore: Bool = true
     let pageSize = 15
     let repo: ITunesRepository
+    @State private var refreshBlocked: Bool = false
     
     init(repo: ITunesRepository) {
         self.repo = repo
@@ -67,7 +68,12 @@ struct SearchView: View {
                 .listStyle(.plain)
                 .navigationTitle("검색")
                 .refreshable {
+                    guard !refreshBlocked else { return }
+                    refreshBlocked = true
                     await performSearch()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        refreshBlocked = false
+                    }
                 }
                 
                 // 로딩 인디케이터
