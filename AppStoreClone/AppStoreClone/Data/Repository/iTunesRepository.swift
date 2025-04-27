@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ITunesRepository {
-    func searchApps(query: String) async throws -> [SearchResultModel]
+    func searchApps(query: String, offset: Int) async throws -> [SearchResultModel]
     func lookup(trackId: Int) async throws -> AppDetailModel?
 }
 
@@ -20,8 +20,8 @@ final class ITunesRepositoryImpl: ITunesRepository {
         self.networkService = networkService
     }
     
-    func searchApps(query: String) async throws -> [SearchResultModel] {
-        let response = try await networkService.callRequest(api: iTunesRouter.search(term: query), type: ITunesSearchResponse.self)
+    func searchApps(query: String, offset: Int) async throws -> [SearchResultModel] {
+        let response = try await networkService.callRequest(api: iTunesRouter.search(term: query, offset: offset), type: ITunesSearchResponse.self)
         
         return AppInfoMapper.mapToSearchResultAppInfos(response)
     }

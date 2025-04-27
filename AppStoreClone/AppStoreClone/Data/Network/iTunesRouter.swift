@@ -8,7 +8,7 @@
 import Foundation
 
 enum iTunesRouter: APIRouter {
-    case search(term: String)
+    case search(term: String, offset: Int)
     case lookup(trackId: Int)
 }
 
@@ -33,13 +33,14 @@ extension iTunesRouter {
     
     var parameters: [String: Any]? {
         switch self {
-        case .search(let term):
+        case .search(let term, let offset):
             return [
                 "term": term,
                 "country": "kr",
                 "media": "software",
                 "entity": "software",
-                "limit": "15"
+                "limit": "15",
+                "offset": offset
             ]
         case .lookup(let trackId):
             return [

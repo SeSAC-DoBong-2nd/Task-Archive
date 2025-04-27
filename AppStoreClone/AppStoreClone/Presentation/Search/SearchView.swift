@@ -16,6 +16,10 @@ struct SearchView: View {
     // 에러 메시지 표시 상태 (선택 사항)
     @State private var errorMessage: String? = nil
     @State private var path: [Int] = [] // navigation path
+    @State private var currentOffset: Int = 0
+    @State private var isFetchingMore: Bool = false
+    @State private var canLoadMore: Bool = true
+    let pageSize = 15
     let repo: ITunesRepository
     
     init(repo: ITunesRepository) {
@@ -39,11 +43,17 @@ struct SearchView: View {
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .padding(.top, 50)
                         } else {
-                            ForEach(searchResults) { result in
+                            ForEach(searchResults.indices, id: \.self) { idx in
+                                let result = searchResults[idx]
                                 Button {
                                     path.append(result.trackId)
                                 } label: {
                                     SearchResultRowView(appInfo: result)
+                                }
+                                .onAppear {
+                                    if idx >= searchResults.count - 4 {
+                                        Task { await loadMore() }
+                                    }
                                 }
                             }
                         }
@@ -99,14 +109,39 @@ struct SearchView: View {
         hasSearched = true
         errorMessage = nil
         searchResults = []
+        currentOffset = 0
+        canLoadMore = true
         
         do {
-            searchResults = try await repo.searchApps(query: searchTerm)
+            let results = try await repo.searchApps(query: searchTerm, offset: 0)
+            searchResults = results
+            currentOffset = results.count
+            canLoadMore = results.count == pageSize
         } catch {
             handleSearchError(error.localizedDescription)
         }
         
         isLoading = false
+    }
+    
+    @MainActor
+    private func loadMore() async {
+        guard !isFetchingMore, canLoadMore, !isLoading else { return }
+        isFetchingMore = true
+        defer { isFetchingMore = false }
+        let searchTerm = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        do {
+            let moreResults = try await repo.searchApps(query: searchTerm, offset: currentOffset)
+            if moreResults.isEmpty {
+                canLoadMore = false
+            } else {
+                searchResults.append(contentsOf: moreResults)
+                currentOffset += moreResults.count
+                canLoadMore = moreResults.count == pageSize
+            }
+        } catch {
+            canLoadMore = false
+        }
     }
     
     /// 검색 초기화 함수
