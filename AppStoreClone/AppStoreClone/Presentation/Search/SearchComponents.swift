@@ -72,57 +72,9 @@ struct SearchResultRowView: View {
                         }
                     }
                 }
-            } else {
-                Text("스크린샷 없음")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .padding(.leading)
             }
         }
         .padding(.vertical, 10)
     }
     
-    
-    @ViewBuilder
-    func asyncImage(url: URL?) -> some View {
-        if let url = url {
-            AsyncImage(url: url) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: 120, height: 210)
-                        .background(Color.gray.opacity(0.1))
-                case .success(let image):
-                    image
-                        .resizable()
-                case .failure:
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.gray)
-                        .padding(40)
-                        .background(Color.gray.opacity(0.1))
-                @unknown default:
-                    EmptyView()
-                }
-            }
-            .clipped()
-            .cornerRadius(10)
-        } else {
-            Image(systemName: "photo.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(.gray.opacity(0.5))
-                .frame(width: 120, height: 210)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-        }
-    }
-    
 }
-
-
-//#Preview {
-//    SearchResultRowView(appInfo: DummyLiterals.searchResultData[0])
-//        .padding()
-//}

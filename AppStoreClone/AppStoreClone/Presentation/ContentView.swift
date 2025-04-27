@@ -29,7 +29,7 @@ struct ContentView: View {
                 .tabItem { Label("Arcade", systemImage: ImageLiterals.arcade) }
                 .tag(3) // 네 번째 탭
 
-            SearchView()
+            SearchView(repo: ITunesRepositoryImpl(networkService: NetworkService()))
                 .tabItem { Label("검색", systemImage: ImageLiterals.search) }
                 .tag(4) // 다섯 번째 탭
         }
