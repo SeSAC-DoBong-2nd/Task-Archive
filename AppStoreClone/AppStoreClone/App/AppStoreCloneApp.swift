@@ -14,6 +14,7 @@ struct AppStoreCloneApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(NetworkMonitor.shared)
                 .environmentObject(AppDownloadManager.shared)
         }
         .onChange(of: scenePhase) { newPhase in

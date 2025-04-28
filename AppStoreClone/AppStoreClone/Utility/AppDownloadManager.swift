@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /// 앱 다운로드 타이머 관리를 위한 클래스
 final class AppDownloadManager: ObservableObject {
@@ -15,10 +16,18 @@ final class AppDownloadManager: ObservableObject {
     @Published var userInstalledApps: Set<String> = [] // 사용자가 설치한 앱 ID 목록
     
     private var timers: [String: Timer] = [:]
+    private var cancellables = Set<AnyCancellable>()
     
     private init() {
         // 앱 설치 상태 복원
         loadAppStates()
+        
+        // 네트워크 상태 구독
+        NetworkMonitor.shared.$isConnected
+            .sink { [weak self] isConnected in
+                self?.handleNetworkChange(isConnected: isConnected)
+            }
+            .store(in: &cancellables)
     }
     
     // MARK: - 앱 다운로드 상태 관리
@@ -245,6 +254,20 @@ final class AppDownloadManager: ObservableObject {
                 } else {
                     completeDownload(appID: appID)
                 }
+            }
+        }
+    }
+    
+    private func handleNetworkChange(isConnected: Bool) {
+        if isConnected {
+            // 네트워크 복구: 일시정지된 다운로드 재개
+            for (appID, info) in appDownloadStates where info.buttonState == .resume {
+                resumeDownload(appID: appID)
+            }
+        } else {
+            // 네트워크 단절: 다운로드 중인 모든 앱 일시정지
+            for (appID, info) in appDownloadStates where info.buttonState == .downloading {
+                pauseDownload(appID: appID)
             }
         }
     }

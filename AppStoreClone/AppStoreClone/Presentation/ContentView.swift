@@ -21,7 +21,7 @@ struct ContentView: View {
                 .tabItem { Label("투데이", systemImage: ImageLiterals.today) }
                 .tag(0)
 
-            ArcadeView()
+            GamesView()
                 .tabItem { Label("게임", systemImage: ImageLiterals.games) }
                 .tag(1)
 
@@ -41,29 +41,80 @@ struct ContentView: View {
 }
 
 struct TodayView: View {
+    @EnvironmentObject private var networkMonitor: NetworkMonitor
+    
     var body: some View {
-        NavigationView {
-            Text("투데이 화면")
-                .navigationTitle("투데이")
+        ZStack {
+            NavigationView {
+                Text("투데이 화면")
+                    .navigationTitle("투데이")
+            }
+            if !networkMonitor.isConnected {
+                Color.black.opacity(0.5).ignoresSafeArea()
+                VStack {
+                    Spacer()
+                    Text("네트워크 연결이 끊겼습니다. 확인 바랍니다.")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .background(Color.red.opacity(0.8))
+                        .cornerRadius(12)
+                    Spacer()
+                }
+            }
         }
     }
 }
 
 struct GamesView: View {
+    @EnvironmentObject private var networkMonitor: NetworkMonitor
+    
     var body: some View {
-        NavigationView {
-            Text("게임 화면")
-                .navigationTitle("게임")
+        ZStack {
+            NavigationView {
+                Text("게임 화면")
+                    .navigationTitle("게임")
+            }
+            if !networkMonitor.isConnected {
+                Color.black.opacity(0.5).ignoresSafeArea()
+                VStack {
+                    Spacer()
+                    Text("네트워크 연결이 끊겼습니다. 확인 바랍니다.")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .background(Color.red.opacity(0.8))
+                        .cornerRadius(12)
+                    Spacer()
+                }
+            }
         }
     }
 }
 
 
 struct ArcadeView: View {
+    @EnvironmentObject private var networkMonitor: NetworkMonitor
+    
     var body: some View {
-        NavigationView {
-            Text("Arcade 화면")
-                .navigationTitle("Arcade")
+        ZStack {
+            NavigationView {
+                Text("Arcade 화면")
+                    .navigationTitle("Arcade")
+            }
+            if !networkMonitor.isConnected {
+                Color.black.opacity(0.5).ignoresSafeArea()
+                VStack {
+                    Spacer()
+                    Text("네트워크 연결이 끊겼습니다. 확인 바랍니다.")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .background(Color.red.opacity(0.8))
+                        .cornerRadius(12)
+                    Spacer()
+                }
+            }
         }
     }
 }

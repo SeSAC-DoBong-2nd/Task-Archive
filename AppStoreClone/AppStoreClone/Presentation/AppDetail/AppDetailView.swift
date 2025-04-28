@@ -11,6 +11,7 @@ struct AppDetailView: View {
     let trackId: Int
     let repo: ITunesRepository
     @StateObject private var vm: AppDetailViewModel
+    @EnvironmentObject private var networkMonitor: NetworkMonitor
 
     init(trackId: Int, repo: ITunesRepository) {
         self.trackId = trackId
@@ -19,20 +20,35 @@ struct AppDetailView: View {
     }
 
     var body: some View {
-        Group {
-            if vm.isLoading {
-                ProgressView("로딩 중...")
-            } else if let error = vm.errorMessage {
-                Text("오류: \(error)").foregroundColor(.red)
-            } else if let detailData = vm.appDetail {
-                AppDetailContentView(detailData: detailData)
-            } else {
-                Text("데이터 없음")
+        ZStack {
+            Group {
+                if vm.isLoading {
+                    ProgressView("로딩 중...")
+                } else if let error = vm.errorMessage {
+                    Text("오류: \(error)").foregroundColor(.red)
+                } else if let detailData = vm.appDetail {
+                    AppDetailContentView(detailData: detailData)
+                } else {
+                    Text("데이터 없음")
+                }
             }
-        }
-        .onAppear {
-            Task {
-                await vm.fetchAppDetail(trackId: trackId)
+            .onAppear {
+                Task {
+                    await vm.fetchAppDetail(trackId: trackId)
+                }
+            }
+            if !networkMonitor.isConnected {
+                Color.black.opacity(0.5).ignoresSafeArea()
+                VStack {
+                    Spacer()
+                    Text("네트워크 연결이 끊겼습니다. 확인 바랍니다.")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .background(Color.red.opacity(0.8))
+                        .cornerRadius(12)
+                    Spacer()
+                }
             }
         }
     }
