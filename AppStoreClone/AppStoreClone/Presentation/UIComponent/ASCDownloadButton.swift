@@ -107,7 +107,6 @@ struct ASCDownloadButton: View {
                         .padding(.vertical, 7)
                 case .downloading:
                     circularProgressView(progress: downloadProgress)
-//                    CircularProgressView(progress: downloadProgress)
                         .frame(width: 26, height: 26)
                 case .resume:
                     RoundedRectangle(cornerRadius: 15)
@@ -189,28 +188,3 @@ struct ASCDownloadButton: View {
         }
     }
 }
-
-// 원형 프로그레스 뷰 (다운로드 중 상태 표시용)
-//struct CircularProgressView: View {
-//    let progress: Double
-//    
-//    var body: some View {
-//        ZStack {
-//            // 배경 원
-//            Circle()
-//                .stroke(Color(uiColor: .systemGray5), lineWidth: 1)
-//            
-//            // 진행 원
-//            Circle()
-//                .trim(from: 0, to: CGFloat(progress))
-//                .stroke(Color.blue, style: StrokeStyle(lineWidth: 2, lineCap: .round))
-//                .rotationEffect(.degrees(-90))
-//                .animation(.linear, value: progress)
-//            
-//            // 중앙 정지 아이콘
-//            Image(systemName: "pause.fill")
-//                .font(.system(size: 5))
-//                .foregroundColor(.blue)
-//        }
-//    }
-//}
