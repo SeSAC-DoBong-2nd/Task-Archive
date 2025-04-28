@@ -7,33 +7,35 @@
 
 import SwiftUI
 
-struct AppDetailModel {
+struct AppDetailView: View {
     let trackId: Int
-    let trackName: String
-    let description: String
-    let artworkUrl512: URL
-    let version: String
-    let releaseNotes: String?
-    let screenshotUrls: [URL]
-    let averageUserRating: Double?
-    let userRatingCount: Int?
-    let currentVersionDate: String?
-    let metaData: [MetadataItem]
-}
+    let repo: ITunesRepository
 
-class AppDetailViewModel: ObservableObject {
-    @Published var appDetail: AppDetailModel?
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String? = nil
-    
-    private let repo: ITunesRepository
-    
-    init(repo: ITunesRepository) {
-        self.repo = repo
+    @State private var appDetail: AppDetailModel? = nil
+    @State private var isLoading: Bool = false
+    @State private var errorMessage: String? = nil
+
+    var body: some View {
+        Group {
+            if isLoading {
+                ProgressView("로딩 중...")
+            } else if let error = errorMessage {
+                Text("오류: \(error)").foregroundColor(.red)
+            } else if let detailData = appDetail {
+                AppDetailContentView(detailData: detailData)
+            } else {
+                Text("데이터 없음")
+            }
+        }
+        .onAppear {
+            Task {
+                await fetchAppDetail()
+            }
+        }
     }
-    
+
     @MainActor
-    func fetchAppDetail(trackId: Int) async {
+    private func fetchAppDetail() async {
         isLoading = true
         errorMessage = nil
         do {
@@ -43,37 +45,6 @@ class AppDetailViewModel: ObservableObject {
             self.errorMessage = error.localizedDescription
         }
         isLoading = false
-    }
-}
-
-struct AppDetailView: View {
-    let trackId: Int
-    let repo: ITunesRepository
-    @StateObject private var viewModel: AppDetailViewModel
-    
-    init(trackId: Int, repo: ITunesRepository) {
-        self.trackId = trackId
-        self.repo = repo
-        _viewModel = StateObject(wrappedValue: AppDetailViewModel(repo: repo))
-    }
-    
-    var body: some View {
-        Group {
-            if viewModel.isLoading {
-                ProgressView("로딩 중...")
-            } else if let error = viewModel.errorMessage {
-                Text("오류: \(error)").foregroundColor(.red)
-            } else if let detailData = viewModel.appDetail {
-                AppDetailContentView(detailData: detailData)
-            } else {
-                Text("데이터 없음")
-            }
-        }
-        .onAppear {
-            Task {
-                await viewModel.fetchAppDetail(trackId: trackId)
-            }
-        }
     }
 }
 
@@ -115,7 +86,7 @@ struct AppDetailContentView: View {
                 //MARK: 3. 새로운 소식
                 WhatsNewView(
                     version: detailData.version,
-                    updateDate: detailData.currentVersionDate ?? "", // 필요시 추가
+                    updateDate: detailData.currentVersionDate ?? "",
                     releaseNotes: detailData.releaseNotes ?? ""
                 )
                 

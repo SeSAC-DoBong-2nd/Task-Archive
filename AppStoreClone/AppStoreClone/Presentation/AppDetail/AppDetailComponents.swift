@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 //MARK: - 앱 헤더
 
 struct AppHeaderView: View {
