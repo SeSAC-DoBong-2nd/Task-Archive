@@ -80,6 +80,7 @@ struct SearchView: View {
                         vm.clearSearch()
                     }
                 }
+                .contentShape(Rectangle())
                 .navigationDestination(for: Int.self) { trackId in
                     AppDetailView(trackId: trackId, repo: vm.repo)
                 }

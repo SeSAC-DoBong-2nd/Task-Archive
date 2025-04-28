@@ -81,7 +81,7 @@ struct SearchResultRowView: View {
                         ForEach(urls, id: \.absoluteString) { url in
                             asyncImage(url: url)
                                 .scaledToFill()
-                                .frame(width: 120, height: 210)
+                                .frame(width: 113, height: 210)
                                 .clipShape(RoundedRectangle(cornerRadius: 18))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 18)
@@ -90,6 +90,7 @@ struct SearchResultRowView: View {
                         }
                     }
                 }
+                .allowsHitTesting(false)
             }
         }
         .padding(.vertical, 10)

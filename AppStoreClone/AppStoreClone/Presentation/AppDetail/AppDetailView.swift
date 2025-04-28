@@ -99,20 +99,24 @@ struct AppDetailContentView: View {
                 Divider().padding(.horizontal)
                 
                 //MARK: 4. 미리보기
-                VStack(alignment: .leading) {
-                    Text("미리 보기")
-                        .font(.title2).bold()
-                        .padding(.horizontal)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(detailData.screenshotUrls.indices, id: \.self) { index in
-                                ScreenshotPreviewImage(imageName: detailData.screenshotUrls[index]) {
-                                    self.selectedScreenshotIndex = index
-                                    self.showingScreenshotViewer = true
+                if detailData.screenshotUrls.isEmpty {
+                    EmptyView()
+                } else {
+                    VStack(alignment: .leading) {
+                        Text("미리 보기")
+                            .font(.title2).bold()
+                            .padding(.horizontal)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10) {
+                                ForEach(detailData.screenshotUrls.indices, id: \.self) { index in
+                                    ScreenshotPreviewImage(imageName: detailData.screenshotUrls[index]) {
+                                        self.selectedScreenshotIndex = index
+                                        self.showingScreenshotViewer = true
+                                    }
                                 }
                             }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
                     }
                 }
             }

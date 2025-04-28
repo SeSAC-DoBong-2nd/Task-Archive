@@ -47,7 +47,7 @@ final class NetworkMonitor: ObservableObject {
     ///ping 횟수로 첫 네트워크 단절 감지 시간을 줄이고자 하였으나, iOS 내부 재시도 정책 때문에 해결하지 못함..
     //TODO: 위 문제 해결방안 모색
     private func ping() {
-        print(#function, "지금 핑 시작")
+//        print(#function, "지금 핑 시작")
         guard let url = URL(string: "https://www.apple.com/library/test/success.html") else { return }
         var request = URLRequest(url: url)
         request.timeoutInterval = 0.7

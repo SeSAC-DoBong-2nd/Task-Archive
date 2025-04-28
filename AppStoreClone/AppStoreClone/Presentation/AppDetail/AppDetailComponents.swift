@@ -130,7 +130,16 @@ struct WhatsNewView: View {
 
     // 3줄 초과 여부 판단
     private func needsMoreButton(text: String) -> Bool {
-        text.split(whereSeparator: \.isNewline).count > 3
+        let label = UILabel()
+        label.text = text
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        let width: CGFloat = UIScreen.main.bounds.width - 32 // 패딩 고려
+        let size = label.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
+        let lineHeight = label.font.lineHeight
+        let numberOfLines = Int(size.height / lineHeight)
+        return numberOfLines > 3
     }
 }
 
