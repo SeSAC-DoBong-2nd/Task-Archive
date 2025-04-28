@@ -10,18 +10,21 @@ import SwiftUI
 struct AppDetailView: View {
     let trackId: Int
     let repo: ITunesRepository
+    @StateObject private var vm: AppDetailViewModel
 
-    @State private var appDetail: AppDetailModel? = nil
-    @State private var isLoading: Bool = false
-    @State private var errorMessage: String? = nil
+    init(trackId: Int, repo: ITunesRepository) {
+        self.trackId = trackId
+        self.repo = repo
+        _vm = StateObject(wrappedValue: AppDetailViewModel(repo: repo))
+    }
 
     var body: some View {
         Group {
-            if isLoading {
+            if vm.isLoading {
                 ProgressView("로딩 중...")
-            } else if let error = errorMessage {
+            } else if let error = vm.errorMessage {
                 Text("오류: \(error)").foregroundColor(.red)
-            } else if let detailData = appDetail {
+            } else if let detailData = vm.appDetail {
                 AppDetailContentView(detailData: detailData)
             } else {
                 Text("데이터 없음")
@@ -29,22 +32,9 @@ struct AppDetailView: View {
         }
         .onAppear {
             Task {
-                await fetchAppDetail()
+                await vm.fetchAppDetail(trackId: trackId)
             }
         }
-    }
-
-    @MainActor
-    private func fetchAppDetail() async {
-        isLoading = true
-        errorMessage = nil
-        do {
-            let detail = try await repo.lookup(trackId: trackId)
-            self.appDetail = detail
-        } catch {
-            self.errorMessage = error.localizedDescription
-        }
-        isLoading = false
     }
 }
 
@@ -124,3 +114,4 @@ struct AppDetailContentView: View {
         }
     }
 }
+
