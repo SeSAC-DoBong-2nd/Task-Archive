@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
     // 현재 선택된 탭을 추적하는 상태 변수 (기본값: 0 - 첫 번째 탭)
     @State private var selectedTab: Int = 0
+    
+    init() {
+        print("ContentView Init")
+    }
 
     var body: some View {
         TabView(selection: $selectedTab) {

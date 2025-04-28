@@ -39,6 +39,28 @@ enum ASCDownloadButtonState {
         default: return Color.blue
         }
     }
+    
+    // Codable 지원을 위한 rawValue 변환
+    func toRawValue() -> Int {
+        switch self {
+        case .get: return 0
+        case .downloading: return 1
+        case .resume: return 2
+        case .open: return 3
+        case .reDownload: return 4
+        }
+    }
+    
+    static func fromRawValue(_ value: Int) -> ASCDownloadButtonState {
+        switch value {
+        case 0: return .get
+        case 1: return .downloading
+        case 2: return .resume
+        case 3: return .open
+        case 4: return .reDownload
+        default: return .get
+        }
+    }
 }
 
 // 앱 다운로드 타이머 관리를 위한 클래스
@@ -72,12 +94,19 @@ class AppDownloadManager: ObservableObject {
         let isReinstall = userInstalledApps.contains(appID) == false &&
                          (appDownloadStates[appID]?.buttonState == .reDownload)
         
-        var downloadInfo = isReinstall ? appDownloadStates[appID] :
-        AppDownloadInfo(appID: appID, appName: appName, appIconURL: appIconURL, buttonState: .downloading,
-                          progress: 0, remainingTime: 30)
-                          
-        downloadInfo?.buttonState = .downloading
-        appDownloadStates[appID] = downloadInfo
+        // 기존에 .resume 상태로 남아있는 경우, remainingTime을 유지
+        if let existingInfo = appDownloadStates[appID], existingInfo.buttonState == .resume {
+            var updatedInfo = existingInfo
+            updatedInfo.buttonState = .downloading
+            appDownloadStates[appID] = updatedInfo
+        } else {
+            var downloadInfo = isReinstall ? appDownloadStates[appID] :
+            AppDownloadInfo(appID: appID, appName: appName, appIconURL: appIconURL, buttonState: .downloading,
+                              progress: 0, remainingTime: 30)
+            
+            downloadInfo?.buttonState = .downloading
+            appDownloadStates[appID] = downloadInfo
+        }
         
         // 타이머 시작 또는 재개
         startOrResumeTimer(for: appID)
@@ -350,30 +379,6 @@ struct AppDownloadInfo: Codable, Identifiable {
     }
 }
 
-// ASCDownloadButtonState Codable 지원 확장
-extension ASCDownloadButtonState {
-    // Codable 지원을 위한 rawValue 변환
-    func toRawValue() -> Int {
-        switch self {
-        case .get: return 0
-        case .downloading: return 1
-        case .resume: return 2
-        case .open: return 3
-        case .reDownload: return 4
-        }
-    }
-    
-    static func fromRawValue(_ value: Int) -> ASCDownloadButtonState {
-        switch value {
-        case 0: return .get
-        case 1: return .downloading
-        case 2: return .resume
-        case 3: return .open
-        case 4: return .reDownload
-        default: return .get
-        }
-    }
-}
 
 // 개선된 다운로드 버튼 뷰
 struct ASCDownloadButton: View {
@@ -488,8 +493,8 @@ struct CircularProgressView: View {
     var body: some View {
         ZStack {
             // 배경 원
-//            Circle()
-//                .stroke(Color(uiColor: .systemGray5), lineWidth: 2)
+            Circle()
+                .stroke(Color(uiColor: .systemGray5), lineWidth: 1)
             
             // 진행 원
             Circle()
