@@ -74,7 +74,8 @@ struct SearchResultRowView: View {
             .padding(.top, 10)
             
             //MARK: 스크린샷 스크롤 파트
-            if let urls = appInfo.screenshotURLs, !urls.isEmpty {
+            let realButtonState = downloadManager.appDownloadStates[String(appInfo.trackId)]?.buttonState ?? appInfo.buttonState
+            if realButtonState != .open, let urls = appInfo.screenshotURLs, !urls.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack() {
                         ForEach(urls, id: \.absoluteString) { url in
