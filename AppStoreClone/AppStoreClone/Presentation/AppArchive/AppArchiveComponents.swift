@@ -12,6 +12,15 @@ struct AppArchiveRowView: View {
     let model: AppDownloadInfo
     @EnvironmentObject private var downloadManager: AppDownloadManager
 
+    // 날짜 포맷터 (한국 기준)
+    private var formattedDate: String {
+        guard let date = model.downloadedDate else { return "" }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy. MM. dd."
+        return formatter.string(from: date)
+    }
+
     var body: some View {
         HStack(spacing: 15) {
             // 앱 아이콘
@@ -29,7 +38,7 @@ struct AppArchiveRowView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(model.appName)
                     .font(.headline)
-                Text("날짜 필요")
+                Text(formattedDate)
                     .font(.caption)
                     .foregroundColor(.gray)
             }
