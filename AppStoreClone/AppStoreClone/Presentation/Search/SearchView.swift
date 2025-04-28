@@ -27,30 +27,39 @@ struct SearchView: View {
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .padding(.top, 50)
                             } else if vm.searchResults.isEmpty {
-                                Text("'\(vm.searchText)'에 대한 검색 결과 없음")
-                                    .foregroundColor(.gray)
-                                    .frame(maxWidth: .infinity, alignment: .center)
-                                    .padding(.top, 50)
+                                
+                                Section {
+                                    Text("'\(vm.searchText)'에 대한 검색 결과 없음")
+                                        .foregroundColor(.gray)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .padding(.top, 50)
+                                        .listRowInsets(EdgeInsets())
+                                        .listRowSeparator(.hidden)
+                                }
                             } else {
-                                ForEach(vm.searchResults.indices, id: \.self) { idx in
-                                    let result = vm.searchResults[idx]
+                                ForEach(vm.searchResults, id: \.trackId) { result in
                                     Button {
                                         vm.path.append(result.trackId)
                                     } label: {
                                         SearchResultRowView(appInfo: result)
                                     }
                                     .onAppear {
-                                        if idx >= vm.searchResults.count - 4 {
+                                        if let idx = vm.searchResults.firstIndex(where: { $0.trackId == result.trackId }),
+                                           idx >= vm.searchResults.count - 4 {
                                             Task { await vm.loadMore() }
                                         }
                                     }
                                 }
                             }
                         } else if !vm.isLoading && !vm.hasSearched {
-                            Text("검색어를 입력하고 검색 버튼을 누르세요.")
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .padding(.top, 50)
+                            Section {
+                                Text("검색어를 입력하고 검색 버튼을 누르세요.")
+                                    .foregroundColor(.gray)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .padding(.top, 50)
+                                    .listRowInsets(EdgeInsets())
+                                    .listRowSeparator(.hidden)
+                            }
                         }
                     }
                     .listStyle(.plain)
