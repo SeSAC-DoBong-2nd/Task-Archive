@@ -15,21 +15,10 @@ final class AppDownloadManager: ObservableObject {
     @Published var userInstalledApps: Set<String> = [] // 사용자가 설치한 앱 ID 목록
     
     private var timers: [String: Timer] = [:]
-    private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
     
     private init() {
-        // 백그라운드 노티피케이션 등록
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground),
-                                              name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground),
-                                              name: UIApplication.willEnterForegroundNotification, object: nil)
-        
         // 앱 설치 상태 복원
         loadAppStates()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - 앱 다운로드 상태 관리
@@ -148,7 +137,8 @@ final class AppDownloadManager: ObservableObject {
             
             // 상태 변경 알림
             objectWillChange.send()
-            //TODO: 이거 때문인지 타이머가 돌면 ContentView Init 구문 0.1초마다 실행
+            // 진행 상황이 바뀔 때마다 상태 저장
+            saveAppStates()
         }
     }
     
@@ -173,34 +163,16 @@ final class AppDownloadManager: ObservableObject {
     
     // MARK: - 백그라운드 처리
     
-    @objc
-    private func appDidEnterBackground() {
-        // iOS에 백그라운드 작업 요청
-        backgroundTaskID = UIApplication.shared.beginBackgroundTask { [weak self] in
-            self?.endBackgroundTask()
-        }
-        
+    public func enterBackground() {
         // 모든 현재 상태와 타이머 정보 저장
         saveAppStates()
     }
     
-    @objc
-    private func appWillEnterForeground() {
-        // 백그라운드 작업이 더 이상 필요 없음
-        endBackgroundTask()
-        
+    public func enterForeground() {
         // 상태 복원
         loadAppStates()
-        
         // 백그라운드에서 지난 시간 계산하여 진행 상태 업데이트
         updateStatesAfterBackground()
-    }
-    
-    private func endBackgroundTask() {
-        if backgroundTaskID != .invalid {
-            UIApplication.shared.endBackgroundTask(backgroundTaskID)
-            backgroundTaskID = .invalid
-        }
     }
     
     private func updateStatesAfterBackground() {
@@ -220,13 +192,11 @@ final class AppDownloadManager: ObservableObject {
                     // 진행 중인 상태 업데이트
                     appDownloadStates[appID]?.remainingTime = newRemainingTime
                     appDownloadStates[appID]?.progress = 1.0 - (newRemainingTime / 30.0)
-                    
                     // 다운로드 계속
                     startOrResumeTimer(for: appID)
                 }
             }
         }
-        
         // 현재 시간을 마지막 업데이트 시간으로 저장
         UserDefaults.standard.set(currentTime, forKey: "lastUpdateTime")
     }
