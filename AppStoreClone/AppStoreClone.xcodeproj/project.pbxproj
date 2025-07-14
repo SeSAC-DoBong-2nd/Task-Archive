@@ -76,6 +76,7 @@
 		9E1EFDBE2DBE0D4F0021DE73 /* NetworkServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProvider.swift; sourceTree = "<group>"; };
 		9E1EFDC12DBE0FF10021DE73 /* iTunesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesRepository.swift; sourceTree = "<group>"; };
 		9E1EFDC32DBE2A9E0021DE73 /* ITunesLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesLookup.swift; sourceTree = "<group>"; };
+		9E7B92DC2DCC7E3D0010B1D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +126,7 @@
 		9E1EFD442DBB4ED60021DE73 /* AppStoreClone */ = {
 			isa = PBXGroup;
 			children = (
+				9E7B92DC2DCC7E3D0010B1D5 /* Info.plist */,
 				9E1EFD492DBB4ED80021DE73 /* App */,
 				9E1EFD4E2DBB4F680021DE73 /* Utility */,
 				9E1EFDAB2DBE00390021DE73 /* Extension */,
@@ -532,6 +534,7 @@
 				DEVELOPMENT_TEAM = A95XXD5WT7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppStoreClone/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "박신영_AppStoreClone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -567,6 +570,7 @@
 				DEVELOPMENT_TEAM = A95XXD5WT7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppStoreClone/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "박신영_AppStoreClone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

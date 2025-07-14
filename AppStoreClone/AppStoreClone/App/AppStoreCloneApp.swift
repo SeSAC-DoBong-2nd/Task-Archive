@@ -24,12 +24,11 @@ struct AppStoreCloneApp: App {
                         .animation(.easeOut(duration: 0.5), value: isShowingSplash)
                 }
             }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    withAnimation {
-                        isShowingSplash = false
-                    }
-                }
+            .animation(.default, value: isShowingSplash)
+            .task {
+                try? await Task.sleep(for: .seconds(2))
+                
+                isShowingSplash = false
             }
         }
         .onChange(of: scenePhase) { newPhase in
